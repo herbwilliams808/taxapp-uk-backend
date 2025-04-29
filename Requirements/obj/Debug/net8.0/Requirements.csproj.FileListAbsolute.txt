@@ -108,3 +108,7 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Requirements/obj/Debug/net8.0/Requirements.genruntimeconfig.cache
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Requirements/obj/Debug/net8.0/ref/Requirements.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Requirements/bin/Debug/net8.0/reqnroll.json
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Requirements/bin/Debug/net8.0/System.IO.Pipelines.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Requirements/bin/Debug/net8.0/System.Text.Encodings.Web.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Requirements/bin/Debug/net8.0/System.Text.Json.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Requirements/bin/Debug/net8.0/runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll
