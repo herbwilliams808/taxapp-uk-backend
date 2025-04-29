@@ -59,6 +59,10 @@
               "target": "Package",
               "version": "[2.4.0, )"
             },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[8.0.5, )"
+            },
             "nunit": {
               "target": "Package",
               "version": "[4.0.1, )"

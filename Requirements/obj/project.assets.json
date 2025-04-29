@@ -1344,6 +1344,7 @@
       "Microsoft.NET.Test.Sdk >= 17.8.0",
       "NUnit3TestAdapter >= 4.5.0",
       "Reqnroll.NUnit >= 2.4.0",
+      "System.Text.Json >= 8.0.5",
       "nunit >= 4.0.1"
     ]
   },
@@ -1404,6 +1405,10 @@
           "Reqnroll.NUnit": {
             "target": "Package",
             "version": "[2.4.0, )"
+          },
+          "System.Text.Json": {
+            "target": "Package",
+            "version": "[8.0.5, )"
           },
           "nunit": {
             "target": "Package",
