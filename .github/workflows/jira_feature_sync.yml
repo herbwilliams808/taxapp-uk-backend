@@ -22,11 +22,11 @@ jobs:
 
       - name: Create or Update Feature File
         run: |
-          mkdir -p Requirements
+          mkdir -p Requirements/Features
           python3 create_feature_file.py payload.json
 
       - name: Commit and Push Changes
         run: |
-          git add Requirements/*.feature
+          git add Requirements/Features/*.feature
           git commit -m "Add feature file from Jira"
           git push

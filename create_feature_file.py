@@ -12,8 +12,11 @@ def main(payload_path):
     summary = data.get('summary', 'UnnamedFeature')
     description = data.get('description', '')
 
+    # Ensure the directory exists
+    os.makedirs('Requirements/Features', exist_ok=True)
+
     filename = convert_to_camel_case(summary) + ".feature"
-    filepath = os.path.join('Requirements', filename)
+    filepath = os.path.join('Requirements/Features', filename)
 
     with open(filepath, 'w') as f:
         f.write(description)
