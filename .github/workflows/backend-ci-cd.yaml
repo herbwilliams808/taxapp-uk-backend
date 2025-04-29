@@ -23,19 +23,23 @@ jobs:
         with:
           dotnet-version: '8.0.x' # Specify .NET version
       
-      # Step 3: Install dependencies
+      # Step 3: Clean build directory
+      - name: Clean build directory
+        run: dotnet clean
+      
+      # Step 4: Install dependencies
       - name: Install dependencies
         run: dotnet restore
       
-      # Step 4: Build the application
+      # Step 5: Build the application
       - name: Build application
         run: dotnet build --configuration Release --no-restore
       
-      # Step 5: Run tests (optional)
+      # Step 6: Run tests (optional)
       - name: Run tests
         run: dotnet test --no-build --verbosity normal
 
-      # Step 6: Deploy to Azure Web App using Publish Profile
+      # Step 7: Deploy to Azure Web App using Publish Profile
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
