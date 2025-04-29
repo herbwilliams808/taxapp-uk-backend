@@ -1,0 +1,32 @@
+name: Create Feature File from Jira Webhook
+
+on:
+  repository_dispatch:
+    types: [trigger_workflow]
+
+jobs:
+  create_feature_file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Extract Payload
+        id: extract
+        run: |
+          echo "${{ toJson(github.event.client_payload) }}" > payload.json
+
+      - name: Authenticate with GitHub
+        run: echo "${{ secrets.UPDATE_FEATURE_FILE_FINE_GRAINED_TOKEN }}" | gh auth login --with-token
+
+      - name: Create or Update Feature File
+        run: |
+          mkdir -p Requirements
+          python3 create_feature_file.py payload.json
+
+      - name: Commit and Push Changes
+        run: |
+          git add Requirements/*.feature
+          git commit -m "Add feature file from Jira"
+          git push
