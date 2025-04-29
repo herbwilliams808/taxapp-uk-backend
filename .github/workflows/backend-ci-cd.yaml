@@ -16,9 +16,9 @@ jobs:
       # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
-          
-          # Step 2: Set up .NET environment
-          - name: Setup .NET
+      
+      # Step 2: Set up .NET environment
+      - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x' # Specify .NET version
@@ -39,6 +39,6 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'your-app-service-name' # TaxAppUK-WebApp
+          app-name: 'TaxAppUK-WebApp'
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           package: '.' # Path to the application package
