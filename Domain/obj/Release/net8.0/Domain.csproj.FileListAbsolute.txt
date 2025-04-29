@@ -1,0 +1,12 @@
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/bin/Release/net8.0/Domain.deps.json
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/bin/Release/net8.0/Domain.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/bin/Release/net8.0/Domain.pdb
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/obj/Release/net8.0/Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/obj/Release/net8.0/Domain.AssemblyInfoInputs.cache
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/obj/Release/net8.0/Domain.AssemblyInfo.cs
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/obj/Release/net8.0/Domain.csproj.CoreCompileInputs.cache
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/obj/Release/net8.0/Domain.sourcelink.json
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/obj/Release/net8.0/Domain.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/obj/Release/net8.0/refint/Domain.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/obj/Release/net8.0/Domain.pdb
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/obj/Release/net8.0/ref/Domain.dll
