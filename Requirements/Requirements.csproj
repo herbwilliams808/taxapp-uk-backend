@@ -14,6 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Content Include=".github\workflows\ci-cd-pipeline.yml" />
         <Content Include="**/*.feature" />
     </ItemGroup>  
 
