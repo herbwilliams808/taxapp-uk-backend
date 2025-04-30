@@ -11,7 +11,7 @@
           "FluentAssertions": "6.12.0",
           "Microsoft.NET.Test.Sdk": "17.8.0",
           "NUnit3TestAdapter": "4.5.0",
-          "Reqnroll.NUnit": "2.4.0",
+          "Reqnroll.NUnit": "2.4.1",
           "System.Text.Json": "9.0.4",
           "NUnit": "4.0.1"
         },
@@ -344,7 +344,7 @@
         }
       },
       "NUnit3TestAdapter/4.5.0": {},
-      "Reqnroll/2.4.0": {
+      "Reqnroll/2.4.1": {
         "dependencies": {
           "Cucumber.CucumberExpressions": "17.1.0",
           "Gherkin": "30.0.0",
@@ -358,11 +358,11 @@
           }
         }
       },
-      "Reqnroll.NUnit/2.4.0": {
+      "Reqnroll.NUnit/2.4.1": {
         "dependencies": {
           "NUnit": "4.0.1",
-          "Reqnroll": "2.4.0",
-          "Reqnroll.Tools.MsBuild.Generation": "2.4.0"
+          "Reqnroll": "2.4.1",
+          "Reqnroll.Tools.MsBuild.Generation": "2.4.1"
         },
         "runtime": {
           "lib/netstandard2.0/Reqnroll.NUnit.ReqnrollPlugin.dll": {
@@ -371,9 +371,9 @@
           }
         }
       },
-      "Reqnroll.Tools.MsBuild.Generation/2.4.0": {
+      "Reqnroll.Tools.MsBuild.Generation/2.4.1": {
         "dependencies": {
-          "Reqnroll": "2.4.0"
+          "Reqnroll": "2.4.1"
         }
       },
       "System.Configuration.ConfigurationManager/4.4.0": {
@@ -532,26 +532,26 @@
       "path": "nunit3testadapter/4.5.0",
       "hashPath": "nunit3testadapter.4.5.0.nupkg.sha512"
     },
-    "Reqnroll/2.4.0": {
+    "Reqnroll/2.4.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-JmeI9Idbiao5dPS4jeeof+esLBDjcx2BXjww4UW654IL6sDM/p7Rbkr2qWH+Ac8A3fC96rmO4w0x3TYYFzVuwQ==",
-      "path": "reqnroll/2.4.0",
-      "hashPath": "reqnroll.2.4.0.nupkg.sha512"
+      "sha512": "sha512-Ui229q21Kmkrv3L89THgsxGMXooJGK5OrFPLvYDXfE2nO/u4tqYsbmMRddyEE3fsR40IDP++HsRrDxlkR6reVw==",
+      "path": "reqnroll/2.4.1",
+      "hashPath": "reqnroll.2.4.1.nupkg.sha512"
     },
-    "Reqnroll.NUnit/2.4.0": {
+    "Reqnroll.NUnit/2.4.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-XxRw1mFcQy+ovkktCuv+Sk71nk6EBfseMeOGN0tfrx3/EM+VXArfncTumXepRUvI1aqKy7N13nPqUGwx2TuhwA==",
-      "path": "reqnroll.nunit/2.4.0",
-      "hashPath": "reqnroll.nunit.2.4.0.nupkg.sha512"
+      "sha512": "sha512-IbP1uVirMVpopeRwjvtz2b0PO9oQtHcDnAQigTpZY9lxSRYBycQSYQaZ6fbkkg/mG/azkPPGV3YIjNILQ8jWrw==",
+      "path": "reqnroll.nunit/2.4.1",
+      "hashPath": "reqnroll.nunit.2.4.1.nupkg.sha512"
     },
-    "Reqnroll.Tools.MsBuild.Generation/2.4.0": {
+    "Reqnroll.Tools.MsBuild.Generation/2.4.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-/OZ7emUyrNsykdt5X0g6TWVa8EVxv6J1kM6E/Qe5auksnCKim+nYNJ+LWrQzHD/NvX/yS0Akub0zMTEnyzMQxQ==",
-      "path": "reqnroll.tools.msbuild.generation/2.4.0",
-      "hashPath": "reqnroll.tools.msbuild.generation.2.4.0.nupkg.sha512"
+      "sha512": "sha512-+Up0eUWnKRKPdRIttE52DYzwayUd4bGMyRytYeeCwtqwZA4tLhK2NspOZJ8axPcmATOM9QSTCUHUlyp9pgcfQg==",
+      "path": "reqnroll.tools.msbuild.generation/2.4.1",
+      "hashPath": "reqnroll.tools.msbuild.generation.2.4.1.nupkg.sha512"
     },
     "System.Configuration.ConfigurationManager/4.4.0": {
       "type": "package",
