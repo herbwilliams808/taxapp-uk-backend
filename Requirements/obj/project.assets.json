@@ -389,7 +389,7 @@
           "build/netcoreapp3.1/NUnit3TestAdapter.props": {}
         }
       },
-      "Reqnroll/2.4.0": {
+      "Reqnroll/2.4.1": {
         "type": "package",
         "dependencies": {
           "Cucumber.CucumberExpressions": "17.1.0",
@@ -411,12 +411,12 @@
           "build/Reqnroll.targets": {}
         }
       },
-      "Reqnroll.NUnit/2.4.0": {
+      "Reqnroll.NUnit/2.4.1": {
         "type": "package",
         "dependencies": {
           "NUnit": "3.13.1",
-          "Reqnroll": "[2.4.0]",
-          "Reqnroll.Tools.MsBuild.Generation": "[2.4.0]"
+          "Reqnroll": "[2.4.1]",
+          "Reqnroll.Tools.MsBuild.Generation": "[2.4.1]"
         },
         "compile": {
           "lib/netstandard2.0/Reqnroll.NUnit.ReqnrollPlugin.dll": {}
@@ -429,10 +429,10 @@
           "build/Reqnroll.NUnit.targets": {}
         }
       },
-      "Reqnroll.Tools.MsBuild.Generation/2.4.0": {
+      "Reqnroll.Tools.MsBuild.Generation/2.4.1": {
         "type": "package",
         "dependencies": {
-          "Reqnroll": "[2.4.0]"
+          "Reqnroll": "[2.4.1]"
         },
         "build": {
           "build/Reqnroll.Tools.MsBuild.Generation.props": {},
@@ -990,10 +990,10 @@
         "nunit_256.png"
       ]
     },
-    "Reqnroll/2.4.0": {
-      "sha512": "JmeI9Idbiao5dPS4jeeof+esLBDjcx2BXjww4UW654IL6sDM/p7Rbkr2qWH+Ac8A3fC96rmO4w0x3TYYFzVuwQ==",
+    "Reqnroll/2.4.1": {
+      "sha512": "Ui229q21Kmkrv3L89THgsxGMXooJGK5OrFPLvYDXfE2nO/u4tqYsbmMRddyEE3fsR40IDP++HsRrDxlkR6reVw==",
       "type": "package",
-      "path": "reqnroll/2.4.0",
+      "path": "reqnroll/2.4.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1008,14 +1008,14 @@
         "lib/netstandard2.0/Reqnroll.ExternalAnnotations.xml",
         "lib/netstandard2.0/Reqnroll.dll",
         "lib/netstandard2.0/Reqnroll.xml",
-        "reqnroll.2.4.0.nupkg.sha512",
+        "reqnroll.2.4.1.nupkg.sha512",
         "reqnroll.nuspec"
       ]
     },
-    "Reqnroll.NUnit/2.4.0": {
-      "sha512": "XxRw1mFcQy+ovkktCuv+Sk71nk6EBfseMeOGN0tfrx3/EM+VXArfncTumXepRUvI1aqKy7N13nPqUGwx2TuhwA==",
+    "Reqnroll.NUnit/2.4.1": {
+      "sha512": "IbP1uVirMVpopeRwjvtz2b0PO9oQtHcDnAQigTpZY9lxSRYBycQSYQaZ6fbkkg/mG/azkPPGV3YIjNILQ8jWrw==",
       "type": "package",
-      "path": "reqnroll.nunit/2.4.0",
+      "path": "reqnroll.nunit/2.4.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1027,14 +1027,14 @@
         "build/netstandard2.0/Reqnroll.NUnit.Generator.ReqnrollPlugin.dll",
         "images/reqnroll-icon.png",
         "lib/netstandard2.0/Reqnroll.NUnit.ReqnrollPlugin.dll",
-        "reqnroll.nunit.2.4.0.nupkg.sha512",
+        "reqnroll.nunit.2.4.1.nupkg.sha512",
         "reqnroll.nunit.nuspec"
       ]
     },
-    "Reqnroll.Tools.MsBuild.Generation/2.4.0": {
-      "sha512": "/OZ7emUyrNsykdt5X0g6TWVa8EVxv6J1kM6E/Qe5auksnCKim+nYNJ+LWrQzHD/NvX/yS0Akub0zMTEnyzMQxQ==",
+    "Reqnroll.Tools.MsBuild.Generation/2.4.1": {
+      "sha512": "+Up0eUWnKRKPdRIttE52DYzwayUd4bGMyRytYeeCwtqwZA4tLhK2NspOZJ8axPcmATOM9QSTCUHUlyp9pgcfQg==",
       "type": "package",
-      "path": "reqnroll.tools.msbuild.generation/2.4.0",
+      "path": "reqnroll.tools.msbuild.generation/2.4.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1050,7 +1050,7 @@
         "licenses/Cucumber.CucumberExpressions-LICENSE-MIT.txt",
         "licenses/Gherkin-LICENSE-MIT.txt",
         "licenses/SpecFlow.Internal.Json-LICENSE-MIT.txt",
-        "reqnroll.tools.msbuild.generation.2.4.0.nupkg.sha512",
+        "reqnroll.tools.msbuild.generation.2.4.1.nupkg.sha512",
         "reqnroll.tools.msbuild.generation.nuspec",
         "tasks/net462/CucumberExpressions.dll",
         "tasks/net462/Gherkin.dll",
@@ -1443,7 +1443,7 @@
       "FluentAssertions >= 6.12.0",
       "Microsoft.NET.Test.Sdk >= 17.8.0",
       "NUnit3TestAdapter >= 4.5.0",
-      "Reqnroll.NUnit >= 2.4.0",
+      "Reqnroll.NUnit >= 2.4.1",
       "System.Text.Json >= 9.0.4",
       "nunit >= 4.0.1"
     ]
@@ -1504,7 +1504,7 @@
           },
           "Reqnroll.NUnit": {
             "target": "Package",
-            "version": "[2.4.0, )"
+            "version": "[2.4.1, )"
           },
           "System.Text.Json": {
             "target": "Package",

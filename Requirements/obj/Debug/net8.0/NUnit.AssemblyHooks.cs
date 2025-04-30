@@ -6,7 +6,7 @@ using System.Diagnostics;
 using global::System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-[GeneratedCode("Reqnroll", "2.4.0")]
+[GeneratedCode("Reqnroll", "2.4.1")]
 [global::NUnit.Framework.SetUpFixture]
 public static class Requirements_NUnitAssemblyHooks
 {

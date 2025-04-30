@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "6K7B9IKLpU4=",
+  "dgSpecHash": "ES39I9a+ZH0=",
   "success": true,
   "projectFilePath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Requirements/Requirements.csproj",
   "expectedPackageFiles": [
@@ -16,9 +16,9 @@
     "/Users/herbwilliams/.nuget/packages/nuget.frameworks/6.5.0/nuget.frameworks.6.5.0.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/nunit/4.0.1/nunit.4.0.1.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/nunit3testadapter/4.5.0/nunit3testadapter.4.5.0.nupkg.sha512",
-    "/Users/herbwilliams/.nuget/packages/reqnroll/2.4.0/reqnroll.2.4.0.nupkg.sha512",
-    "/Users/herbwilliams/.nuget/packages/reqnroll.nunit/2.4.0/reqnroll.nunit.2.4.0.nupkg.sha512",
-    "/Users/herbwilliams/.nuget/packages/reqnroll.tools.msbuild.generation/2.4.0/reqnroll.tools.msbuild.generation.2.4.0.nupkg.sha512",
+    "/Users/herbwilliams/.nuget/packages/reqnroll/2.4.1/reqnroll.2.4.1.nupkg.sha512",
+    "/Users/herbwilliams/.nuget/packages/reqnroll.nunit/2.4.1/reqnroll.nunit.2.4.1.nupkg.sha512",
+    "/Users/herbwilliams/.nuget/packages/reqnroll.tools.msbuild.generation/2.4.1/reqnroll.tools.msbuild.generation.2.4.1.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/system.configuration.configurationmanager/4.4.0/system.configuration.configurationmanager.4.4.0.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/system.io.pipelines/9.0.4/system.io.pipelines.9.0.4.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/system.reflection.metadata/1.6.0/system.reflection.metadata.1.6.0.nupkg.sha512",
