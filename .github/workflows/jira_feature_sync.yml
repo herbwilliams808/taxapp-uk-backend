@@ -38,5 +38,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git add Requirements/Features/*.feature
-          git commit -m "Feature file updated in Jira: ${{ github.event.client_payload.commitMessage }}"
+          git commit -m "Feature file updated in Jira: ${{ github.event.client_payload.lastComment }}"
           git push
