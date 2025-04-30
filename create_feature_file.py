@@ -6,7 +6,7 @@ def convert_to_camel_case(text):
     return ''.join(word.capitalize() for word in text.split())
 
 def main(payload_path):
-    with open(payload_path, 'r') as f:
+    with open(payload_path, 'r', encoding="utf-8") as f:
         data = json.load(f)
 
     summary = data.get('summary', 'UnnamedFeature')
