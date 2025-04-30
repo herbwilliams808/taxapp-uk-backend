@@ -15,7 +15,7 @@ jobs:
       - name: Extract Payload
         id: extract
         run: |
-          echo "${{ toJson(github.event.client_payload) }}" > payload.json
+          echo '${{ toJson(github.event.client_payload) }}' > payload.json
 
       - name: Validate JSON File
         run: jq . payload.json
