@@ -7,6 +7,7 @@ def convert_to_camel_case(text):
 
 def main(payload_path):
     with open(payload_path, 'r') as f:
+        print("Payload: " + f)
         data = json.load(f)
 
     summary = data.get('summary', 'UnnamedFeature')
