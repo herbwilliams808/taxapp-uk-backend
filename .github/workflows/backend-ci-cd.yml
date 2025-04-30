@@ -47,6 +47,11 @@ jobs:
       # - name: Run tests
       #   run: dotnet test --no-build --verbosity normal
 
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.TAXAPPUKSP_AZURE_CREDENTIALS}}
+
       # Step 9: Deploy to Azure Web App using Publish Profile
       - name: Deploy to Azure Web App using Publish Profile
         uses: azure/webapps-deploy@v2
