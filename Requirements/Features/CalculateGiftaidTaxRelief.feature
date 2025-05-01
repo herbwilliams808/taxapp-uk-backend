@@ -1,6 +1,6 @@
 Feature: As a higher rate taxpayer,
 
-I want to submit my income and Giftaid contributions,
+I want to submit my income and Gift aid contributions,
 
 To get an estimate of how much tax relief I’m entitled to
 
