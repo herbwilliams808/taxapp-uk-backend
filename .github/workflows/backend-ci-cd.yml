@@ -27,24 +27,21 @@ jobs:
 
       - name: Install dependencies
         run: dotnet restore
+        working-directory: . # IMPORTANT: Run in the repository root
 
       - name: Build the solution
         run: dotnet build --no-restore --configuration Release
+        working-directory: . # IMPORTANT:  Run in the repository root
 
       - name: Run tests
         run: dotnet test --no-build --configuration Release --verbosity normal
+        working-directory: . # IMPORTANT: Run in the repository root
 
       - name: Configure Azure Blob settings
         run: |
           echo "AZUREBLOBSETTINGS__BLOBCONNECTIONSTRING=${{ secrets.AZUREBLOBSETTINGS__BLOBCONNECTIONSTRING }}" >> $GITHUB_ENV
           echo "AZUREBLOBSETTINGS__TAXRATESCONTAINERNAME=${{ secrets.AZUREBLOBSETTINGS__TAXRATESCONTAINERNAME }}" >> $GITHUB_ENV
           echo "AZUREBLOBSETTINGS__TAXRATESUKBLOBNAME=${{ secrets.AZUREBLOBSETTINGS__TAXRATESUKBLOBNAME }}" >> $GITHUB_ENV
-
-      - name: Deploy to Azure
-        run: |
-          # Replace the following with your actual deployment script or tool commands
-          echo "Deploying application..."
-          # Example: az webapp deployment source config-zip --resource-group <ResourceGroupName> --name <AppName> --src <path-to-your-zip>
 
       - name: Azure Login
         uses: azure/login@v1
