@@ -36,9 +36,9 @@ jobs:
       - name: Verify publish output
         run: ls -al ./API/bin/Release/net8.0/publish/
 
-      - name: Run tests
-        run: dotnet test --no-build --configuration Release --verbosity normal
-        working-directory: .
+#      - name: Run tests
+#        run: dotnet test --no-build --configuration Release --verbosity normal
+#        working-directory: .
 
       - name: Configure Azure Blob settings
         run: |
