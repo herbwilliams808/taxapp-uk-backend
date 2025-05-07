@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: Deploy TaxAppUK
 
 on:
   push:
@@ -7,60 +7,50 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    env:
+      DOTNET_ROOT: /usr/share/dotnet
+
     steps:
-      # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
-      
-      # Step 2: Set up .NET environment
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x' # Specify .NET version
-      
-      # Step 3: Clear NuGet cache
-      - name: Clear NuGet cache
-        run: dotnet nuget locals all --clear
+          dotnet-version: '8.0.x'
 
-      # Step 4: Clean build directory
-      - name: Clean build directory
-        run: dotnet clean
-      
-      # Step 5: Install dependencies
-      - name: Restore dependencies
-        run: dotnet restore --verbosity detailed
+      - name: Install dependencies
+        run: dotnet restore
 
-      # Step 6: List installed packages (for debugging)
-      - name: List installed packages
-        run: dotnet list package
-      
-      # Step 7: Build the application
-      - name: Build application
-        run: dotnet build --configuration Release --no-restore --verbosity minimal
+      - name: Build the solution
+        run: dotnet build --no-restore --configuration Release
 
-      # Step 8: Run tests (optional)
-      # - name: Run tests
-      #   run: dotnet test --no-build --verbosity normal
+      - name: Run tests
+        run: dotnet test --no-build --configuration Release --verbosity normal
 
-      # Step 9: Azure Login
+      - name: Configure Azure Blob settings
+        run: |
+          echo "AZUREBLOBSETTINGS__BLOBCONNECTIONSTRING=${{ secrets.AZUREBLOBSETTINGS__BLOBCONNECTIONSTRING }}" >> $GITHUB_ENV
+          echo "AZUREBLOBSETTINGS__TAXRATESCONTAINERNAME=${{ secrets.AZUREBLOBSETTINGS__TAXRATESCONTAINERNAME }}" >> $GITHUB_ENV
+          echo "AZUREBLOBSETTINGS__TAXRATESUKBLOBNAME=${{ secrets.AZUREBLOBSETTINGS__TAXRATESUKBLOBNAME }}" >> $GITHUB_ENV
+
+      - name: Deploy to Azure
+        run: |
+          # Replace the following with your actual deployment script or tool commands
+          echo "Deploying application..."
+          # Example: az webapp deployment source config-zip --resource-group <ResourceGroupName> --name <AppName> --src <path-to-your-zip>
+
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.TAXAPPUKSP_AZURE_CREDENTIALS}}
 
-      # Step 10: Set up environment variables for Azure Blob Storage connection
-      - name: Set environment variables for Azure Blob Storage
-        run: |
-          echo "AZUREBLOB_CONNECTION_STRING=${{ secrets.AzureBlobSettings__BlobConnectionString }}" >> $GITHUB_ENV
-          echo "AZUREBLOB_CONTAINER_NAME=${{ secrets.AzureBlobSettings__TaxRatesContainerName }}" >> $GITHUB_ENV
-          echo "AZUREBLOB_TAXRATESBLOB=${{ secrets.AzureBlobSettings__TaxRatesUkBlobName }}" >> $GITHUB_ENV
-      
-      # Step 11: Deploy to Azure Web App using Publish Profile
       - name: Deploy to Azure Web App using Publish Profile
         uses: azure/webapps-deploy@v2
         with:
