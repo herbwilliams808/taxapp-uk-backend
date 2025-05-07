@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder1", "Solution
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Config", "Config\Config.csproj", "{CB79EFCD-5D67-453C-B6A9-BB526D3CF003}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{8A4BD17E-C7CC-470A-AC11-680CCA2BD1D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared/Shared.csproj", "{8A4BD17E-C7CC-470A-AC11-680CCA2BD1D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
