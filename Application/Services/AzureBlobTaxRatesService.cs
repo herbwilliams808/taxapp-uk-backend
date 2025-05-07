@@ -26,8 +26,8 @@ namespace Application.Services
             Console.WriteLine("Starting to load tax rates...");
 
             var blobServiceClient = new BlobServiceClient(_blobSettings.BlobConnectionString);
-            var containerClient = blobServiceClient.GetBlobContainerClient(_blobSettings.ContainerName);
-            var blobClient = containerClient.GetBlobClient(_blobSettings.BlobName);
+            var containerClient = blobServiceClient.GetBlobContainerClient(_blobSettings.TaxRatesContainerName);
+            var blobClient = containerClient.GetBlobClient(_blobSettings.TaxRatesUkBlobName);
 
             using var downloadStream = new MemoryStream();
             await blobClient.DownloadToAsync(downloadStream);

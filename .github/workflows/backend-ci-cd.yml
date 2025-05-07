@@ -56,9 +56,9 @@ jobs:
       # Step 10: Set up environment variables for Azure Blob Storage connection
       - name: Set environment variables for Azure Blob Storage
         run: |
-          echo "AZUREBLOB_CONNECTION_STRING=${{ secrets.AzureBlob__ConnectionString }}" >> $GITHUB_ENV
-          echo "AZUREBLOB_CONTAINER_NAME=${{ secrets.AzureBlob__ContainerName }}" >> $GITHUB_ENV
-          echo "AZUREBLOB_TAXRATESBLOB=${{ secrets.AzureBlob__TaxRatesBlob }}" >> $GITHUB_ENV
+          echo "AZUREBLOB_CONNECTION_STRING=${{ secrets.AzureBlobSettings__BlobConnectionString }}" >> $GITHUB_ENV
+          echo "AZUREBLOB_CONTAINER_NAME=${{ secrets.AzureBlobSettings__TaxRatesContainerName }}" >> $GITHUB_ENV
+          echo "AZUREBLOB_TAXRATESBLOB=${{ secrets.AzureBlobSettings__TaxRatesUkBlobName }}" >> $GITHUB_ENV
       
       # Step 11: Deploy to Azure Web App using Publish Profile
       - name: Deploy to Azure Web App using Publish Profile
