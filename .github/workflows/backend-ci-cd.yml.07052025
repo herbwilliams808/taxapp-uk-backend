@@ -1,0 +1,69 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      # Step 2: Set up .NET environment
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x' # Specify .NET version
+      
+      # Step 3: Clear NuGet cache
+      - name: Clear NuGet cache
+        run: dotnet nuget locals all --clear
+
+      # Step 4: Clean build directory
+      - name: Clean build directory
+        run: dotnet clean
+      
+      # Step 5: Install dependencies
+      - name: Restore dependencies
+        run: dotnet restore --verbosity detailed
+
+      # Step 6: List installed packages (for debugging)
+      - name: List installed packages
+        run: dotnet list package
+      
+      # Step 7: Build the application
+      - name: Build application
+        run: dotnet build --configuration Release --no-restore --verbosity minimal
+
+      # Step 8: Run tests (optional)
+      # - name: Run tests
+      #   run: dotnet test --no-build --verbosity normal
+
+      # Step 9: Azure Login
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.TAXAPPUKSP_AZURE_CREDENTIALS}}
+
+      # Step 10: Set up environment variables for Azure Blob Storage connection
+      - name: Set environment variables for Azure Blob Storage
+        run: |
+          echo "AZUREBLOB_CONNECTION_STRING=${{ secrets.AzureBlobSettings__BlobConnectionString }}" >> $GITHUB_ENV
+          echo "AZUREBLOB_CONTAINER_NAME=${{ secrets.AzureBlobSettings__TaxRatesContainerName }}" >> $GITHUB_ENV
+          echo "AZUREBLOB_TAXRATESBLOB=${{ secrets.AzureBlobSettings__TaxRatesUkBlobName }}" >> $GITHUB_ENV
+      
+      # Step 11: Deploy to Azure Web App using Publish Profile
+      - name: Deploy to Azure Web App using Publish Profile
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'TaxAppUK-WebApp'
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: '.' # Path to the application package

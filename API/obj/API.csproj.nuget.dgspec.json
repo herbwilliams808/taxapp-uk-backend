@@ -1,0 +1,427 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/API.csproj": {}
+  },
+  "projects": {
+    "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/API.csproj",
+        "projectName": "API",
+        "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/API.csproj",
+        "packagesPath": "/Users/herbwilliams/.nuget/packages/",
+        "outputPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/herbwilliams/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/Application.csproj": {
+                "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/Application.csproj"
+              },
+              "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Config/Config.csproj": {
+                "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Config/Config.csproj"
+              },
+              "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/Domain.csproj": {
+                "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/Domain.csproj"
+              },
+              "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Infrastructure/Infrastructure.csproj": {
+                "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Infrastructure/Infrastructure.csproj"
+              },
+              "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/Shared.csproj": {
+                "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Azure.Storage.Blobs": {
+              "target": "Package",
+              "version": "[12.24.0, )"
+            },
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.15, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[8.1.1, )"
+            },
+            "Swashbuckle.AspNetCore.Annotations": {
+              "target": "Package",
+              "version": "[8.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.408/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/Application.csproj",
+        "projectName": "Application",
+        "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/Application.csproj",
+        "packagesPath": "/Users/herbwilliams/.nuget/packages/",
+        "outputPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/herbwilliams/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Config/Config.csproj": {
+                "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Config/Config.csproj"
+              },
+              "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/Domain.csproj": {
+                "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/Domain.csproj"
+              },
+              "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/Shared.csproj": {
+                "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Azure.Storage.Blobs": {
+              "target": "Package",
+              "version": "[12.24.0, )"
+            },
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.408/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Config/Config.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Config/Config.csproj",
+        "projectName": "Config",
+        "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Config/Config.csproj",
+        "packagesPath": "/Users/herbwilliams/.nuget/packages/",
+        "outputPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Config/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/herbwilliams/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Azure.Storage.Blobs": {
+              "target": "Package",
+              "version": "[12.24.0, )"
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.408/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/Domain.csproj",
+        "projectName": "Domain",
+        "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/Domain.csproj",
+        "packagesPath": "/Users/herbwilliams/.nuget/packages/",
+        "outputPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/herbwilliams/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.408/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Infrastructure/Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Infrastructure/Infrastructure.csproj",
+        "projectName": "Infrastructure",
+        "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Infrastructure/Infrastructure.csproj",
+        "packagesPath": "/Users/herbwilliams/.nuget/packages/",
+        "outputPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/herbwilliams/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.408/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/Shared.csproj",
+        "projectName": "Shared",
+        "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/Shared.csproj",
+        "packagesPath": "/Users/herbwilliams/.nuget/packages/",
+        "outputPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/herbwilliams/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.408/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
