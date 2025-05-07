@@ -25,23 +25,38 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
+      - name: Print current working directory (1)
+        run: pwd
+
+      - name: List files before restore
+        run: ls -al
+
       - name: Install dependencies
         run: dotnet restore
-        working-directory: . # IMPORTANT: Run in the repository root
+        working-directory: .
+
+      - name: Print current working directory (2)
+        run: pwd
 
       - name: Build the solution
         run: dotnet build --no-restore --configuration Release
-        working-directory: . # IMPORTANT:  Run in the repository root
+        working-directory: .
 
       - name: Run tests
         run: dotnet test --no-build --configuration Release --verbosity normal
-        working-directory: . # IMPORTANT: Run in the repository root
+        working-directory: .
 
       - name: Configure Azure Blob settings
         run: |
           echo "AZUREBLOBSETTINGS__BLOBCONNECTIONSTRING=${{ secrets.AZUREBLOBSETTINGS__BLOBCONNECTIONSTRING }}" >> $GITHUB_ENV
           echo "AZUREBLOBSETTINGS__TAXRATESCONTAINERNAME=${{ secrets.AZUREBLOBSETTINGS__TAXRATESCONTAINERNAME }}" >> $GITHUB_ENV
           echo "AZUREBLOBSETTINGS__TAXRATESUKBLOBNAME=${{ secrets.AZUREBLOBSETTINGS__TAXRATESUKBLOBNAME }}" >> $GITHUB_ENV
+
+      - name: Print current working directory (3)
+        run: pwd
+
+      - name: List files before deployment
+        run: ls -al
 
       - name: Azure Login
         uses: azure/login@v1
@@ -53,4 +68,4 @@ jobs:
         with:
           app-name: 'TaxAppUK-WebApp'
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          package: '.' # Path to the application package
+          package: './API/bin/Release/net8.0/publish/' #  <---  **CRITICAL CHANGE HERE**
