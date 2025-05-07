@@ -15,9 +15,9 @@ namespace Application.Services
             _blobSettings = blobSettings.Value ?? throw new ArgumentNullException(nameof(blobSettings));
 
             // Debugging - check if settings are loaded correctly
-            Console.WriteLine($"Blob Connection String: {_blobSettings.BlobConnectionString ?? "NOT SET"}");
-            Console.WriteLine($"Blob Container Name: {_blobSettings.ContainerName ?? "NOT SET"}");
-            Console.WriteLine($"Blob Name: {_blobSettings.BlobName ?? "NOT SET"}");
+            // Console.WriteLine($"Blob Connection String: {_blobSettings.BlobConnectionString ?? "NOT SET"}");
+            // Console.WriteLine($"Blob Container Name: {_blobSettings.ContainerName ?? "NOT SET"}");
+            // Console.WriteLine($"Blob Name: {_blobSettings.BlobName ?? "NOT SET"}");
         }
 
         public async Task<Dictionary<string, dynamic>> LoadTaxRatesAsync()
