@@ -10,3 +10,11 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/obj/Release/net8.0/refint/Application.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/obj/Release/net8.0/Application.pdb
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/obj/Release/net8.0/ref/Application.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/bin/Release/net8.0/Config.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/bin/Release/net8.0/Domain.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/bin/Release/net8.0/Shared.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/bin/Release/net8.0/Config.pdb
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/bin/Release/net8.0/Domain.pdb
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/bin/Release/net8.0/Shared.pdb
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/obj/Release/net8.0/Application.csproj.AssemblyReference.cache
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/obj/Release/net8.0/Applicat.44B5EDA2.Up2Date
