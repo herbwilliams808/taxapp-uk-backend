@@ -1,6 +1,8 @@
 using System.Text.Json;
 using Azure.Storage.Blobs;
+using Azure.Identity;  // Ensure this is included
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;  // For IHostEnvironment
 using Shared.Models;
 
 namespace Application.Services
@@ -8,24 +10,31 @@ namespace Application.Services
     public class AzureBlobTaxRatesService
     {
         private readonly AzureBlobSettings _blobSettings;
+        private readonly IHostEnvironment _env;
 
-        // Primary constructor that injects IOptions<AzureBlobSettings>
-        public AzureBlobTaxRatesService(IOptions<AzureBlobSettings> blobSettings)
+        public AzureBlobTaxRatesService(IOptions<AzureBlobSettings> blobSettings, IHostEnvironment env)
         {
             _blobSettings = blobSettings.Value ?? throw new ArgumentNullException(nameof(blobSettings));
-
-            // Debugging - check if settings are loaded correctly
-            // Console.WriteLine($"Blob Connection String: {_blobSettings.BlobConnectionString ?? "NOT SET"}");
-            // Console.WriteLine($"Blob Container Name: {_blobSettings.ContainerName ?? "NOT SET"}");
-            // Console.WriteLine($"Blob Name: {_blobSettings.BlobName ?? "NOT SET"}");
+            _env = env;
         }
 
         public async Task<Dictionary<string, dynamic>> LoadTaxRatesAsync()
         {
-            // Debugging the method execution
             Console.WriteLine("Starting to load tax rates...");
 
-            var blobServiceClient = new BlobServiceClient(_blobSettings.BlobConnectionString);
+            BlobServiceClient blobServiceClient;
+
+            if (_env.IsDevelopment())
+            {
+                // Use connection string for local development
+                blobServiceClient = new BlobServiceClient(_blobSettings.BlobConnectionString);
+            }
+            else
+            {
+                // Use Managed Identity when running in Azure
+                blobServiceClient = new BlobServiceClient(new Uri($"https://{_blobSettings.TaxRatesContainerName}.blob.core.windows.net"), new DefaultAzureCredential());
+            }
+
             var containerClient = blobServiceClient.GetBlobContainerClient(_blobSettings.TaxRatesContainerName);
             var blobClient = containerClient.GetBlobClient(_blobSettings.TaxRatesUkBlobName);
 
