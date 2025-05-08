@@ -3,6 +3,7 @@ using Azure.Storage.Blobs;
 using Azure.Identity;  // Ensure this is included
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Hosting;  // For IHostEnvironment
+using Microsoft.Extensions.Logging; // Added for logging
 using Shared.Models;
 
 namespace Application.Services
@@ -11,16 +12,18 @@ namespace Application.Services
     {
         private readonly AzureBlobSettings _blobSettings;
         private readonly IHostEnvironment _env;
+        private readonly ILogger<AzureBlobTaxRatesService> _logger; // Added ILogger
 
-        public AzureBlobTaxRatesService(IOptions<AzureBlobSettings> blobSettings, IHostEnvironment env)
+        public AzureBlobTaxRatesService(IOptions<AzureBlobSettings> blobSettings, IHostEnvironment env, ILogger<AzureBlobTaxRatesService> logger)
         {
             _blobSettings = blobSettings.Value ?? throw new ArgumentNullException(nameof(blobSettings));
             _env = env;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger)); // Initialize logger
         }
 
         public async Task<Dictionary<string, dynamic>> LoadTaxRatesAsync()
         {
-            Console.WriteLine("Starting to load tax rates...");
+            _logger.LogInformation("Starting to load tax rates...");
 
             BlobServiceClient blobServiceClient;
 
@@ -28,41 +31,40 @@ namespace Application.Services
             {
                 if (_env.IsDevelopment())
                 {
-                    Console.WriteLine("Using connection string for local development...");
+                    _logger.LogInformation("Using connection string for local development...");
                     blobServiceClient = new BlobServiceClient(_blobSettings.BlobConnectionString);
                 }
                 else
                 {
-                    Console.WriteLine("Using Managed Identity for Azure environment...");
+                    _logger.LogInformation("Using Managed Identity for Azure environment...");
                     var uri = new Uri($"https://{_blobSettings.TaxRatesContainerName}.blob.core.windows.net");
-                    Console.WriteLine($"Blob Service URI: {uri}");
+                    _logger.LogInformation($"Blob Service URI: {uri}");
                     blobServiceClient = new BlobServiceClient(uri, new DefaultAzureCredential());
                 }
 
                 var containerClient = blobServiceClient.GetBlobContainerClient(_blobSettings.TaxRatesContainerName);
-                Console.WriteLine($"Container URI: {containerClient.Uri}");
+                _logger.LogInformation($"Container URI: {containerClient.Uri}");
 
                 var blobClient = containerClient.GetBlobClient(_blobSettings.TaxRatesUkBlobName);
-                Console.WriteLine($"Blob URI: {blobClient.Uri}");
+                _logger.LogInformation($"Blob URI: {blobClient.Uri}");
 
                 using var downloadStream = new MemoryStream();
                 await blobClient.DownloadToAsync(downloadStream);
-                Console.WriteLine("Blob downloaded successfully.");
+                _logger.LogInformation("Blob downloaded successfully.");
 
                 downloadStream.Position = 0;
                 using var reader = new StreamReader(downloadStream);
                 var jsonContent = await reader.ReadToEndAsync();
 
-                Console.WriteLine("Blob content successfully read. Attempting to deserialize...");
+                _logger.LogInformation("Blob content successfully read. Attempting to deserialize...");
                 var taxRates = JsonSerializer.Deserialize<Dictionary<string, dynamic>>(jsonContent);
 
-                Console.WriteLine("Deserialization completed successfully.");
+                _logger.LogInformation("Deserialization completed successfully.");
                 return taxRates ?? new Dictionary<string, dynamic>();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error while loading tax rates: {ex.Message}");
-                Console.WriteLine(ex.StackTrace);
+                _logger.LogError(ex, "Error while loading tax rates.");
                 throw;
             }
         }
