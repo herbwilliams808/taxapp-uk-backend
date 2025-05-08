@@ -16,31 +16,12 @@ builder.Configuration
 
 var configuration = builder.Configuration;
 
-// Inspect all configuration keys and values
-// Console.WriteLine("Configuration Values:");
-// foreach (var kvp in builder.Configuration.AsEnumerable())
-// {
-//     Console.WriteLine($"{kvp.Key}: {kvp.Value}");
-// }
-
-// Log Azure Blob settings during startup
-// var connectionString = configuration["AzureBlobSettings:BlobConnectionString"];
-// var containerName = configuration["AzureBlobSettings:ContainerName"];
-// var blobName = configuration["AzureBlobSettings:BlobName"];
-//
-// Console.WriteLine("");
-// Console.WriteLine("Blob Variable Values:");
-// Console.WriteLine($"Blob Connection String: {connectionString ?? "NOT SET"}");
-// Console.WriteLine($"Blob Container Name: {containerName ?? "NOT SET"}");
-// Console.WriteLine($"Blob Name: {blobName ?? "NOT SET"}");
-
-// Configure application services
-
-// Add other services like controllers, etc.
-
 // Configure AzureBlobSettings
 builder.Services.Configure<AzureBlobSettings>(builder.Configuration.GetSection("AzureBlobSettings"));
 
+// Configure logging
+builder.Logging.ClearProviders(); // Optional, if you want to clear previous providers
+builder.Logging.AddConsole(); // Add the console logger
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -48,12 +29,14 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// if (app.Environment.IsDevelopment())
-// {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-// }
+// Enable Swagger UI in development (you can enable for all environments as well)
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapControllers();
+
+// Example logging usage
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+logger.LogInformation("Application started at {time}", DateTime.UtcNow);
 
 app.Run();
