@@ -37,7 +37,7 @@ namespace Application.Services
                 else
                 {
                     _logger.LogInformation("Using Managed Identity for Azure environment...");
-                    var uri = new Uri($"https://{_blobSettings.TaxRatesContainerName}.blob.core.windows.net");
+                    var uri = new Uri($"https://taxappuksa.blob.core.windows.net");
                     _logger.LogInformation($"Blob Service URI: {uri}");
                     blobServiceClient = new BlobServiceClient(uri, new DefaultAzureCredential());
                 }
