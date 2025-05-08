@@ -24,29 +24,47 @@ namespace Application.Services
 
             BlobServiceClient blobServiceClient;
 
-            if (_env.IsDevelopment())
+            try
             {
-                // Use connection string for local development
-                blobServiceClient = new BlobServiceClient(_blobSettings.BlobConnectionString);
+                if (_env.IsDevelopment())
+                {
+                    Console.WriteLine("Using connection string for local development...");
+                    blobServiceClient = new BlobServiceClient(_blobSettings.BlobConnectionString);
+                }
+                else
+                {
+                    Console.WriteLine("Using Managed Identity for Azure environment...");
+                    var uri = new Uri($"https://{_blobSettings.TaxRatesContainerName}.blob.core.windows.net");
+                    Console.WriteLine($"Blob Service URI: {uri}");
+                    blobServiceClient = new BlobServiceClient(uri, new DefaultAzureCredential());
+                }
+
+                var containerClient = blobServiceClient.GetBlobContainerClient(_blobSettings.TaxRatesContainerName);
+                Console.WriteLine($"Container URI: {containerClient.Uri}");
+
+                var blobClient = containerClient.GetBlobClient(_blobSettings.TaxRatesUkBlobName);
+                Console.WriteLine($"Blob URI: {blobClient.Uri}");
+
+                using var downloadStream = new MemoryStream();
+                await blobClient.DownloadToAsync(downloadStream);
+                Console.WriteLine("Blob downloaded successfully.");
+
+                downloadStream.Position = 0;
+                using var reader = new StreamReader(downloadStream);
+                var jsonContent = await reader.ReadToEndAsync();
+
+                Console.WriteLine("Blob content successfully read. Attempting to deserialize...");
+                var taxRates = JsonSerializer.Deserialize<Dictionary<string, dynamic>>(jsonContent);
+
+                Console.WriteLine("Deserialization completed successfully.");
+                return taxRates ?? new Dictionary<string, dynamic>();
             }
-            else
+            catch (Exception ex)
             {
-                // Use Managed Identity when running in Azure
-                blobServiceClient = new BlobServiceClient(new Uri($"https://{_blobSettings.TaxRatesContainerName}.blob.core.windows.net"), new DefaultAzureCredential());
+                Console.WriteLine($"Error while loading tax rates: {ex.Message}");
+                Console.WriteLine(ex.StackTrace);
+                throw;
             }
-
-            var containerClient = blobServiceClient.GetBlobContainerClient(_blobSettings.TaxRatesContainerName);
-            var blobClient = containerClient.GetBlobClient(_blobSettings.TaxRatesUkBlobName);
-
-            using var downloadStream = new MemoryStream();
-            await blobClient.DownloadToAsync(downloadStream);
-            downloadStream.Position = 0;
-
-            using var reader = new StreamReader(downloadStream);
-            var jsonContent = await reader.ReadToEndAsync();
-
-            var taxRates = JsonSerializer.Deserialize<Dictionary<string, dynamic>>(jsonContent);
-            return taxRates ?? new Dictionary<string, dynamic>();
         }
     }
 }
