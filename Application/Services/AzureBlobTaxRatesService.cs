@@ -19,6 +19,8 @@ namespace Application.Services
             _blobSettings = blobSettings.Value ?? throw new ArgumentNullException(nameof(blobSettings));
             _env = env;
             _logger = logger ?? throw new ArgumentNullException(nameof(logger)); // Initialize logger
+            _logger.LogInformation("*_*_*_*_*_*_ Logger initialised");
+
         }
 
         public async Task<Dictionary<string, dynamic>> LoadTaxRatesAsync()

@@ -5,8 +5,9 @@ using Shared.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Register AzureBlobTaxRatesService with DI
+// Register Services with DI
 builder.Services.AddSingleton<AzureBlobTaxRatesService>();
+builder.Services.AddSingleton<TaxEstimationService>();
 
 // Load configuration from appsettings.json, environment variables, and command-line arguments
 builder.Configuration

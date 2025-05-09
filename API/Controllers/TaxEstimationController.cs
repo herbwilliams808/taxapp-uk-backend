@@ -6,22 +6,15 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TaxEstimationController : ControllerBase
+    public class TaxEstimationController(TaxEstimationService taxEstimationService) : ControllerBase
     {
-        private readonly TaxCalculationService _taxCalculationService;
-
-        public TaxEstimationController()
-        {
-            _taxCalculationService = new TaxCalculationService();
-        }
-
         [HttpPost]
-        public ActionResult<TaxCalculationResponse> CalculateTax(TaxCalculationRequest request)
+        public ActionResult<TaxEstimationResponse> CalculateTax(TaxEstimationRequest request)
         {
             var totalIncome = request.EmploymentIncome + request.PropertyIncome;
-            var taxOwed = _taxCalculationService.CalculateTax(totalIncome);
+            var taxOwed = taxEstimationService.CalculateTax(totalIncome);
 
-            var response = new TaxCalculationResponse
+            var response = new TaxEstimationResponse
             {
                 TotalIncome = totalIncome,
                 TaxOwed = taxOwed,

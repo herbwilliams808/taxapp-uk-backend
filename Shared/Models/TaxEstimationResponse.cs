@@ -1,6 +1,6 @@
 namespace Shared.Models
 {
-    public class TaxCalculationResponse
+    public class TaxEstimationResponse
     {
         public decimal TotalIncome { get; set; }
         public decimal TaxOwed { get; set; }

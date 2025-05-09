@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Shared.Models
 {
-    public class TaxCalculationRequest
+    public class TaxEstimationRequest
     {
         [Required]
         public decimal EmploymentIncome { get; set; }

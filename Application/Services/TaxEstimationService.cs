@@ -1,9 +1,21 @@
+using Microsoft.Extensions.Logging;
+
 namespace Application.Services
 {
-    public class TaxCalculationService
+    public class TaxEstimationService
     {
+        private readonly ILogger<TaxEstimationService> _logger; // Added ILogger
+
+        public TaxEstimationService(ILogger<TaxEstimationService> logger)
+        {
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger)); // Initialize logger
+            _logger.LogInformation("*_*_*_*_*_*_ Logger initialised");
+            
+        }
         public decimal CalculateTax(decimal totalIncome)
         {
+            _logger.LogInformation("Starting to calculate tax...");
+
             if (totalIncome <= 12570) // Personal Allowance threshold
             {
                 return 0;
