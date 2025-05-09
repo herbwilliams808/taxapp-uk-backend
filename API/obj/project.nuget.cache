@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "IVe6++stltU=",
+  "dgSpecHash": "P6YJwQFgsU0=",
   "success": true,
   "projectFilePath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/API.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "/Users/herbwilliams/.nuget/packages/azure.identity/1.13.2/azure.identity.1.13.2.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/azure.storage.blobs/12.24.0/azure.storage.blobs.12.24.0.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/azure.storage.common/12.23.0/azure.storage.common.12.23.0.nupkg.sha512",
+    "/Users/herbwilliams/.nuget/packages/microsoft.applicationinsights/2.23.0/microsoft.applicationinsights.2.23.0.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/microsoft.aspnetcore.openapi/8.0.15/microsoft.aspnetcore.openapi.8.0.15.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
@@ -30,6 +31,7 @@
     "/Users/herbwilliams/.nuget/packages/microsoft.extensions.hosting.abstractions/8.0.0/microsoft.extensions.hosting.abstractions.8.0.0.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/microsoft.extensions.logging/9.0.4/microsoft.extensions.logging.9.0.4.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.4/microsoft.extensions.logging.abstractions.9.0.4.nupkg.sha512",
+    "/Users/herbwilliams/.nuget/packages/microsoft.extensions.logging.applicationinsights/2.23.0/microsoft.extensions.logging.applicationinsights.2.23.0.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/microsoft.extensions.logging.configuration/8.0.0/microsoft.extensions.logging.configuration.8.0.0.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/microsoft.extensions.logging.console/8.0.0/microsoft.extensions.logging.console.8.0.0.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/microsoft.extensions.logging.debug/8.0.0/microsoft.extensions.logging.debug.8.0.0.nupkg.sha512",
