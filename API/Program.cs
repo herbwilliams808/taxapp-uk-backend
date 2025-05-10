@@ -8,7 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Configure logging
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
-builder.Logging.SetMinimumLevel(LogLevel.Information);
+builder.Logging.AddDebug();
+builder.Logging.AddAzureWebAppDiagnostics(); // Add Azure Web App Diagnostics logging
+builder.Logging.SetMinimumLevel(LogLevel.Trace);
 
 // Load configuration
 builder.Configuration
