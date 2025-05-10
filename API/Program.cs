@@ -4,6 +4,14 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.ApplicationInsights;
 using Shared.Models;
 
+using var loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
+    .SetMinimumLevel(LogLevel.Trace)
+    .AddConsole());
+
+ILogger logger = loggerFactory.CreateLogger<Program>();
+logger.LogInformation("Program.cs logger ready :)");
+logger.LogInformation("Program.cs > init builder...");
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Register Services with DI
@@ -29,32 +37,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.Configure<AzureApplicationInsightsSettings>(builder.Configuration.GetSection("AzureApplicationInsightsSettings"));
-
-string aiConnectionString = configuration.GetValue<string>("AzureApplicationInsightsSettings:ApplicationInsightsConnectionString");
-Console.WriteLine($"Ask: {aiConnectionString}" );
-
-builder.Logging.AddApplicationInsights(
-    configureTelemetryConfiguration: (config) =>
-        config.ConnectionString = aiConnectionString,//builder.Configuration.GetConnectionString(aiConnectionString),
-    configureApplicationInsightsLoggerOptions: (options) => { }
-);
-
-builder.Logging.AddFilter<ApplicationInsightsLoggerProvider>("your-category", LogLevel.Trace);
-
-
 var app = builder.Build();
 
 // Enable Swagger UI in development (you can enable for all environments as well)
 app.UseSwagger();
 app.UseSwaggerUI();
-
-
-
 app.MapControllers();
 
 // Example logging usage
-var logger = app.Services.GetRequiredService<ILogger<Program>>();
 logger.LogInformation("Application started at {time}", DateTime.UtcNow);
 
 app.Run();
