@@ -5,6 +5,8 @@ using Shared.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Console.WriteLine("*_*_* Application startup begins...");
+
 // Configure logging
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
