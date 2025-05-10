@@ -8,7 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Configure logging FIRST
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
+builder.Logging.AddAzureWebAppDiagnostics();  // Required for Azure Filesystem/Blob logging
 builder.Logging.SetMinimumLevel(LogLevel.Trace); // Or your desired level
+
+
 
 // Now get a logger from the host's logging system
 var logger = builder.Services.BuildServiceProvider().GetRequiredService<ILogger<Program>>();
