@@ -21,9 +21,9 @@ namespace Application.Services
             _logger = logger ?? throw new ArgumentNullException(nameof(logger)); // Initialize logger
             
             // Log the configuration values for debugging
-            _logger.LogInformation("Blob Connection String: {BlobConnectionString}", _blobSettings.BlobConnectionString);
-            _logger.LogInformation("Blob Container Name: {TaxRatesContainerName}", _blobSettings.TaxRatesContainerName);
-            _logger.LogInformation("Blob Name: {TaxRatesUkBlobName}", _blobSettings.TaxRatesUkBlobName);
+            _logger.LogInformation("------| Blob Connection String: {BlobConnectionString}", _blobSettings.BlobConnectionString);
+            _logger.LogInformation("------| Blob Container Name: {TaxRatesContainerName}", _blobSettings.TaxRatesContainerName);
+            _logger.LogInformation("------| Blob Name: {TaxRatesUkBlobName}", _blobSettings.TaxRatesUkBlobName);
 
             _logger.LogInformation("------| Logger initialised");
 
