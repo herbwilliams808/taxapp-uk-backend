@@ -8,35 +8,31 @@ using Shared.Models;
 
 namespace Application.Services
 {
-    public class AzureBlobTaxRatesService
+    public class AzureBlobTaxRatesService(
+        IOptions<AzureBlobSettings> blobSettings,
+        IHostEnvironment env,
+        ILogger<AzureBlobTaxRatesService> logger)
     {
-        private readonly AzureBlobSettings _blobSettings;
-        private readonly IHostEnvironment _env;
-        private readonly ILogger<AzureBlobTaxRatesService> _logger; // Added ILogger
-        private Dictionary<string, dynamic>? _cachedTaxRates; // Cache for tax rates
+        private readonly AzureBlobSettings _blobSettings = blobSettings.Value ?? throw new ArgumentNullException(nameof(blobSettings));
 
-        public AzureBlobTaxRatesService(IOptions<AzureBlobSettings> blobSettings, IHostEnvironment env, ILogger<AzureBlobTaxRatesService> logger)
-        {
-            _blobSettings = blobSettings.Value ?? throw new ArgumentNullException(nameof(blobSettings));
-            _env = env;
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger)); // Initialize logger
-        }
+        private readonly ILogger<AzureBlobTaxRatesService> _logger = logger ?? throw new ArgumentNullException(nameof(logger)); // Initialize logger
+            // Added ILogger
+        private Dictionary<string, dynamic>? _cachedTaxRates; // Cache for tax rates
 
         public async Task<Dictionary<string, dynamic>> LoadTaxRatesAsync()
         {
             if (_cachedTaxRates != null)
             {
-                _logger.LogInformation("------| Returning cached tax rates.");
+                _logger.LogInformation("------| Loading tax rates from cache...");
                 return _cachedTaxRates;
             }
             
             _logger.LogInformation("------| Loading tax rates from blob storage...");
 
-            BlobServiceClient blobServiceClient;
-
             try
             {
-                if (_env.IsDevelopment())
+                BlobServiceClient blobServiceClient;
+                if (env.IsDevelopment())
                 {
                     blobServiceClient = new BlobServiceClient(_blobSettings.BlobConnectionString);
                 }
