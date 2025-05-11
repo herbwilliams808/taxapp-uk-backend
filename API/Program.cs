@@ -1,11 +1,7 @@
 using Application.Services;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Shared.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
-Console.WriteLine("*_*_* Application startup begins...");
 
 // Configure logging
 builder.Logging.ClearProviders();
@@ -25,7 +21,6 @@ builder.Services.Configure<AzureBlobSettings>(builder.Configuration.GetSection("
 builder.Services.AddSingleton<AzureBlobTaxRatesService>();
 builder.Services.AddSingleton<TaxEstimationService>();
 
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -38,12 +33,7 @@ logger.LogInformation("Application startup begins...");
 try
 {
     var blobService = app.Services.GetRequiredService<AzureBlobTaxRatesService>();
-
-    // Use the service to load and log tax rates
     var taxRates = await blobService.LoadTaxRatesAsync();
-    logger.LogInformation("Loaded tax rates: {@TaxRates}", taxRates);
-
-    logger.LogInformation("Application startup complete.");
 }
 catch (Exception ex)
 {
