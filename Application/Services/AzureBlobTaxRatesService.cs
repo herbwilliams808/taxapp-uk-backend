@@ -13,6 +13,7 @@ namespace Application.Services
         private readonly AzureBlobSettings _blobSettings;
         private readonly IHostEnvironment _env;
         private readonly ILogger<AzureBlobTaxRatesService> _logger; // Added ILogger
+        private Dictionary<string, dynamic>? _cachedTaxRates; // Cache for tax rates
 
         public AzureBlobTaxRatesService(IOptions<AzureBlobSettings> blobSettings, IHostEnvironment env, ILogger<AzureBlobTaxRatesService> logger)
         {
@@ -31,6 +32,12 @@ namespace Application.Services
 
         public async Task<Dictionary<string, dynamic>> LoadTaxRatesAsync()
         {
+            if (_cachedTaxRates != null)
+            {
+                _logger.LogInformation("------| Returning cached tax rates.");
+                return _cachedTaxRates;
+            }
+            
             _logger.LogInformation("------| Starting to load tax rates...");
 
             BlobServiceClient blobServiceClient;
@@ -70,15 +77,19 @@ namespace Application.Services
                 using var reader = new StreamReader(downloadStream);
                 var jsonContent = await reader.ReadToEndAsync();
 
-                _logger.LogInformation("------| Blob content successfully read. Attempting to deserialize...");
-                var taxRates = JsonSerializer.Deserialize<Dictionary<string, dynamic>>(jsonContent);
+                _cachedTaxRates = JsonSerializer.Deserialize<Dictionary<string, dynamic>>(jsonContent);
+                _logger.LogInformation("------| Tax rates deserialized successfully.");
+                return _cachedTaxRates ?? new Dictionary<string, dynamic>();
 
-                _logger.LogInformation("------| Deserialization completed successfully.");
-                return taxRates ?? new Dictionary<string, dynamic>();
+                // _logger.LogInformation("------| Blob content successfully read. Attempting to deserialize...");
+                // var taxRates = JsonSerializer.Deserialize<Dictionary<string, dynamic>>(jsonContent);
+                //
+                // _logger.LogInformation("------| Deserialization completed successfully.");
+                // return taxRates ?? new Dictionary<string, dynamic>();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while loading tax rates.");
+                _logger.LogError(ex, "------| Error while loading tax rates.");
                 throw;
             }
         }

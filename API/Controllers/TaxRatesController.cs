@@ -12,6 +12,7 @@ namespace API.Controllers
         {
             try
             {
+                // Await the LoadTaxRatesAsync method for proper async handling
                 var taxRates = await taxRatesService.LoadTaxRatesAsync();
                 return Ok(taxRates);
             }
