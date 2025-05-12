@@ -1,15 +1,21 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Shared.Models
 {
     public class TaxEstimationRequest
     {
-        [Required]
-        public decimal EmploymentIncome { get; set; }
+        /// <summary>
+        /// The tax year ending (4-digit numerical string). Optional. Defaults to the previous tax year based on the current date.
+        /// </summary>
+        public string? TaxYearEnding { get; set; }
 
-        [Required]
-        public decimal PropertyIncome { get; set; }
+        /// <summary>
+        /// The region (e.g., "england", "scotland", "wales", "northern ireland"). Optional. Defaults to "england".
+        /// </summary>
+        public string? Region { get; set; }
 
-        public decimal TaxDeducted { get; set; }
+        /// <summary>
+        /// Detailed incomes, including employment and property business incomes. Required.
+        /// </summary>
+        public Incomes.Incomes Incomes { get; set; } = default!;
     }
+    
 }

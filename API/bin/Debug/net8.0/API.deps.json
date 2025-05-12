@@ -10,8 +10,6 @@
         "dependencies": {
           "Application": "1.0.0",
           "Azure.Storage.Blobs": "12.24.0",
-          "Config": "1.0.0",
-          "Domain": "1.0.0",
           "Infrastructure": "1.0.0",
           "Microsoft.ApplicationInsights.AspNetCore": "2.23.0",
           "Microsoft.AspNetCore.OpenApi": "8.0.15",
@@ -1026,8 +1024,6 @@
         "dependencies": {
           "Azure.Identity": "1.13.2",
           "Azure.Storage.Blobs": "12.24.0",
-          "Config": "1.0.0",
-          "Domain": "1.0.0",
           "Microsoft.Extensions.Hosting": "8.0.0",
           "Microsoft.Extensions.Options": "9.0.4",
           "Newtonsoft.Json": "13.0.3",
@@ -1035,26 +1031,6 @@
         },
         "runtime": {
           "Application.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "Config/1.0.0": {
-        "dependencies": {
-          "Azure.Storage.Blobs": "12.24.0",
-          "Microsoft.Extensions.Logging": "9.0.4"
-        },
-        "runtime": {
-          "Config.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "Domain/1.0.0": {
-        "runtime": {
-          "Domain.dll": {
             "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -1813,16 +1789,6 @@
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
     },
     "Application/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Config/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Domain/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
