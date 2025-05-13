@@ -1,7 +1,6 @@
 using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Models;
-using System.Globalization;
 
 namespace API.Controllers
 {
@@ -12,28 +11,31 @@ namespace API.Controllers
         [HttpPost]
         public ActionResult<TaxEstimationResponse> CalculateTax(TaxEstimationRequest request)
         {
-            // Determine the tax year ending
-            int currentYear = DateTime.UtcNow.Year;
-            int currentMonth = DateTime.UtcNow.Month;
-            int defaultTaxYearEnding = (currentMonth < 4 || (currentMonth == 4 && DateTime.UtcNow.Day < 6)) ? currentYear : currentYear + 1;
-            int taxYearEnding = string.IsNullOrEmpty(request.TaxYearEnding) 
-                ? defaultTaxYearEnding 
-                : int.TryParse(request.TaxYearEnding, out var parsedYear) ? parsedYear : defaultTaxYearEnding;
-
-            // Default region to "england" if not provided
-            string region = string.IsNullOrEmpty(request.Region) ? "england" : request.Region.ToLower(CultureInfo.InvariantCulture);
-
             // Validate region
+            var region = string.IsNullOrWhiteSpace(request.Region) ? "england" : request.Region.ToLower();
             var validRegions = new[] { "england", "scotland", "wales", "northern ireland" };
             if (!validRegions.Contains(region))
             {
-                return BadRequest("Invalid region provided. Valid values are: england, scotland, wales, northern ireland.");
+                return BadRequest($"Invalid region. Valid values are: {string.Join(", ", validRegions)}.");
             }
 
-            // Calculate tax using the service
-            var taxResult = taxEstimationService.CalculateTax(request.Incomes, taxYearEnding, region);
+            // Determine tax year ending
+            var currentDate = DateTime.UtcNow;
+            var defaultTaxYearEnding = currentDate.Month > 4 || (currentDate.Month == 4 && currentDate.Day >= 6)
+                ? currentDate.Year
+                : currentDate.Year - 1;
+            var taxYearEnding = request.TaxYearEnding ?? defaultTaxYearEnding;
 
-            return Ok(taxResult);
+            // Perform tax calculation
+            var response = taxEstimationService.CalculateTax(
+                request.Incomes,
+                taxYearEnding,
+                region,
+                request.Contributions
+
+            );
+
+            return Ok(response);
         }
     }
 }
