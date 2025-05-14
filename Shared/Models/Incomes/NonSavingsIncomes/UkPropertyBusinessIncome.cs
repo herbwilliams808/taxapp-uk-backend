@@ -1,4 +1,4 @@
-namespace Shared.Models.Incomes;
+namespace Shared.Models.Incomes.NonSavingsIncomes;
 
 public class UkPropertyBusinessIncome
 {

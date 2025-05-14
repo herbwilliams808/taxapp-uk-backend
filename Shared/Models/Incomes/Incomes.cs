@@ -1,3 +1,5 @@
+using Shared.Models.Incomes.NonSavingsIncomes;
+
 namespace Shared.Models.Incomes;
 
 public class Incomes
