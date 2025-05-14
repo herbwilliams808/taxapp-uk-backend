@@ -31,7 +31,7 @@ namespace API.Controllers
                 request.Incomes,
                 taxYearEnding,
                 region,
-                request.Contributions
+                request.Reliefs
 
             );
 

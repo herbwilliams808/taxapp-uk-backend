@@ -1,4 +1,4 @@
-using Shared.Models.Contributions;
+using Shared.Models.Reliefs;
 using Shared.Models.Incomes;
 
 namespace Shared.Models
@@ -7,6 +7,6 @@ namespace Shared.Models
         int? TaxYearEnding, 
         string Region, 
         Incomes.Incomes Incomes, 
-        Contributions.Contributions Contributions // Added Contributions property
+        Reliefs.Reliefs Reliefs // Added Contributions property
     );
 }

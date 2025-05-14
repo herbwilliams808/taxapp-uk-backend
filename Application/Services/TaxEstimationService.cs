@@ -1,7 +1,7 @@
 using Application.Calculators;
 using Microsoft.Extensions.Logging;
 using Shared.Models;
-using Shared.Models.Contributions;
+using Shared.Models.Reliefs;
 using Shared.Models.Incomes;
 
 namespace Application.Services
@@ -10,7 +10,7 @@ namespace Application.Services
     {
         private readonly ILogger<TaxEstimationService> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
-        public TaxEstimationResponse CalculateTax(Incomes incomes, int taxYearEnding, string region, Contributions contributions)
+        public TaxEstimationResponse CalculateTax(Incomes incomes, int taxYearEnding, string region, Reliefs reliefs)
         {
             // Load tax rates for the specified year and region
             var taxRates = taxRatesService.LoadTaxRatesAsync().Result;
@@ -26,9 +26,20 @@ namespace Application.Services
 
             // Use the BasicRateLimitCalculator
             // Check if contributions are null and use 0 if they are.
-            var pensionContributions = contributions.TotalPensionContributions?.GrossedUpAmount ?? 0m;
-            var giftAidContributions = contributions.TotalGiftAidPayments?.GrossedUpAmount ?? 0m;
-            var basicRateLimit = new BasicRateLimitCalculator().Calculate(basicRateThreshold, pensionContributions, giftAidContributions);
+            var regularPensionContributions = reliefs.PensionReliefs?.RegularPensionContributions ?? 0m;
+            var giftAidCurrentYear = reliefs.GiftAidPayments?.CurrentYear ?? 0m;
+            var giftAidCurrentYearTreatedAsPrevious = reliefs.GiftAidPayments?.CurrentYearTreatedAsPreviousYear ?? 0m;
+            var giftAidNextYearTreatedAsCurrent = reliefs.GiftAidPayments?.NextYearTreatedAsCurrentYear ?? 0m;
+
+            var giftAidPayments = (giftAidCurrentYear - giftAidCurrentYearTreatedAsPrevious)
+                                  + giftAidNextYearTreatedAsCurrent;
+            var paymentsIntoPensions = regularPensionContributions;
+            
+            var basicRateLimit = new BasicRateLimitCalculator().Calculate(
+                basicRateThreshold, 
+                paymentsIntoPensions, 
+                giftAidPayments
+                );
 
             decimal taxOwed = 0;
 
