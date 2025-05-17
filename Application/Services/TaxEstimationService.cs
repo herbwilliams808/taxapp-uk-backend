@@ -21,8 +21,10 @@ namespace Application.Services
             // Calculate profit from properties
             var profitFromProperties = (incomes.UkPropertyBusiness?.Income ?? 0m) - (incomes.UkPropertyBusiness?.AllowablePropertyLettingExpenses ?? 0m);
 
+            var employmentIncomes = incomes.Employments.Select(employment => employment.Pay.TaxablePayToDate ?? 0m);
+            
             // Use the TotalIncomeCalculator
-            var totalIncome = new TotalIncomeCalculator().Calculate(incomes.Employment.Select(e => e.Income), profitFromProperties);
+            var totalIncome = new TotalIncomeCalculator().Calculate(employmentIncomes, profitFromProperties);
 
             // Use the BasicRateLimitCalculator
             // Check if contributions are null and use 0 if they are.
@@ -54,7 +56,7 @@ namespace Application.Services
             {
                 TotalIncome = totalIncome,
                 TaxOwed = taxOwed,
-                NetIncome = totalIncome - taxOwed - incomes.Employment.Sum(e => e.TaxPaid)
+                NetIncome = totalIncome - taxOwed - incomes.Employments.Sum(e => e.Pay.TotalTaxToDate ?? 0m)
             };
         }
     }
