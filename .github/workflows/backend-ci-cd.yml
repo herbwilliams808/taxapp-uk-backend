@@ -30,7 +30,7 @@ jobs:
         working-directory: .
 
       - name: Build the solution and publish
-        run: dotnet build --no-restore --configuration Release --output ./API/bin/Release/net8.0/publish/
+        run: dotnet build --no-restore --configuration Release
         working-directory: .
 
       - name: Verify publish output
