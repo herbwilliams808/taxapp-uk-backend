@@ -18,8 +18,7 @@ namespace Application.Services
             var key = $"year_{taxYearEnding - 1}_{taxYearEnding}.{region}.basicRateThreshold";
             var basicRateThreshold = taxRates.TryGetValue(key, out var threshold) ? threshold : 0m;
 
-            var employmentIncomes = incomes.Employments.Select(employment => employment.Pay.TaxablePayToDate ?? 0m);
-            var totalEmploymentIncome = new TotalEmploymentIncomeCalculator().Calculate(employmentIncomes);
+            var totalEmploymentIncome = new TotalEmploymentIncomeCalculator().Calculate(incomes);
             
             var nonPayeEmploymentIncome = incomes.NonPayeEmploymentIncome.Tips ?? 0m;
             

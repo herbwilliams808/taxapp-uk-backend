@@ -1,4 +1,6 @@
 using Application.Calculators;
+using Shared.Models.Incomes;
+using Shared.Models.Incomes.NonSavingsIncomes.Employments;
 
 namespace UnitTests.Application.Calculators
 {
@@ -9,10 +11,18 @@ namespace UnitTests.Application.Calculators
         {
             // Arrange
             var calculator = new TotalEmploymentIncomeCalculator();
-            var employmentIncomes = new[] { 50000m, 20000m }; // Example incomes
-
+            
+            var incomes = new Incomes
+            {
+                Employments =
+                [
+                    new Employment { Pay = new Pay(taxablePayToDate: 20000m) },
+                    new Employment { Pay = new Pay(taxablePayToDate: 50000m) }
+                ]
+            };
+            
             // Act
-            var result = calculator.Calculate(employmentIncomes);
+            var result = calculator.Calculate(incomes);
 
             // Assert
             Assert.Equal(70000, result);
