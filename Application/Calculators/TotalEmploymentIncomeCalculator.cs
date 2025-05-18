@@ -1,6 +1,6 @@
 namespace Application.Calculators;
 
-public class TotalEmploymentIncomesCalculator
+public class TotalEmploymentIncomeCalculator
 {
     public decimal Calculate(IEnumerable<decimal>? employmentIncomes)
     {
