@@ -18,13 +18,15 @@ namespace Application.Services
             var key = $"year_{taxYearEnding - 1}_{taxYearEnding}.{region}.basicRateThreshold";
             var basicRateThreshold = taxRates.TryGetValue(key, out var threshold) ? threshold : 0m;
 
+            var employmentIncomes = incomes.Employments.Select(employment => employment.Pay.TaxablePayToDate ?? 0m);
+
+            var nonPayeEmploymentIncome = incomes.NonPayeEmploymentIncome.Tips ?? 0m;
+            
             // Calculate profit from properties
             var profitFromProperties = (incomes.UkPropertyBusiness?.Income ?? 0m) - (incomes.UkPropertyBusiness?.AllowablePropertyLettingExpenses ?? 0m);
-
-            var employmentIncomes = incomes.Employments.Select(employment => employment.Pay.TaxablePayToDate ?? 0m);
             
             // Use the TotalIncomeCalculator
-            var totalIncome = new TotalIncomeCalculator().Calculate(employmentIncomes, profitFromProperties);
+            var totalIncome = new TotalIncomeCalculator().Calculate(employmentIncomes, nonPayeEmploymentIncome, profitFromProperties);
 
             // Use the BasicRateLimitCalculator
             // Check if contributions are null and use 0 if they are.
