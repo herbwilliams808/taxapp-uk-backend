@@ -27,7 +27,7 @@ sum(
     ASE4	Create and Amend Other Employment Income	lumpSums > benefitFromEmployerFinancedRetirementScheme > amount
 ) = A3
 ```
-#### Total pay
+#### Box A4: Total pay
 ```
 A4 = A1 + A2 + A3
 TotalPay =
@@ -72,10 +72,12 @@ sum(
     EMP16	Create and Amend Employment Financial Details	benefitsInKind > personalIncidentalExpenses
 ) = A5
 ```
-#### Total Employee Benefits
+#### Box A5: Total Employment Benefits
 ```
-TotalEmployeeBenefits =
-Sum()
+TotalEmploymentBenefits =
+Sum(employments.each(benefits.each))
+
+Application.Calculators.TotalEmploymentBenefitsCalculator
 ```
 ### Employment Expenses
 ___
@@ -95,6 +97,10 @@ sum(
     EMP20	Create and Amend Employment Expenses	expenses > vehicleExpenses
     EMP20	Create and Amend Employment Expenses	expenses > mileageAllowanceRelief
 ) = A6
+```
+#### Box A6: Total Employment Expenses
+```
+
 ```
 
 'Additional information' pages, page Ai 2 (Share schemes and employment lump sums: (boxes 11 to 13)

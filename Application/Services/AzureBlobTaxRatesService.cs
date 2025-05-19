@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Hosting;  // For IHostEnvironment
 using Microsoft.Extensions.Logging; // Added for logging
 using Shared.Models;
+using Shared.Models.Settings;
 
 namespace Application.Services
 {

@@ -1,7 +1,4 @@
-using Shared.Models.Reliefs;
-using Shared.Models.Incomes;
-
-namespace Shared.Models
+namespace Shared.Models.HttpMessages
 {
     public record TaxEstimationRequest(
         int? TaxYearEnding, 

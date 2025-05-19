@@ -1,5 +1,6 @@
 using Application.Services;
 using Shared.Models;
+using Shared.Models.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,6 +1,7 @@
 using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Models;
+using Shared.Models.HttpMessages;
 
 namespace API.Controllers
 {

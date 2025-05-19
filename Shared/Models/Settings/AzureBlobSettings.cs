@@ -1,4 +1,4 @@
-namespace Shared.Models;
+namespace Shared.Models.Settings;
 
 /// <summary>
 /// Represents the configuration settings for accessing Azure Blob Storage.

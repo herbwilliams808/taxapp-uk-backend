@@ -13,7 +13,7 @@ namespace Shared.Models.Incomes.NonSavingsIncomes.Employments
         public Deductions? Deductions { get; set; }
 
         [SwaggerSchema(Description = "Details about benefits in kind provided by the employer.")]
-        public BenefitsInKind? BenefitsInKind { get; set; }
+        public Benefits? BenefitsInKind { get; set; }
 
         [SwaggerSchema(Description = "Indicates if the worker is considered an off-payroll worker.")]
         public bool? OffPayrollWorker { get; set; }
