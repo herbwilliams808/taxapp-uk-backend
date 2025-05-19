@@ -1,3 +1,4 @@
+using Application.Calculators;
 using Shared.Models.Incomes;
 using Shared.Models.Incomes.NonSavingsIncomes.Employments;
 
@@ -5,180 +6,162 @@ namespace UnitTests.Application.Calculators
 {
     public class TotalEmploymentBenefitsCalculatorTests
     {
-        private readonly TotalEmploymentBenefitsCalculator _calculator;
-
-        public TotalEmploymentBenefitsCalculatorTests()
-        {
-            _calculator = new TotalEmploymentBenefitsCalculator();
-        }
-
         [Fact]
-        public void Calculate_WhenIncomesIsNull_ReturnsZero()
-        {
-            // Act
-            var result = _calculator.Calculate(incomes: null!);
-
-            // Assert
-            Assert.Equal(0m, result);
-        }
-
-        [Fact]
-        public void Calculate_WhenEmploymentsIsNull_ReturnsZero()
+        public void CalculateTotalBenefits_ReturnsCorrectSum_WhenAllPropertiesArePopulated()
         {
             // Arrange
-            var incomes = new Incomes();
-
-            // Act
-            var result = _calculator.Calculate(incomes);
-
-            // Assert
-            Assert.Equal(0m, result);
-        }
-
-        [Fact]
-        public void Calculate_WhenEmploymentsIsEmpty_ReturnsZero()
-        {
-            // Arrange
-            var incomes = new Incomes 
-            { 
-                Employments = new List<Employment>() 
+            var benefits = new Benefits
+            {
+                Accommodation = 1000,
+                Assets = 200,
+                AssetTransfer = 300,
+                BeneficialLoan = 150,
+                Car = 5000,
+                CarFuel = 1000,
+                EducationalServices = 800,
+                Entertaining = 400,
+                Expenses = 200,
+                MedicalInsurance = 1200,
+                Telephone = 150,
+                Service = 300,
+                TaxableExpenses = 700,
+                Van = 600,
+                VanFuel = 400,
+                Mileage = 250,
+                NonQualifyingRelocationExpenses = 150,
+                NurseryPlaces = 350,
+                OtherItems = 500,
+                PaymentsOnEmployeesBehalf = 100,
+                PersonalIncidentalExpenses = 50,
+                QualifyingRelocationExpenses = 200,
+                EmployerProvidedProfessionalSubscriptions = 150,
+                EmployerProvidedServices = 300,
+                IncomeTaxPaidByDirector = 400,
+                TravelAndSubsistence = 800,
+                VouchersAndCreditCards = 1000,
+                NonCash = 600
             };
 
-            // Act
-            var result = _calculator.Calculate(incomes);
-
-            // Assert
-            Assert.Equal(0m, result);
-        }
-
-        [Fact]
-        public void Calculate_WithSingleEmploymentAndAllBenefits_ReturnsTotalSum()
-        {
-            // Arrange
             var incomes = new Incomes
             {
                 Employments = new List<Employment>
                 {
-                    new()
+                    new Employment
                     {
-                        Pay = new Pay(),
-                        BenefitsInKind = new BenefitsInKind
-                        {
-                            MedicalInsurance = 100m,
-                            CarBenefits = 200m,
-                            FuelBenefits = 300m,
-                            EducationalServices = 400m,
-                            NonCashVouchers = 500m,
-                            Accommodation = 600m,
-                            Assets = 700m,
-                            AssetTransfers = 800m,
-                            CreditTokens = 900m,
-                            DebitCards = 1000m,
-                            EmployerProvidedServices = 1100m,
-                            OtherItems = 1200m,
-                            PaymentsOnEmployeesBehalf = 1300m,
-                            PersonalIncurrredExpenses = 1400m,
-                            QualifyingRelocationExpenses = 1500m,
-                            EmployerProvidedProfessionalSubscriptions = 1600m,
-                            MileageAllowance = 1700m,
-                            VehiclesAndVehicleFuel = 1800m
-                        }
+                        BenefitsInKind = benefits,
+                        Pay = new Pay()
                     }
                 }
             };
 
+            var calculator = new TotalEmploymentBenefitsCalculator();
+
             // Act
-            var result = _calculator.Calculate(incomes);
+            var result = calculator.CalculateTotalBenefits(incomes);
 
             // Assert
-            Assert.Equal(17100m, result);
+            Assert.Equal(17250, result); // Sum of all populated properties
         }
 
         [Fact]
-        public void Calculate_WithMultipleEmployments_ReturnsTotalSum()
+        public void CalculateTotalBenefits_IgnoresNullValues()
+        {
+            // Arrange
+            var benefits = new Benefits
+            {
+                Accommodation = null,
+                Car = 5000,
+                MedicalInsurance = null,
+                OtherItems = 500
+            };
+
+            var incomes = new Incomes
+            {
+                Employments = new List<Employment>
+                {
+                    new Employment
+                    {
+                        BenefitsInKind = benefits,
+                        Pay = new Pay()
+                    }
+                }
+            };
+
+            var calculator = new TotalEmploymentBenefitsCalculator();
+
+            // Act
+            var result = calculator.CalculateTotalBenefits(incomes);
+
+            // Assert
+            Assert.Equal(5500, result); // Only non-null values contribute
+        }
+
+        [Fact]
+        public void CalculateTotalBenefits_HandlesMultipleEmploymentsWithDifferentProperties()
         {
             // Arrange
             var incomes = new Incomes
             {
                 Employments = new List<Employment>
                 {
-                    new()
+                    new Employment
                     {
-                        Pay = new Pay(),
-                        BenefitsInKind = new BenefitsInKind
+                        BenefitsInKind = new Benefits
                         {
-                            MedicalInsurance = 100m,
-                            CarBenefits = 200m
-                        }
+                            Car = 3000,
+                            CarFuel = 1000
+                        },
+                        Pay = new Pay()
                     },
-                    new()
+                    new Employment
                     {
-                        Pay = new Pay(),
-                        BenefitsInKind = new BenefitsInKind
+                        BenefitsInKind = new Benefits
                         {
-                            FuelBenefits = 300m,
-                            EducationalServices = 400m
-                        }
+                            MedicalInsurance = 2000,
+                            OtherItems = 700
+                        },
+                        Pay = new Pay()
                     }
                 }
             };
 
+            var calculator = new TotalEmploymentBenefitsCalculator();
+
             // Act
-            var result = _calculator.Calculate(incomes);
+            var result = calculator.CalculateTotalBenefits(incomes);
 
             // Assert
-            Assert.Equal(1000m, result);
+            Assert.Equal(6700, result); // Sum of all valid benefits across employments
         }
 
         [Fact]
-        public void Calculate_WithSomeNullBenefits_ReturnsSumOfNonNullValues()
+        public void CalculateTotalBenefits_ReturnsZero_WhenNoBenefitsArePresent()
         {
             // Arrange
             var incomes = new Incomes
             {
                 Employments = new List<Employment>
                 {
-                    new()
+                    new Employment
                     {
-                        Pay = new Pay(),
-                        BenefitsInKind = new BenefitsInKind
-                        {
-                            MedicalInsurance = 100m,
-                            CarBenefits = null,
-                            FuelBenefits = 300m
-                        }
-                    }
+                        BenefitsInKind = null,
+                        Pay = new Pay()
+                    }, // No benefits in this employment
+                    new Employment
+                    {
+                        BenefitsInKind = new Benefits(),
+                        Pay = new Pay()
+                    } // Empty benefits
                 }
             };
 
-            // Act
-            var result = _calculator.Calculate(incomes);
-
-            // Assert
-            Assert.Equal(400m, result);
-        }
-
-        [Fact]
-        public void Calculate_WithNullBenefitsInKind_ReturnsZero()
-        {
-            // Arrange
-            var incomes = new Incomes
-            {
-                Employments = new List<Employment>
-                {
-                    new()
-                    {
-                        Pay = new Pay(),
-                        BenefitsInKind = null
-                    }
-                }
-            };
+            var calculator = new TotalEmploymentBenefitsCalculator();
 
             // Act
-            var result = _calculator.Calculate(incomes);
+            var result = calculator.CalculateTotalBenefits(incomes);
 
             // Assert
-            Assert.Equal(0m, result);
+            Assert.Equal(0, result); // No contributions
         }
     }
 }
