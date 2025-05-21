@@ -49,7 +49,8 @@ namespace UnitTests.Application.Calculators
                     new Employment
                     {
                         BenefitsInKind = benefits,
-                        Pay = new Pay()
+                        Pay = new Pay(),
+                        Employer = new Employer { EmployerName = "Test Employer" }
                     }
                 }
             };
@@ -82,7 +83,8 @@ namespace UnitTests.Application.Calculators
                     new Employment
                     {
                         BenefitsInKind = benefits,
-                        Pay = new Pay()
+                        Pay = new Pay(),
+                        Employer = new Employer { EmployerName = "Test Employer" }
                     }
                 }
             };
@@ -111,7 +113,8 @@ namespace UnitTests.Application.Calculators
                             Car = 3000,
                             CarFuel = 1000
                         },
-                        Pay = new Pay()
+                        Pay = new Pay(),
+                        Employer = new Employer { EmployerName = "First Employer" }
                     },
                     new Employment
                     {
@@ -120,7 +123,8 @@ namespace UnitTests.Application.Calculators
                             MedicalInsurance = 2000,
                             OtherItems = 700
                         },
-                        Pay = new Pay()
+                        Pay = new Pay(),
+                        Employer = new Employer { EmployerName = "Second Employer" }
                     }
                 }
             };
@@ -145,12 +149,14 @@ namespace UnitTests.Application.Calculators
                     new Employment
                     {
                         BenefitsInKind = null,
-                        Pay = new Pay()
+                        Pay = new Pay(),
+                        Employer = new Employer { EmployerName = "First Employer" }
                     }, // No benefits in this employment
                     new Employment
                     {
                         BenefitsInKind = new Benefits(),
-                        Pay = new Pay()
+                        Pay = new Pay(),
+                        Employer = new Employer { EmployerName = "Second Employer" }
                     } // Empty benefits
                 }
             };
