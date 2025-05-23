@@ -14,9 +14,9 @@ public class CustomerEstimatedPay
     /// The estimated pay amount in decimal format
     /// </summary>
     /// <example>1000.50</example>
-    [Required(AllowEmptyStrings = false, ErrorMessage = "Amount is required")]
-    [Range(typeof(decimal), "0", "79228162514264337593543950335", ErrorMessage = "Amount must be non-negative")]
-    [DefaultValue(null)]
+    // [Required(AllowEmptyStrings = false, ErrorMessage = "Amount is required")]
+    // [Range(typeof(decimal), "0", "79228162514264337593543950335", ErrorMessage = "Amount must be non-negative")]
+    // [DefaultValue(null)]
     [DisplayName("Estimated Pay Amount")]
     [DisplayFormat(DataFormatString = "{0:C2}")]
     public decimal? Amount { get; set; }

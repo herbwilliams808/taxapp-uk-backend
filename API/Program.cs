@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
-builder.Logging.AddAzureWebAppDiagnostics(); // Add Azure Web App Diagnostics logging
+builder.Logging.AddAzureWebAppDiagnostics();
 builder.Logging.SetMinimumLevel(LogLevel.Trace);
 
 // Load configuration
@@ -39,12 +39,16 @@ try
 catch (Exception ex)
 {
     logger.LogError(ex, "Error during application startup.");
-    throw; // Ensures the app fails visibly on critical errors
+    throw;
 }
 
-// Enable middleware
-app.UseSwagger();
-app.UseSwaggerUI();
+// Only enable Swagger in Development environment
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 app.MapControllers();
 
 app.Run();
