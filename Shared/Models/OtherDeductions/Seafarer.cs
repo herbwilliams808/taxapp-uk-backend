@@ -1,16 +1,15 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Shared.Models.OtherDeductions
 {
-    public class Seafarer(string nameOfShip, DateTime fromDate, DateTime toDate)
+    public class Seafarer(decimal amountDeducted, string nameOfShip, DateTime fromDate, DateTime toDate )
     {
         [StringLength(100)]
         public string? CustomerReference { get; init; }
 
         [Required]
         [Range(0, double.MaxValue, ErrorMessage = "AmountDeducted must be a positive value.")]
-        public decimal AmountDeducted { get; init; }
+        public decimal AmountDeducted { get; init; } = amountDeducted;
 
         [Required]
         [StringLength(200)]

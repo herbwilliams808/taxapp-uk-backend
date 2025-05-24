@@ -44,30 +44,9 @@ namespace UnitTests.Application.Calculators
             {
                 Seafarers = 
                 [
-                    new Seafarer("Ship1", DateTime.Today, DateTime.Today) { AmountDeducted = 100m },
-                    new Seafarer("Ship2", DateTime.Today, DateTime.Today) { AmountDeducted = 200m },
-                    new Seafarer("Ship3", DateTime.Today, DateTime.Today) { AmountDeducted = 300m }
-                ]
-            };
-
-            // Act
-            var result = _calculator.Calculate(otherDeductions);
-
-            // Assert
-            Assert.Equal(600m, result);
-        }
-
-        [Fact]
-        public void Calculate_ShouldHandleNullableSeafarerAmounts()
-        {
-            // Arrange
-            var otherDeductions = new OtherDeductions
-            {
-                Seafarers = 
-                [
-                    new Seafarer("Ship1", DateTime.Today, DateTime.Today) { AmountDeducted = 100m },
-                    new Seafarer("Ship1", DateTime.Today, DateTime.Today) {  },
-                    new Seafarer("Ship1", DateTime.Today, DateTime.Today) { AmountDeducted = 300m }
+                    new Seafarer(100m,"Ship1", DateTime.Today, DateTime.Today),
+                    new Seafarer(0m,"Ship2", DateTime.Today, DateTime.Today),
+                    new Seafarer(300m,"Ship3", DateTime.Today, DateTime.Today)
                 ]
             };
 
@@ -77,6 +56,7 @@ namespace UnitTests.Application.Calculators
             // Assert
             Assert.Equal(400m, result);
         }
+        
 
         [Fact]
         public void Calculate_ShouldReturnZero_WhenSeafarersIsNull()
