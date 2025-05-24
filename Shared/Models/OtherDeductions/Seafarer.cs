@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Shared.Models.OtherDeductions
 {
-    public class Seafarers
+    public class Seafarer(string nameOfShip, DateTime fromDate, DateTime toDate)
     {
         [StringLength(100)]
         public string? CustomerReference { get; init; }
@@ -14,12 +14,12 @@ namespace Shared.Models.OtherDeductions
 
         [Required]
         [StringLength(200)]
-        public string NameOfShip { get; init; }
+        public string NameOfShip { get; init; } = nameOfShip;
 
         [Required]
-        public DateTime FromDate { get; init; }
+        public DateTime FromDate { get; init; } = fromDate;
 
         [Required]
-        public DateTime ToDate { get; init; }
+        public DateTime ToDate { get; init; } = toDate;
     }
 }

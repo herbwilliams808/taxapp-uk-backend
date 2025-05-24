@@ -10,7 +10,7 @@ namespace UnitTests.Application.Calculators
         public void CalculateTotalBenefits_ReturnsCorrectSum_WhenAllPropertiesArePopulated()
         {
             // Arrange
-            var benefits = new Benefits
+            var benefits = new BenefitsInKind
             {
                 Accommodation = 1000,
                 Assets = 200,
@@ -49,7 +49,6 @@ namespace UnitTests.Application.Calculators
                     new Employment
                     {
                         BenefitsInKind = benefits,
-                        Pay = new Pay(),
                         Employer = new Employer { EmployerName = "Test Employer" }
                     }
                 }
@@ -58,7 +57,7 @@ namespace UnitTests.Application.Calculators
             var calculator = new TotalEmploymentBenefitsCalculator();
 
             // Act
-            var result = calculator.CalculateTotalBenefits(incomes);
+            var result = calculator.Calculate(incomes);
 
             // Assert
             Assert.Equal(17250, result); // Sum of all populated properties
@@ -68,7 +67,7 @@ namespace UnitTests.Application.Calculators
         public void CalculateTotalBenefits_IgnoresNullValues()
         {
             // Arrange
-            var benefits = new Benefits
+            var benefits = new BenefitsInKind
             {
                 Accommodation = null,
                 Car = 5000,
@@ -83,7 +82,6 @@ namespace UnitTests.Application.Calculators
                     new Employment
                     {
                         BenefitsInKind = benefits,
-                        Pay = new Pay(),
                         Employer = new Employer { EmployerName = "Test Employer" }
                     }
                 }
@@ -92,7 +90,7 @@ namespace UnitTests.Application.Calculators
             var calculator = new TotalEmploymentBenefitsCalculator();
 
             // Act
-            var result = calculator.CalculateTotalBenefits(incomes);
+            var result = calculator.Calculate(incomes);
 
             // Assert
             Assert.Equal(5500, result); // Only non-null values contribute
@@ -108,22 +106,20 @@ namespace UnitTests.Application.Calculators
                 {
                     new Employment
                     {
-                        BenefitsInKind = new Benefits
+                        BenefitsInKind = new BenefitsInKind
                         {
                             Car = 3000,
                             CarFuel = 1000
                         },
-                        Pay = new Pay(),
                         Employer = new Employer { EmployerName = "First Employer" }
                     },
                     new Employment
                     {
-                        BenefitsInKind = new Benefits
+                        BenefitsInKind = new BenefitsInKind
                         {
                             MedicalInsurance = 2000,
                             OtherItems = 700
                         },
-                        Pay = new Pay(),
                         Employer = new Employer { EmployerName = "Second Employer" }
                     }
                 }
@@ -132,7 +128,7 @@ namespace UnitTests.Application.Calculators
             var calculator = new TotalEmploymentBenefitsCalculator();
 
             // Act
-            var result = calculator.CalculateTotalBenefits(incomes);
+            var result = calculator.Calculate(incomes);
 
             // Assert
             Assert.Equal(6700, result); // Sum of all valid benefits across employments
@@ -149,13 +145,11 @@ namespace UnitTests.Application.Calculators
                     new Employment
                     {
                         BenefitsInKind = null,
-                        Pay = new Pay(),
                         Employer = new Employer { EmployerName = "First Employer" }
                     }, // No benefits in this employment
                     new Employment
                     {
-                        BenefitsInKind = new Benefits(),
-                        Pay = new Pay(),
+                        BenefitsInKind = new BenefitsInKind(),
                         Employer = new Employer { EmployerName = "Second Employer" }
                     } // Empty benefits
                 }
@@ -164,7 +158,7 @@ namespace UnitTests.Application.Calculators
             var calculator = new TotalEmploymentBenefitsCalculator();
 
             // Act
-            var result = calculator.CalculateTotalBenefits(incomes);
+            var result = calculator.Calculate(incomes);
 
             // Assert
             Assert.Equal(0, result); // No contributions

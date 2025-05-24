@@ -37,7 +37,7 @@ namespace Shared.Models.Incomes.NonSavingsIncomes.Employments
 
         [Required]
         [SwaggerSchema(Description = "Details about the pay, including taxable pay and tax to date.")]
-        public required Pay Pay { get; set; }
+        public Pay? Pay { get; set; }
 
         [SwaggerSchema(Description = "The customer's estimated pay for this employment.")]
         public CustomerEstimatedPay? CustomerEstimatedPay { get; set; }
@@ -46,7 +46,7 @@ namespace Shared.Models.Incomes.NonSavingsIncomes.Employments
         public Deductions? Deductions { get; set; }
 
         [SwaggerSchema(Description = "Details about benefits in kind provided by the employer.")]
-        public Benefits? BenefitsInKind { get; set; }
+        public BenefitsInKind? BenefitsInKind { get; set; }
         
         [SwaggerSchema(Description = "Details about expenses while at the employer.")]
         public Expenses.Expenses? Expenses { get; set; }

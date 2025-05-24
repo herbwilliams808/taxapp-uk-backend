@@ -17,11 +17,17 @@ public class TotalEmploymentIncomeCalculator
                 lumpSum.TaxableLumpSumsAndCertainIncome?.Amount ?? 0m);
         var totalTaxableLumpSums = taxableLumpSums?.Sum() ?? 0;
         
-        var benefits = 
+        var employerFinancedRetirementSchemeBenefits = 
             incomes.OtherEmploymentIncome.LumpSums?.Select(lumpSum => 
                 lumpSum.BenefitFromEmployerFinancedRetirementScheme?.Amount ?? 0m);
-        var totalBenefits = benefits?.Sum() ?? 0;
+        var totalEmployerFinancedRetirementSchemeBenefits = employerFinancedRetirementSchemeBenefits?.Sum() ?? 0;
         
-        return totalEmploymentIncome + nonPayeEmploymentIncome + totalTaxableLumpSums + totalBenefits;
+        var totalBenefitsInKind = new TotalEmploymentBenefitsCalculator().Calculate(incomes);
+        
+        return totalEmploymentIncome + 
+               nonPayeEmploymentIncome + 
+               totalTaxableLumpSums + 
+               totalEmployerFinancedRetirementSchemeBenefits + 
+               totalBenefitsInKind;
     }
 }

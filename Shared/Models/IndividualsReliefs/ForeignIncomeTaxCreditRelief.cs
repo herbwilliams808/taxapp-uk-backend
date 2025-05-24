@@ -5,6 +5,11 @@ namespace Shared.Models.IndividualsReliefs
 {
     public class ForeignIncomeTaxCreditRelief
     {
+        public ForeignIncomeTaxCreditRelief(string countryCode)
+        {
+            CountryCode = countryCode;
+        }
+
         [Required]
         [StringLength(3, MinimumLength = 2, ErrorMessage = "CountryCode must be 2 or 3 characters long.")]
         public string CountryCode { get; init; }

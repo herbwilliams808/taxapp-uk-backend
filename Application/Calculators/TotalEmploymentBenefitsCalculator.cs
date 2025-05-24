@@ -4,7 +4,7 @@ namespace Application.Calculators
 {
     public class TotalEmploymentBenefitsCalculator
     {
-        public decimal CalculateTotalBenefits(Incomes incomes)
+        public decimal Calculate(Incomes incomes)
         {
             if (incomes?.Employments == null || !incomes.Employments.Any())
                 return 0;

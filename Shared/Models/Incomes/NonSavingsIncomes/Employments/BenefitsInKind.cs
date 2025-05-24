@@ -5,7 +5,7 @@ namespace Shared.Models.Incomes.NonSavingsIncomes.Employments
     /// <summary>
     /// Represents the benefits received by an employee.
     /// </summary>
-    public class Benefits
+    public class BenefitsInKind
     {
         [SwaggerSchema("Accommodation benefit.")]
         public decimal? Accommodation { get; set; }
