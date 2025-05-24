@@ -2,8 +2,11 @@ using Application.Calculators;
 using Microsoft.Extensions.Logging;
 using Shared.Models;
 using Shared.Models.HttpMessages;
-using Shared.Models.Reliefs;
 using Shared.Models.Incomes;
+using Shared.Models.IndividualsForeignIncome;
+using Shared.Models.IndividualsReliefs;
+using Shared.Models.IndividualsReliefs.ForeignReliefs;
+using Shared.Models.OtherDeductions;
 
 namespace Application.Services
 {
@@ -11,7 +14,15 @@ namespace Application.Services
     {
         private readonly ILogger<TaxEstimationService> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
-        public TaxEstimationResponse CalculateTax(Incomes incomes, int taxYearEnding, string region, Reliefs reliefs)
+        public TaxEstimationResponse CalculateTax(
+            int taxYearEnding, 
+            string region, 
+            Incomes? incomes,
+            IndividualsReliefs? individualsReliefs,
+            OtherDeductions? otherDeductions, 
+            IndividualsForeignIncome? individualsForeignIncome,
+            ForeignReliefs? foreignReliefs
+        )
         {
             // Load tax rates for the specified year and region
             var taxRates = taxRatesService.LoadTaxRatesAsync().Result;
@@ -20,17 +31,17 @@ namespace Application.Services
             var basicRateThreshold = taxRates.TryGetValue(key, out var threshold) ? threshold : 0m;
 
             // Use the TotalIncomeCalculator
-            var totalEmploymentIncome = new TotalEmploymentIncomeCalculator().Calculate(incomes);
+            var totalEmploymentIncome = new TotalEmploymentIncomeCalculator(new TotalEmploymentBenefitsCalculator(), new TotalEmploymentExpensesCalculator(), new TotalOtherDeductionsCalculator()).Calculate(incomes, otherDeductions, individualsForeignIncome, foreignReliefs );
             var nonPayeEmploymentIncome = incomes.NonPayeEmploymentIncome.Tips ?? 0m;
             var profitFromProperties = new ProfitFromPropertiesCalculator().Calculate(incomes);
             var totalIncome = new TotalIncomeCalculator().Calculate(totalEmploymentIncome, nonPayeEmploymentIncome, profitFromProperties);
 
             // Use the BasicRateLimitCalculator
             // Check if contributions are null and use 0 if they are.
-            var regularPensionContributions = reliefs.PensionReliefs?.RegularPensionContributions ?? 0m;
-            var giftAidCurrentYear = reliefs.GiftAidPayments?.CurrentYear ?? 0m;
-            var giftAidCurrentYearTreatedAsPrevious = reliefs.GiftAidPayments?.CurrentYearTreatedAsPreviousYear ?? 0m;
-            var giftAidNextYearTreatedAsCurrent = reliefs.GiftAidPayments?.NextYearTreatedAsCurrentYear ?? 0m;
+            var regularPensionContributions = individualsReliefs.PensionReliefs?.RegularPensionContributions ?? 0m;
+            var giftAidCurrentYear = individualsReliefs.GiftAidPayments?.CurrentYear ?? 0m;
+            var giftAidCurrentYearTreatedAsPrevious = individualsReliefs.GiftAidPayments?.CurrentYearTreatedAsPreviousYear ?? 0m;
+            var giftAidNextYearTreatedAsCurrent = individualsReliefs.GiftAidPayments?.NextYearTreatedAsCurrentYear ?? 0m;
 
             var giftAidPayments = (giftAidCurrentYear - giftAidCurrentYearTreatedAsPrevious)
                                   + giftAidNextYearTreatedAsCurrent;
@@ -40,7 +51,7 @@ namespace Application.Services
                 basicRateThreshold, 
                 paymentsIntoPensions, 
                 giftAidPayments
-                );
+            );
 
             decimal taxOwed = 0;
 

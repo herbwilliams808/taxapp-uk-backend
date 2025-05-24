@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace Shared.Models.IndividualsReliefs
+namespace Shared.Models.IndividualsReliefs.ForeignReliefs
 {
-    public class CreateAndAmendForeignReliefsBody
+    public class ForeignReliefs
     {
         public ForeignTaxCreditRelief? ForeignTaxCreditRelief { get; init; }
 

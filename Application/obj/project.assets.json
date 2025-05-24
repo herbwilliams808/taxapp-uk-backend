@@ -78,6 +78,39 @@
           }
         }
       },
+      "Castle.Core/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Diagnostics.EventLog": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Castle.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Castle.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Devlooped.SponsorLink/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/_._": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/Devlooped.SponsorLink.props": {},
+          "buildTransitive/Devlooped.SponsorLink.targets": {}
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
         "type": "package",
         "compile": {
@@ -731,6 +764,23 @@
           }
         }
       },
+      "Moq/4.20.0": {
+        "type": "package",
+        "dependencies": {
+          "Castle.Core": "5.1.1",
+          "Devlooped.SponsorLink": "1.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Moq.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Moq.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Newtonsoft.Json/13.0.3": {
         "type": "package",
         "compile": {
@@ -1070,6 +1120,53 @@
         "lib/net8.0/Azure.Storage.Common.xml",
         "lib/netstandard2.0/Azure.Storage.Common.dll",
         "lib/netstandard2.0/Azure.Storage.Common.xml"
+      ]
+    },
+    "Castle.Core/5.1.1": {
+      "sha512": "rpYtIczkzGpf+EkZgDr9CClTdemhsrwA/W5hMoPjLkRFnXzH44zDLoovXeKtmxb1ykXK9aJVODSpiJml8CTw2g==",
+      "type": "package",
+      "path": "castle.core/5.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ASL - Apache Software Foundation License.txt",
+        "CHANGELOG.md",
+        "LICENSE",
+        "castle-logo.png",
+        "castle.core.5.1.1.nupkg.sha512",
+        "castle.core.nuspec",
+        "lib/net462/Castle.Core.dll",
+        "lib/net462/Castle.Core.xml",
+        "lib/net6.0/Castle.Core.dll",
+        "lib/net6.0/Castle.Core.xml",
+        "lib/netstandard2.0/Castle.Core.dll",
+        "lib/netstandard2.0/Castle.Core.xml",
+        "lib/netstandard2.1/Castle.Core.dll",
+        "lib/netstandard2.1/Castle.Core.xml",
+        "readme.txt"
+      ]
+    },
+    "Devlooped.SponsorLink/1.0.0": {
+      "sha512": "YtGfB0L0OUGK/Nl7YR8jVLOb8zIYo+pM80nw86GVqqeI36D3itw/N5agupsn4sAJxQxKVJti9KvqqAR8dfrW1A==",
+      "type": "package",
+      "path": "devlooped.sponsorlink/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/Devlooped.SponsorLink.dll",
+        "analyzers/dotnet/Devlooped.SponsorLink.xml",
+        "analyzers/dotnet/System.Net.Http.WinHttpHandler.dll",
+        "analyzers/dotnet/es/Devlooped.SponsorLink.resources.dll",
+        "buildTransitive/Devlooped.SponsorLink.props",
+        "buildTransitive/Devlooped.SponsorLink.targets",
+        "devlooped.sponsorlink.1.0.0.nupkg.sha512",
+        "devlooped.sponsorlink.nuspec",
+        "icon.png",
+        "lib/netstandard2.0/Devlooped.SponsorLink.dll",
+        "lib/netstandard2.0/Devlooped.SponsorLink.xml",
+        "lib/netstandard2.0/System.Net.Http.WinHttpHandler.dll",
+        "lib/netstandard2.0/es/Devlooped.SponsorLink.resources.dll",
+        "readme.md"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
@@ -2056,6 +2153,30 @@
         "microsoft.openapi.nuspec"
       ]
     },
+    "Moq/4.20.0": {
+      "sha512": "QZg6hh/MCpVN9uq3/uwfgKCHsV5NqTASJbowai960f2yjkyDk02qG5LO301uMqVIc+ge/GRbUo3qaYI6mlqQrg==",
+      "type": "package",
+      "path": "moq/4.20.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/roslyn4.0/Moq.CodeAnalysis.dll",
+        "analyzers/dotnet/roslyn4.0/Moq.CodeAnalysis.xml",
+        "analyzers/dotnet/roslyn4.0/es/Moq.CodeAnalysis.resources.dll",
+        "icon.png",
+        "lib/net462/Moq.dll",
+        "lib/net462/Moq.xml",
+        "lib/net6.0/Moq.dll",
+        "lib/net6.0/Moq.xml",
+        "lib/netstandard2.0/Moq.dll",
+        "lib/netstandard2.0/Moq.xml",
+        "lib/netstandard2.1/Moq.dll",
+        "lib/netstandard2.1/Moq.xml",
+        "moq.4.20.0.nupkg.sha512",
+        "moq.nuspec",
+        "readme.md"
+      ]
+    },
     "Newtonsoft.Json/13.0.3": {
       "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
       "type": "package",
@@ -2549,6 +2670,7 @@
       "Azure.Storage.Blobs >= 12.24.0",
       "Microsoft.Extensions.Hosting >= 8.0.0",
       "Microsoft.Extensions.Options >= 9.0.4",
+      "Moq >= 4.18.5",
       "Newtonsoft.Json >= 13.0.3",
       "Shared >= 1.0.0"
     ]
@@ -2615,6 +2737,10 @@
             "target": "Package",
             "version": "[9.0.4, )"
           },
+          "Moq": {
+            "target": "Package",
+            "version": "[4.18.5, )"
+          },
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
@@ -2639,5 +2765,27 @@
         "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.408/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Application depends on Moq (>= 4.18.5) but Moq 4.18.5 was not found. Moq 4.20.0 was resolved instead.",
+      "libraryId": "Moq",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    },
+    {
+      "code": "NU1901",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Moq' 4.20.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-6r78-m64m-qwcf",
+      "libraryId": "Moq",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

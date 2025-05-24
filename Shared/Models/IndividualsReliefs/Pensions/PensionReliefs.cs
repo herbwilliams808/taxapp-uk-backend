@@ -1,6 +1,4 @@
-using System;
-
-namespace Shared.Models.Reliefs.Pensions;
+namespace Shared.Models.IndividualsReliefs.Pensions;
 
 /// <summary>
 /// Represents a request model for capturing different forms of pension-related reliefs.

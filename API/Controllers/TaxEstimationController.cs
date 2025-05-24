@@ -29,11 +29,13 @@ namespace API.Controllers
 
             // Perform tax calculation
             var response = taxEstimationService.CalculateTax(
-                request.Incomes,
                 taxYearEnding,
                 region,
-                request.Reliefs
-
+                request.Incomes, 
+                request.IndividualsReliefs,
+                request.OtherDeductions,
+                request.IndividualsForeignIncome,
+                request.ForeignReliefs
             );
 
             return Ok(response);

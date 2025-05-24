@@ -1,4 +1,4 @@
-namespace Shared.Models.Reliefs.CharitableGivings;
+namespace Shared.Models.IndividualsReliefs.CharitableGivings;
 
 /// <summary>
 /// Represents a request model for capturing different forms of Gift Aid payments

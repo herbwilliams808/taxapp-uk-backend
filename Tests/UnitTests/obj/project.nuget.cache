@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "6z8V86UMp8o=",
+  "dgSpecHash": "tycfgmsNooI=",
   "success": true,
   "projectFilePath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/UnitTests.csproj",
   "expectedPackageFiles": [
@@ -8,7 +8,9 @@
     "/Users/herbwilliams/.nuget/packages/azure.identity/1.13.2/azure.identity.1.13.2.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/azure.storage.blobs/12.24.0/azure.storage.blobs.12.24.0.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/azure.storage.common/12.23.0/azure.storage.common.12.23.0.nupkg.sha512",
+    "/Users/herbwilliams/.nuget/packages/castle.core/5.1.1/castle.core.5.1.1.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/coverlet.collector/6.0.0/coverlet.collector.6.0.0.nupkg.sha512",
+    "/Users/herbwilliams/.nuget/packages/devlooped.sponsorlink/1.0.0/devlooped.sponsorlink.1.0.0.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/microsoft.applicationinsights/2.23.0/microsoft.applicationinsights.2.23.0.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/microsoft.applicationinsights.aspnetcore/2.23.0/microsoft.applicationinsights.aspnetcore.2.23.0.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/microsoft.applicationinsights.dependencycollector/2.23.0/microsoft.applicationinsights.dependencycollector.2.23.0.nupkg.sha512",
@@ -72,6 +74,7 @@
     "/Users/herbwilliams/.nuget/packages/microsoft.testplatform.testhost/17.8.0/microsoft.testplatform.testhost.17.8.0.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/microsoft.win32.primitives/4.3.0/microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/microsoft.win32.systemevents/6.0.0/microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "/Users/herbwilliams/.nuget/packages/moq/4.20.0/moq.4.20.0.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/netstandard.library/1.6.1/netstandard.library.1.6.1.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/nuget.frameworks/6.5.0/nuget.frameworks.6.5.0.nupkg.sha512",
@@ -178,5 +181,16 @@
     "/Users/herbwilliams/.nuget/packages/xunit.extensibility.execution/2.5.3/xunit.extensibility.execution.2.5.3.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/xunit.runner.visualstudio/2.5.3/xunit.runner.visualstudio.2.5.3.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Application depends on Moq (>= 4.18.5) but Moq 4.18.5 was not found. Moq 4.20.0 was resolved instead.",
+      "libraryId": "Moq",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

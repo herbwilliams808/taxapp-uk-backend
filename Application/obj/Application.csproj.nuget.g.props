@@ -13,6 +13,7 @@
     <SourceRoot Include="/Users/herbwilliams/.nuget/packages/" />
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)devlooped.sponsorlink/1.0.0/buildTransitive/Devlooped.SponsorLink.props" Condition="Exists('$(NuGetPackageRoot)devlooped.sponsorlink/1.0.0/buildTransitive/Devlooped.SponsorLink.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.extensions.configuration.usersecrets/8.0.0/buildTransitive/net6.0/Microsoft.Extensions.Configuration.UserSecrets.props" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.configuration.usersecrets/8.0.0/buildTransitive/net6.0/Microsoft.Extensions.Configuration.UserSecrets.props')" />
   </ImportGroup>
 </Project>
