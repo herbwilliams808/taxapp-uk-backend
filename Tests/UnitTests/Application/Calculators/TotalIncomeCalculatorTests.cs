@@ -9,15 +9,17 @@ namespace UnitTests.Application.Calculators
         {
             // Arrange
             var calculator = new TotalIncomeCalculator();
-            var employmentIncome = 70000m;
-            var nonPayeEmploymentIncome = 2000m;
-            var propertyIncome = 10000m;
+            const decimal employmentIncome = 72000m;
+            const decimal benefitsInKind = 1000m;
+            const decimal employmentExpenses = 500m;
+            const decimal otherDeductions = 400m;
+            const decimal profitFromProperties = 10000m;
 
             // Act
-            var result = calculator.Calculate(employmentIncome, nonPayeEmploymentIncome, propertyIncome);
+            var result = calculator.Calculate(employmentIncome, benefitsInKind, employmentExpenses, otherDeductions, profitFromProperties);
 
             // Assert
-            Assert.Equal(82000m, result);
+            Assert.Equal(82100, result);
         }
     }
 }

@@ -1,8 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-using Shared.Models;
 using Shared.Models.Expenses;
-using Xunit;
 
 namespace UnitTests.Application.Calculators
 {

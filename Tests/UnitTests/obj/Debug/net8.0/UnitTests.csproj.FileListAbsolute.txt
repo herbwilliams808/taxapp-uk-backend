@@ -15,7 +15,6 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Azure.Identity.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Azure.Storage.Blobs.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Azure.Storage.Common.dll
-/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Castle.Core.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Microsoft.ApplicationInsights.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Microsoft.ApplicationInsights.AspNetCore.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Microsoft.AI.DependencyCollector.dll
@@ -58,7 +57,6 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Microsoft.VisualStudio.TestPlatform.Common.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/testhost.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Microsoft.Win32.SystemEvents.dll
-/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Moq.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Newtonsoft.Json.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/NuGet.Frameworks.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Swashbuckle.AspNetCore.Annotations.dll

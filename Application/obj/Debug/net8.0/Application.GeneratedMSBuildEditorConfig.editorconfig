@@ -1,7 +1,4 @@
 is_global = true
-build_property.DesignTimeBuild = 
-build_property.MSBuildProjectFullPath = /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/Application.csproj
-build_property.DebugSponsorLink = 
 build_property.TargetFramework = net8.0
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = 

@@ -13,7 +13,7 @@ namespace Shared.Models.OtherDeductions
         /// </summary>
         [SwaggerSchema(Description = "Details of the seafarers' deductions, if any.")]
         [JsonPropertyName("seafarers")]
-        public List<Seafarer>? Seafarers { get; init; }
+        public List<Seafarer>? Seafarers { get; init; } = new();
     }
 
 

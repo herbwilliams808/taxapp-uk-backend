@@ -6,10 +6,10 @@ namespace Application.Calculators
     {
         public decimal Calculate(Incomes incomes)
         {
-            if (incomes?.Employments == null || !incomes.Employments.Any())
+            if (incomes?.EmploymentsAndFinancialDetails == null || !incomes.EmploymentsAndFinancialDetails.Any())
                 return 0;
 
-            return incomes.Employments
+            return incomes.EmploymentsAndFinancialDetails
                 .Where(e => e.BenefitsInKind != null) // Filter out employments without BenefitsInKind
                 .SelectMany(e => e.BenefitsInKind!.GetType()
                     .GetProperties()

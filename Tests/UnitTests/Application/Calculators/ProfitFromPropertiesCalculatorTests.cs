@@ -1,6 +1,7 @@
 using Application.Calculators;
 using Shared.Models.Incomes;
-using Shared.Models.Incomes.NonSavingsIncomes;
+using Shared.Models.IndividualsEmploymentIncomes;
+using Shared.Models.PropertyBusiness;
 
 namespace UnitTests.Application.Calculators;
 

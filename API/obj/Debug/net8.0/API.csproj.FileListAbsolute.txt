@@ -9,7 +9,6 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Azure.Identity.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Azure.Storage.Blobs.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Azure.Storage.Common.dll
-/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Castle.Core.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.ApplicationInsights.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.ApplicationInsights.AspNetCore.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.AI.DependencyCollector.dll
@@ -43,7 +42,6 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.OpenApi.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.Win32.SystemEvents.dll
-/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Moq.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Newtonsoft.Json.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Swashbuckle.AspNetCore.Annotations.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll

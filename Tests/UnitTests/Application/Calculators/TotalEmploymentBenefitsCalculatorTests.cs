@@ -1,6 +1,6 @@
 using Application.Calculators;
 using Shared.Models.Incomes;
-using Shared.Models.Incomes.NonSavingsIncomes.Employments;
+using Shared.Models.IndividualsEmploymentIncomes.Employments;
 
 namespace UnitTests.Application.Calculators
 {
@@ -44,9 +44,9 @@ namespace UnitTests.Application.Calculators
 
             var incomes = new Incomes
             {
-                Employments = new List<Employment>
+                EmploymentsAndFinancialDetails = new List<EmploymentAndFinancialDetails>
                 {
-                    new Employment
+                    new EmploymentAndFinancialDetails
                     {
                         BenefitsInKind = benefits,
                         Employer = new Employer { EmployerName = "Test Employer" }
@@ -77,9 +77,9 @@ namespace UnitTests.Application.Calculators
 
             var incomes = new Incomes
             {
-                Employments = new List<Employment>
+                EmploymentsAndFinancialDetails = new List<EmploymentAndFinancialDetails>
                 {
-                    new Employment
+                    new EmploymentAndFinancialDetails
                     {
                         BenefitsInKind = benefits,
                         Employer = new Employer { EmployerName = "Test Employer" }
@@ -102,9 +102,9 @@ namespace UnitTests.Application.Calculators
             // Arrange
             var incomes = new Incomes
             {
-                Employments = new List<Employment>
+                EmploymentsAndFinancialDetails = new List<EmploymentAndFinancialDetails>
                 {
-                    new Employment
+                    new EmploymentAndFinancialDetails
                     {
                         BenefitsInKind = new BenefitsInKind
                         {
@@ -113,7 +113,7 @@ namespace UnitTests.Application.Calculators
                         },
                         Employer = new Employer { EmployerName = "First Employer" }
                     },
-                    new Employment
+                    new EmploymentAndFinancialDetails
                     {
                         BenefitsInKind = new BenefitsInKind
                         {
@@ -140,14 +140,14 @@ namespace UnitTests.Application.Calculators
             // Arrange
             var incomes = new Incomes
             {
-                Employments = new List<Employment>
+                EmploymentsAndFinancialDetails = new List<EmploymentAndFinancialDetails>
                 {
-                    new Employment
+                    new EmploymentAndFinancialDetails
                     {
                         BenefitsInKind = null,
                         Employer = new Employer { EmployerName = "First Employer" }
                     }, // No benefits in this employment
-                    new Employment
+                    new EmploymentAndFinancialDetails
                     {
                         BenefitsInKind = new BenefitsInKind(),
                         Employer = new Employer { EmployerName = "Second Employer" }

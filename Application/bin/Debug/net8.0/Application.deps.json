@@ -12,7 +12,6 @@
           "Azure.Storage.Blobs": "12.24.0",
           "Microsoft.Extensions.Hosting": "8.0.0",
           "Microsoft.Extensions.Options": "9.0.4",
-          "Moq": "4.20.0",
           "Newtonsoft.Json": "13.0.3",
           "Shared": "1.0.0"
         },
@@ -76,18 +75,6 @@
           }
         }
       },
-      "Castle.Core/5.1.1": {
-        "dependencies": {
-          "System.Diagnostics.EventLog": "8.0.0"
-        },
-        "runtime": {
-          "lib/net6.0/Castle.Core.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.1.1.0"
-          }
-        }
-      },
-      "Devlooped.SponsorLink/1.0.0": {},
       "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
         "runtime": {
           "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
@@ -354,18 +341,6 @@
           }
         }
       },
-      "Moq/4.20.0": {
-        "dependencies": {
-          "Castle.Core": "5.1.1",
-          "Devlooped.SponsorLink": "1.0.0"
-        },
-        "runtime": {
-          "lib/net6.0/Moq.dll": {
-            "assemblyVersion": "4.20.0.0",
-            "fileVersion": "4.20.0.0"
-          }
-        }
-      },
       "Newtonsoft.Json/13.0.3": {
         "runtime": {
           "lib/net6.0/Newtonsoft.Json.dll": {
@@ -511,20 +486,6 @@
       "sha512": "sha512-X/pe1LS3lC6s6MSL7A6FzRfnB6P72rNBt5oSuyan6Q4Jxr+KiN9Ufwqo32YLHOVfPcB8ESZZ4rBDketn+J37Rw==",
       "path": "azure.storage.common/12.23.0",
       "hashPath": "azure.storage.common.12.23.0.nupkg.sha512"
-    },
-    "Castle.Core/5.1.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-rpYtIczkzGpf+EkZgDr9CClTdemhsrwA/W5hMoPjLkRFnXzH44zDLoovXeKtmxb1ykXK9aJVODSpiJml8CTw2g==",
-      "path": "castle.core/5.1.1",
-      "hashPath": "castle.core.5.1.1.nupkg.sha512"
-    },
-    "Devlooped.SponsorLink/1.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-YtGfB0L0OUGK/Nl7YR8jVLOb8zIYo+pM80nw86GVqqeI36D3itw/N5agupsn4sAJxQxKVJti9KvqqAR8dfrW1A==",
-      "path": "devlooped.sponsorlink/1.0.0",
-      "hashPath": "devlooped.sponsorlink.1.0.0.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
       "type": "package",
@@ -749,13 +710,6 @@
       "sha512": "sha512-tZ1I0KXnn98CWuV8cpI247A17jaY+ILS9vvF7yhI0uPPEqF4P1d7BWL5Uwtel10w9NucllHB3nTkfYTAcHAh8g==",
       "path": "microsoft.openapi/1.6.23",
       "hashPath": "microsoft.openapi.1.6.23.nupkg.sha512"
-    },
-    "Moq/4.20.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-QZg6hh/MCpVN9uq3/uwfgKCHsV5NqTASJbowai960f2yjkyDk02qG5LO301uMqVIc+ge/GRbUo3qaYI6mlqQrg==",
-      "path": "moq/4.20.0",
-      "hashPath": "moq.4.20.0.nupkg.sha512"
     },
     "Newtonsoft.Json/13.0.3": {
       "type": "package",

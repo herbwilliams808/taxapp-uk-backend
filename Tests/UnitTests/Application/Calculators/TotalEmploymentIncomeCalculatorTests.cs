@@ -1,13 +1,12 @@
-using Moq;
 using Shared.Models.Incomes;
-using Shared.Models.Incomes.NonSavingsIncomes.Employments;
-using Shared.Models.Incomes.NonSavingsIncomes.OtherEmploymentIncome.LumpSum;
+using Shared.Models.IndividualsEmploymentIncomes.Employments;
+using Shared.Models.IndividualsEmploymentIncomes.OtherEmploymentIncome.LumpSum;
 using Shared.Models.OtherDeductions;
 using Shared.Models.IndividualsForeignIncome;
 using Shared.Models.IndividualsReliefs.ForeignReliefs;
 using Application.Calculators;
-using Shared.Models.Incomes.NonSavingsIncomes.NonPayeEmploymentIncome;
-using Shared.Models.Incomes.NonSavingsIncomes.OtherEmploymentIncome;
+using Shared.Models.IndividualsEmploymentIncomes.NonPayeEmploymentIncome;
+using Shared.Models.IndividualsEmploymentIncomes.OtherEmploymentIncome;
 
 namespace UnitTests.Application.Calculators
 {
@@ -19,14 +18,14 @@ namespace UnitTests.Application.Calculators
             // Arrange
             var incomes = new Incomes
             {
-                Employments = new()
+                EmploymentsAndFinancialDetails = new()
                 {
-                    new Employment
+                    new EmploymentAndFinancialDetails
                     {
                         Pay = new Pay { TaxablePayToDate = 1500m },
                         Employer = new Employer { EmployerName = "Employer1" }
                     },
-                    new Employment
+                    new EmploymentAndFinancialDetails
                     {
                         Pay = new Pay { TaxablePayToDate = 2500m },
                         Employer = new Employer { EmployerName = "Employer2" }
@@ -64,23 +63,10 @@ namespace UnitTests.Application.Calculators
                 ForeignTaxForFtcrNotClaimed = new ForeignTaxForFtcrNotClaimed { Amount = 50m }
             };
 
-            // Mock dependencies
-            var mockBenefitsCalculator = new Mock<TotalEmploymentBenefitsCalculator>();
-            mockBenefitsCalculator.Setup(m => m.Calculate(incomes)).Returns(800m);
-
-            var mockExpensesCalculator = new Mock<TotalEmploymentExpensesCalculator>();
-            mockExpensesCalculator.Setup(m => m.Calculate(incomes)).Returns(600m);
-
-            var mockOtherDeductionsCalculator = new Mock<TotalOtherDeductionsCalculator>();
-            mockOtherDeductionsCalculator.Setup(m => m.Calculate(otherDeductions)).Returns(200m);
-
-            var calculator = new TotalEmploymentIncomeCalculator(
-                mockBenefitsCalculator.Object,
-                mockExpensesCalculator.Object,
-                mockOtherDeductionsCalculator.Object);
+            var calculator = new TotalEmploymentIncomeCalculator();
 
             // Act
-            var result = calculator.Calculate(incomes, otherDeductions, individualsForeignIncome, foreignReliefs);
+            var result = calculator.Calculate(incomes, individualsForeignIncome, foreignReliefs);
 
             // Expected calculation:
             // Sum Payable: 1500 + 2500 = 4000
