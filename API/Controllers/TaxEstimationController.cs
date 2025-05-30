@@ -2,6 +2,7 @@ using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Models;
 using Shared.Models.HttpMessages;
+using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -10,7 +11,7 @@ namespace API.Controllers
     public class TaxEstimationController(TaxEstimationService taxEstimationService) : ControllerBase
     {
         [HttpPost]
-        public ActionResult<TaxEstimationResponse> CalculateTax(TaxEstimationRequest request)
+        public async Task<ActionResult<TaxEstimationResponse>> CalculateTaxAsync(TaxEstimationRequest request)
         {
             // Validate region
             var region = string.IsNullOrWhiteSpace(request.Region) ? "england" : request.Region.ToLower();
@@ -27,8 +28,8 @@ namespace API.Controllers
                 : currentDate.Year - 1;
             var taxYearEnding = request.TaxYearEnding ?? defaultTaxYearEnding;
 
-            // Perform tax calculation
-            var response = taxEstimationService.CalculateTax(
+            // Await the async tax calculation method
+            var response = await taxEstimationService.CalculateTaxAsync(
                 taxYearEnding,
                 region,
                 request.Incomes, 

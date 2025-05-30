@@ -6,69 +6,63 @@ using Shared.Models.IndividualsForeignIncome;
 using Shared.Models.IndividualsReliefs;
 using Shared.Models.IndividualsReliefs.ForeignReliefs;
 using Shared.Models.OtherDeductions;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public class TaxEstimationService(AzureBlobTaxRatesService taxRatesService, ILogger<TaxEstimationService> logger)
+    public class TaxEstimationService
     {
-        private readonly ILogger<TaxEstimationService> _logger =
-            logger ?? throw new ArgumentNullException(nameof(logger));
+        private readonly TaxRatesCacheService _taxRatesCacheService;
+        private readonly ILogger<TaxEstimationService> _logger;
 
-        public TaxEstimationResponse CalculateTax(
+        public TaxEstimationService(
+            TaxRatesCacheService taxRatesCacheService,
+            ILogger<TaxEstimationService> logger)
+        {
+            _taxRatesCacheService = taxRatesCacheService 
+                ?? throw new ArgumentNullException(nameof(taxRatesCacheService));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
+
+        public Task<TaxEstimationResponse> CalculateTaxAsync(
             int taxYearEnding,
             string region,
             Incomes? incomes,
             IndividualsReliefs? individualsReliefs,
             OtherDeductions? otherDeductions,
             IndividualsForeignIncome? individualsForeignIncome,
-            ForeignReliefs? foreignReliefs
-        )
+            ForeignReliefs? foreignReliefs)
         {
-            // Load tax rates for the specified year and region
-            var taxRates = taxRatesService.LoadTaxRatesAsync().Result;
+            // Because GetDecimalTaxRateValue is synchronous, no need to await here.
+            decimal basicRateThreshold = _taxRatesCacheService.GetDecimalTaxRateValue(taxYearEnding, region, "basicRateThreshold");
 
-            var key = $"year_{taxYearEnding - 1}_{taxYearEnding}.{region}.basicRateThreshold";
-            var basicRateThreshold = taxRates.TryGetValue(key, out var threshold) ? threshold : 0m;
-
-            // Use the TotalIncomeCalculator
-            var totalEmploymentIncome =
-                new TotalEmploymentIncomeCalculator().Calculate(incomes, individualsForeignIncome, foreignReliefs);
-
+            var totalEmploymentIncome = new TotalEmploymentIncomeCalculator().Calculate(incomes, individualsForeignIncome, foreignReliefs);
             var totalBenefitsInKind = new TotalEmploymentBenefitsCalculator().Calculate(incomes);
-
             var totalEmploymentExpenses = new TotalEmploymentExpensesCalculator().Calculate(incomes);
-
             var totalOtherDeductions = new TotalOtherDeductionsCalculator().Calculate(otherDeductions);
-
             var profitFromProperties = new ProfitFromPropertiesCalculator().Calculate(incomes);
-            
+
             var totalIncome = new TotalIncomeCalculator().Calculate(
                 totalEmploymentIncome,
                 totalBenefitsInKind,
                 totalEmploymentExpenses,
                 totalOtherDeductions,
-                profitFromProperties
-            );
+                profitFromProperties);
 
-
-            // Use the BasicRateLimitCalculator
-            // Check if contributions are null and use 0 if they are.
             var regularPensionContributions = individualsReliefs?.PensionReliefs?.RegularPensionContributions ?? 0m;
             var giftAidCurrentYear = individualsReliefs?.GiftAidPayments?.CurrentYear ?? 0m;
-            var giftAidCurrentYearTreatedAsPrevious =
-                individualsReliefs?.GiftAidPayments?.CurrentYearTreatedAsPreviousYear ?? 0m;
-            var giftAidNextYearTreatedAsCurrent =
-                individualsReliefs?.GiftAidPayments?.NextYearTreatedAsCurrentYear ?? 0m;
+            var giftAidCurrentYearTreatedAsPrevious = individualsReliefs?.GiftAidPayments?.CurrentYearTreatedAsPreviousYear ?? 0m;
+            var giftAidNextYearTreatedAsCurrent = individualsReliefs?.GiftAidPayments?.NextYearTreatedAsCurrentYear ?? 0m;
 
-            var giftAidPayments = (giftAidCurrentYear - giftAidCurrentYearTreatedAsPrevious)
-                                  + giftAidNextYearTreatedAsCurrent;
+            var giftAidPayments = (giftAidCurrentYear - giftAidCurrentYearTreatedAsPrevious) + giftAidNextYearTreatedAsCurrent;
             var paymentsIntoPensions = regularPensionContributions;
 
             var basicRateLimit = new BasicRateLimitCalculator().Calculate(
                 basicRateThreshold,
                 paymentsIntoPensions,
-                giftAidPayments
-            );
+                giftAidPayments);
 
             decimal taxOwed = 0;
 
@@ -77,15 +71,19 @@ namespace Application.Services
                 taxOwed = (totalIncome - basicRateLimit) * 0.2m; // Example tax calculation
             }
 
-            _logger.LogInformation($"Tax calculated for year ending {taxYearEnding}, region {region}: {taxOwed}");
+            _logger.LogInformation("Tax calculated for year ending {TaxYearEnding}, region {Region}: {TaxOwed}",
+                taxYearEnding, region, taxOwed);
 
-            return new TaxEstimationResponse
+            var netIncome = totalIncome - taxOwed -
+                            (incomes?.EmploymentsAndFinancialDetails?.Sum(e => e.Pay.TotalTaxToDate ?? 0m) ?? 0m);
+
+            return Task.FromResult(new TaxEstimationResponse
             {
                 TotalIncome = totalIncome,
+                BasicRateLimit = basicRateLimit,
                 TaxOwed = taxOwed,
-                NetIncome = totalIncome - taxOwed -
-                            incomes.EmploymentsAndFinancialDetails.Sum(e => e.Pay.TotalTaxToDate ?? 0m)
-            };
+                NetIncome = netIncome
+            });
         }
     }
 }
