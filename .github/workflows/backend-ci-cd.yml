@@ -39,9 +39,17 @@ jobs:
         run: cat ./API/bin/Release/net8.0/publish/web.config
         working-directory: .
 
-      - name: Run tests
-        run: dotnet test --no-build --configuration Release --verbosity normal ./Tests/UnitTests/UnitTests.csproj
+      # New step: Explicitly build the UnitTests project
+      - name: Build UnitTests project
+        run: dotnet build ./Tests/UnitTests/UnitTests.csproj --configuration Release --no-restore
+        working-directory: . # Ensure this runs from the solution root
 
+      - name: Run tests
+        # Now, run dotnet test on the project, without --no-build, as it's just been built.
+        # Or, if you want to be explicit, you can point it to the DLL, but let's try the project first.
+        run: dotnet test ./Tests/UnitTests/UnitTests.csproj --configuration Release --verbosity normal
+        working-directory: . # Ensure this runs from the solution root
+        
       - name: Configure Azure Blob settings
         run: |
           echo "AZUREBLOBSETTINGS__BLOBCONNECTIONSTRING=${{ secrets.AZUREBLOBSETTINGS__BLOBCONNECTIONSTRING }}" >> $GITHUB_ENV
