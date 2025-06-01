@@ -5,12 +5,10 @@
 	<s:Boolean x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/ShowAdvancedOptions/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=0CADA375_002D9276_002D4EBA_002D8A06_002DA282A597F3D8/@EntryIndexedValue">6E0CD938-20F2-4B67-9585-60E92DDE8387</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestTemplateMapping/=xUnit/@EntryIndexedValue">33ff99d8-b1ad-4ed5-a4fd-376b97c2c841</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=38477c6b_002D0d8f_002D4e56_002D9d2f_002D737a22b90192/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;Solution /&gt;
-&lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3db02a58_002D4322_002D48cd_002D8b4e_002Dd9e209ea725d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;Solution /&gt;
-&lt;/SessionState&gt;</s:String>
+	
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8754f320_002D8eef_002D439f_002D9bcf_002D45a7a561d9ec/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;Tests&amp;gt;\&amp;lt;UnitTests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;Project Location="/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests" Presentation="&amp;lt;Tests&amp;gt;\&amp;lt;UnitTests&amp;gt;" /&gt;
+  &lt;Not&gt;
+    &lt;Project Location="/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Requirements" Presentation="&amp;lt;Requirements&amp;gt;" /&gt;
+  &lt;/Not&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

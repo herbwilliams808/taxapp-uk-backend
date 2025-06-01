@@ -175,3 +175,7 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/obj/Debug/net8.0/UnitTests.pdb
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/obj/Debug/net8.0/UnitTests.genruntimeconfig.cache
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/obj/Debug/net8.0/ref/UnitTests.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Microsoft.Extensions.DependencyModel.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Scrutor.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Swashbuckle.AspNetCore.Filters.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Swashbuckle.AspNetCore.Filters.Abstractions.dll
