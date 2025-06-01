@@ -40,8 +40,7 @@ jobs:
         working-directory: .
 
       - name: Run tests
-        run: dotnet test --no-build --configuration Release --verbosity normal
-        working-directory: ./Tests/UnitTests
+        run: dotnet test --no-build --configuration Release --verbosity normal ./Tests/UnitTests/UnitTests.csproj
 
       - name: Configure Azure Blob settings
         run: |
