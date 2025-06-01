@@ -1,7 +1,7 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/CoverletSourceRootsMapping_UnitTests
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/API.deps.json
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/API.runtimeconfig.json
-/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Web.config
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/web.config
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/appsettings.Development.json
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/appsettings.json
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/API

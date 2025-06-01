@@ -1,4 +1,4 @@
-/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Web.config
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/web.config
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/appsettings.Development.json
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/appsettings.json
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/API
