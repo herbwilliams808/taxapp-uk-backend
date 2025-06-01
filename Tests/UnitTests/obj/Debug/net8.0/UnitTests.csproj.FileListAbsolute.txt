@@ -1,6 +1,7 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/CoverletSourceRootsMapping_UnitTests
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/API.deps.json
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/API.runtimeconfig.json
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Web.config
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/appsettings.Development.json
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/appsettings.json
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/API
@@ -35,6 +36,7 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Microsoft.Extensions.Configuration.Json.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Microsoft.Extensions.DependencyModel.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Microsoft.Extensions.FileProviders.Abstractions.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Microsoft.Extensions.FileProviders.Physical.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Microsoft.Extensions.FileSystemGlobbing.dll
@@ -62,7 +64,10 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Moq.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Newtonsoft.Json.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/NuGet.Frameworks.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Scrutor.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Swashbuckle.AspNetCore.Annotations.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Swashbuckle.AspNetCore.Filters.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Swashbuckle.AspNetCore.Filters.Abstractions.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -175,7 +180,3 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/obj/Debug/net8.0/UnitTests.pdb
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/obj/Debug/net8.0/UnitTests.genruntimeconfig.cache
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/obj/Debug/net8.0/ref/UnitTests.dll
-/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Microsoft.Extensions.DependencyModel.dll
-/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Scrutor.dll
-/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Swashbuckle.AspNetCore.Filters.dll
-/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Swashbuckle.AspNetCore.Filters.Abstractions.dll

@@ -29,12 +29,15 @@ jobs:
         run: dotnet restore
         working-directory: .
 
-      - name: Build the solution and publish
-        run: dotnet build --no-restore --configuration Release
+      - name: Publish the API project for deployment
+        # IMPORTANT CHANGE: Use 'dotnet publish' instead of 'dotnet build'
+        # We explicitly set stdoutLogEnabled=true via MSBuild property
+        run: dotnet publish ./API/API.csproj --no-restore --configuration Release --output ./API/bin/Release/net8.0/publish /p:EnableStdoutLog=true
         working-directory: .
 
-      - name: Verify publish output
-        run: ls -al ./API/bin/Release/net8.0/publish/
+      - name: Verify web.config in publish output (for debugging)
+        run: cat ./API/bin/Release/net8.0/publish/web.config
+        working-directory: .
 
       - name: Run tests
         run: dotnet test --no-build --configuration Release --verbosity normal
@@ -51,8 +54,9 @@ jobs:
         with:
           creds: ${{ secrets.TAXAPPUKSP_AZURE_CREDENTIALS}}
 
-      - name: Deploy to Azure Web App using Publish Profile
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'TaxAppUK-WebApp'
-          package: './API/bin/Release/net8.0/publish/' # Use the publish output directory
+          # Ensure this path matches the output path from 'dotnet publish'
+          package: './API/bin/Release/net8.0/publish/'

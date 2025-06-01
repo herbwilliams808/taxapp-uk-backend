@@ -1,3 +1,4 @@
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Web.config
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/appsettings.Development.json
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/appsettings.json
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/API
@@ -26,6 +27,7 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.Extensions.Configuration.Json.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.Extensions.DependencyModel.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.Extensions.FileProviders.Abstractions.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.Extensions.FileProviders.Physical.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.Extensions.FileSystemGlobbing.dll
@@ -43,7 +45,10 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.OpenApi.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.Win32.SystemEvents.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Newtonsoft.Json.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Scrutor.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Swashbuckle.AspNetCore.Annotations.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Swashbuckle.AspNetCore.Filters.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Swashbuckle.AspNetCore.Filters.Abstractions.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -95,7 +100,3 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/obj/Debug/net8.0/API.pdb
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/obj/Debug/net8.0/API.genruntimeconfig.cache
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/obj/Debug/net8.0/ref/API.dll
-/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.Extensions.DependencyModel.dll
-/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Scrutor.dll
-/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Swashbuckle.AspNetCore.Filters.dll
-/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Swashbuckle.AspNetCore.Filters.Abstractions.dll
