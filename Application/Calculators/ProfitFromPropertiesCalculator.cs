@@ -7,11 +7,11 @@ namespace Application.Calculators
         /// <summary>
         /// Calculates the profit from properties.
         /// </summary>
-        /// <param name="incomes"></param>
+        /// <param name="incomeDetails"></param>
         /// <returns>The profit from properties after deducting allowable expenses.</returns>
-        public decimal Calculate(Incomes incomes)
+        public decimal Calculate(IncomeDetails incomeDetails)
         {
-            return (incomes.UkPropertyBusiness?.Income ?? 0m) - (incomes.UkPropertyBusiness?.AllowablePropertyLettingExpenses ?? 0m);
+            return (incomeDetails.UkPropertyBusiness?.Income ?? 0m) - (incomeDetails.UkPropertyBusiness?.AllowablePropertyLettingExpenses ?? 0m);
         }
     }
 }

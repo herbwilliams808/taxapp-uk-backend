@@ -1,4 +1,8 @@
+using Swashbuckle.AspNetCore.Filters; // Essential for ExampleFilters() and AddSwaggerExamplesFromAssemblyOf()
+using API.SwaggerExamples; // Your namespace where TaxEstimationRequestExample is defined
+using Microsoft.OpenApi.Models; // For SwaggerDoc and OpenApiInfo
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Application.Services;
 using Shared.Models.Settings;
 using Microsoft.Extensions.Logging;
@@ -25,9 +29,26 @@ builder.Services.AddSingleton<JsonDeserializerService>();
 builder.Services.AddSingleton<TaxRatesCacheService>();
 builder.Services.AddSingleton<TaxEstimationService>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // Configure System.Text.Json to ignore null values during serialization
+        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+        // You might also want to set other options like CamelCasePropertyNames
+        options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+    });
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    // You might already have this part for basic Swagger setup
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API Name", Version = "v1" });
+
+    // THIS IS CRUCIAL: Enable the example filters
+    c.ExampleFilters();
+});
+
+builder.Services.AddSwaggerExamplesFromAssemblyOf<TaxEstimationRequestExample>();
+
 
 var app = builder.Build();
 

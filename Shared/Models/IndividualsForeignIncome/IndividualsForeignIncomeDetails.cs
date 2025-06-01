@@ -6,7 +6,7 @@ namespace Shared.Models.IndividualsForeignIncome
     /// <summary>
     /// Represents a request body for creating or amending foreign income.
     /// </summary>
-    public class IndividualsForeignIncome
+    public class IndividualsForeignIncomeDetails
     {
         /// <summary>
         /// Details about foreign earnings, if any.

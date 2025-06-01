@@ -5,11 +5,11 @@ using Shared.Models.PropertyBusiness;
 
 namespace Shared.Models.Incomes;
 
-public class Incomes
+public class IncomeDetails
 {
     public List<EmploymentAndFinancialDetails> EmploymentsAndFinancialDetails { get; set; } = new();
     public NonPayeEmploymentIncome NonPayeEmploymentIncome { get; set; } = new();
-    public OtherEmploymentIncome OtherEmploymentIncome { get; set; } = new();
+    public OtherEmploymentIncome? OtherEmploymentIncome { get; set; } = new();
     public UkPropertyBusinessIncome? UkPropertyBusiness { get; set; } = new();
 
 }

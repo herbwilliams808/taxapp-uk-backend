@@ -31,7 +31,7 @@ namespace Shared.Models.IndividualsEmploymentIncomes.Employments
         [SwaggerSchema("Entertaining benefit.")]
         public decimal? Entertaining { get; set; }
 
-        [SwaggerSchema("Expenses benefit.")]
+        [SwaggerSchema("ExpensesDetails benefit.")]
         public decimal? Expenses { get; set; }
 
         [SwaggerSchema("Medical insurance benefit.")]

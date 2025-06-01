@@ -29,11 +29,11 @@ namespace Application.Services
         public Task<TaxEstimationResponse> CalculateTaxAsync(
             int taxYearEnding,
             string region,
-            Incomes? incomes,
-            IndividualsReliefs? individualsReliefs,
-            OtherDeductions? otherDeductions,
-            IndividualsForeignIncome? individualsForeignIncome,
-            ForeignReliefs? foreignReliefs)
+            IncomeDetails? incomes,
+            IndividualsReliefsDetails? individualsReliefs,
+            OtherDeductionsDetails? otherDeductions,
+            IndividualsForeignIncomeDetails? individualsForeignIncome,
+            ForeignReliefsDetails? foreignReliefs)
         {
             // Because GetDecimalTaxRateValue is synchronous, no need to await here.
             decimal basicRateThreshold = _taxRatesCacheService.GetDecimalTaxRateValue(taxYearEnding, region, "basicRateThreshold");

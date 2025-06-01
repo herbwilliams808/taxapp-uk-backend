@@ -1,6 +1,6 @@
 namespace Shared.Models.IndividualsReliefs.ForeignReliefs
 {
-    public class ForeignReliefs
+    public class ForeignReliefsDetails
     {
         public ForeignTaxCreditRelief? ForeignTaxCreditRelief { get; init; }
 

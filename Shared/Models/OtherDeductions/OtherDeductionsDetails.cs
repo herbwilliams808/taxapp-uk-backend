@@ -6,7 +6,7 @@ namespace Shared.Models.OtherDeductions
     /// <summary>
     /// Represents the other deductions, including optional details for seafarers.
     /// </summary>
-    public class OtherDeductions
+    public class OtherDeductionsDetails
     {
         /// <summary>
         /// Details of the seafarers' deductions, if any.

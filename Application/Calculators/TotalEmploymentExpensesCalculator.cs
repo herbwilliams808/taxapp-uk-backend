@@ -4,12 +4,12 @@ namespace Application.Calculators
 {
     public class TotalEmploymentExpensesCalculator
     {
-        public decimal Calculate(Incomes incomes)
+        public decimal Calculate(IncomeDetails incomeDetails)
         {
-            if (incomes?.EmploymentsAndFinancialDetails == null || !incomes.EmploymentsAndFinancialDetails.Any())
+            if (incomeDetails?.EmploymentsAndFinancialDetails == null || !incomeDetails.EmploymentsAndFinancialDetails.Any())
                 return 0;
 
-            return incomes.EmploymentsAndFinancialDetails
+            return incomeDetails.EmploymentsAndFinancialDetails
                 .Select(e => e.BenefitsInKind?.Expenses)?.Sum() ?? 0;
         }
     }

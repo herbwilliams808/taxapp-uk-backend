@@ -8,10 +8,10 @@ namespace Application.Calculators;
 public class TotalEmploymentIncomeCalculator
 {
     public decimal Calculate(
-        Incomes? incomes,
-        // OtherDeductions otherDeductions,
-        IndividualsForeignIncome? individualsForeignIncome,
-        ForeignReliefs? foreignReliefs)
+        IncomeDetails? incomes,
+        // OtherDeductionsDetails otherDeductions,
+        IndividualsForeignIncomeDetails? individualsForeignIncome,
+        ForeignReliefsDetails? foreignReliefs)
     {
         var employmentIncomes = incomes?.EmploymentsAndFinancialDetails.Select(employment => employment.Pay?.TaxablePayToDate ?? 0m);
         var totalEmploymentIncome = employmentIncomes?.Sum() ?? 0m;

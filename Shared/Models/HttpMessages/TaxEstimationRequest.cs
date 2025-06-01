@@ -2,6 +2,9 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Shared.Models.IndividualsReliefs.ForeignReliefs;
 using Shared.Models.Incomes;
+using Shared.Models.IndividualsForeignIncome;
+using Shared.Models.IndividualsReliefs;
+using Shared.Models.OtherDeductions;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Shared.Models.HttpMessages
@@ -28,12 +31,12 @@ namespace Shared.Models.HttpMessages
         [DefaultValue("england")]
         public string Region { get; set; } = "england";
 
-        public Incomes.Incomes? Incomes { get; set; }
-        public IndividualsReliefs.IndividualsReliefs? IndividualsReliefs { get; set; }
+        public IncomeDetails? Incomes { get; set; }
+        public IndividualsReliefsDetails? IndividualsReliefs { get; set; }
 
-        public ForeignReliefs? ForeignReliefs { get; set; }
-        public OtherDeductions.OtherDeductions? OtherDeductions { get; set; }
+        public ForeignReliefsDetails? ForeignReliefs { get; set; }
+        public OtherDeductionsDetails? OtherDeductions { get; set; }
         
-        public IndividualsForeignIncome.IndividualsForeignIncome? IndividualsForeignIncome { get; set; }  
+        public IndividualsForeignIncomeDetails? IndividualsForeignIncome { get; set; }  
     }
 }

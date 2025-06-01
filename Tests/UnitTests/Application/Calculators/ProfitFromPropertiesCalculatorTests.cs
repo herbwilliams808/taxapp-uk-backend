@@ -13,7 +13,7 @@ public class ProfitFromPropertiesCalculatorTests
     public void Calculate_WithNullPropertyBusiness_ReturnsZero()
     {
         // Arrange
-        var incomes = new Incomes { UkPropertyBusiness = null };
+        var incomes = new IncomeDetails { UkPropertyBusiness = null };
 
         // Act
         var result = _calculator.Calculate(incomes);
@@ -26,7 +26,7 @@ public class ProfitFromPropertiesCalculatorTests
     public void Calculate_WithZeroIncomeAndExpenses_ReturnsZero()
     {
         // Arrange
-        var incomes = new Incomes
+        var incomes = new IncomeDetails
         {
             UkPropertyBusiness = new UkPropertyBusinessIncome
             {
@@ -50,7 +50,7 @@ public class ProfitFromPropertiesCalculatorTests
         decimal income, decimal expenses, decimal expectedProfit)
     {
         // Arrange
-        var incomes = new Incomes
+        var incomes = new IncomeDetails
         {
             UkPropertyBusiness = new UkPropertyBusinessIncome
             {
@@ -70,7 +70,7 @@ public class ProfitFromPropertiesCalculatorTests
     public void Calculate_WithNullIncomeAndExpenses_ReturnsZero()
     {
         // Arrange
-        var incomes = new Incomes
+        var incomes = new IncomeDetails
         {
             UkPropertyBusiness = new UkPropertyBusinessIncome
             {

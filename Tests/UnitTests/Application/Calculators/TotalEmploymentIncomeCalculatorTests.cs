@@ -16,7 +16,7 @@ namespace UnitTests.Application.Calculators
         public void Calculate_ReturnsCorrectTotalEmploymentIncome()
         {
             // Arrange
-            var incomes = new Incomes
+            var incomes = new IncomeDetails
             {
                 EmploymentsAndFinancialDetails = new()
                 {
@@ -53,12 +53,12 @@ namespace UnitTests.Application.Calculators
                 }
             };
 
-            var otherDeductions = new OtherDeductions();
-            var individualsForeignIncome = new IndividualsForeignIncome
+            var otherDeductions = new OtherDeductionsDetails();
+            var individualsForeignIncome = new IndividualsForeignIncomeDetails
             {
                 ForeignEarnings = new ForeignEarnings(earningsNotTaxableUk: 400m)
             };
-            var foreignReliefs = new ForeignReliefs
+            var foreignReliefs = new ForeignReliefsDetails
             {
                 ForeignTaxForFtcrNotClaimed = new ForeignTaxForFtcrNotClaimed { Amount = 50m }
             };
@@ -74,7 +74,7 @@ namespace UnitTests.Application.Calculators
             // Taxable Lump Sums: 300 + 700 = 1000
             // Employer Financed Retirement Benefits: 100 + 200 = 300
             // Benefits in Kind (mocked): 800
-            // Expenses (mocked): 600
+            // ExpensesDetails (mocked): 600
             // Other Deductions (mocked): 200
             // Earnings Not Taxable UK: 400
             // Foreign Tax For FTCR Not Claimed: 50

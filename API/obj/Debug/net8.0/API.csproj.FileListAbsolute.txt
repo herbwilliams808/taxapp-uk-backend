@@ -95,3 +95,7 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/obj/Debug/net8.0/API.pdb
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/obj/Debug/net8.0/API.genruntimeconfig.cache
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/obj/Debug/net8.0/ref/API.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Microsoft.Extensions.DependencyModel.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Scrutor.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Swashbuckle.AspNetCore.Filters.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Swashbuckle.AspNetCore.Filters.Abstractions.dll

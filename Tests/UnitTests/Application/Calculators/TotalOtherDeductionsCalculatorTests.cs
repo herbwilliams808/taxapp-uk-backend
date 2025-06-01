@@ -11,7 +11,7 @@ namespace UnitTests.Application.Calculators
         public void Calculate_ShouldReturnZero_WhenOtherDeductionsIsNull()
         {
             // Arrange
-            var otherDeductions = new OtherDeductions();
+            var otherDeductions = new OtherDeductionsDetails();
 
             // Act
             var result = _calculator.Calculate(otherDeductions);
@@ -24,7 +24,7 @@ namespace UnitTests.Application.Calculators
         public void Calculate_ShouldReturnZero_WhenSeafarersIsEmpty()
         {
             // Arrange
-            var otherDeductions = new OtherDeductions
+            var otherDeductions = new OtherDeductionsDetails
             {
                 Seafarers = []
             };
@@ -40,7 +40,7 @@ namespace UnitTests.Application.Calculators
         public void Calculate_ShouldSumAmountsCorrectly_WhenSeafarersHaveDeductions()
         {
             // Arrange
-            var otherDeductions = new OtherDeductions
+            var otherDeductions = new OtherDeductionsDetails
             {
                 Seafarers = 
                 [
@@ -62,7 +62,7 @@ namespace UnitTests.Application.Calculators
         public void Calculate_ShouldReturnZero_WhenSeafarersIsNull()
         {
             // Arrange
-            var otherDeductions = new OtherDeductions
+            var otherDeductions = new OtherDeductionsDetails
             {
                 Seafarers = null
             };

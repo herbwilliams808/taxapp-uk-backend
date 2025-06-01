@@ -4,9 +4,9 @@ namespace Application.Calculators;
 
 public class TotalOtherDeductionsCalculator
 {
-   public decimal Calculate(OtherDeductions otherDeductions)
+   public decimal Calculate(OtherDeductionsDetails otherDeductionsDetails)
    {
-      var seafarersdeductions = otherDeductions?.Seafarers?.Select(seafarer => seafarer.AmountDeducted);
+      var seafarersdeductions = otherDeductionsDetails?.Seafarers?.Select(seafarer => seafarer.AmountDeducted);
       return seafarersdeductions?.Sum() ?? 0;
    } 
 }

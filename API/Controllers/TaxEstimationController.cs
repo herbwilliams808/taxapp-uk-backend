@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Shared.Models;
 using Shared.Models.HttpMessages;
 using System.Threading.Tasks;
+using API.SwaggerExamples;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace API.Controllers
 {
@@ -11,6 +13,7 @@ namespace API.Controllers
     public class TaxEstimationController(TaxEstimationService taxEstimationService) : ControllerBase
     {
         [HttpPost]
+        [SwaggerRequestExample(typeof(TaxEstimationRequest), typeof(TaxEstimationRequestExample))]
         public async Task<ActionResult<TaxEstimationResponse>> CalculateTaxAsync(TaxEstimationRequest request)
         {
             // Validate region

@@ -8,7 +8,7 @@ namespace UnitTests.Application.Calculators
         public void CalculateTotalExpenses_WithAllPropertiesSet_ReturnsCorrectSum()
         {
             // Arrange
-            var expenses = new Expenses
+            var expenses = new ExpensesDetails
             {
                 BusinessTravelCosts = 100,
                 JobExpenses = 200,
@@ -31,7 +31,7 @@ namespace UnitTests.Application.Calculators
         public void CalculateTotalExpenses_WithSomePropertiesSetToNull_ReturnsCorrectSum()
         {
             // Arrange
-            var expenses = new Expenses
+            var expenses = new ExpensesDetails
             {
                 BusinessTravelCosts = 100,
                 JobExpenses = null,
@@ -54,7 +54,7 @@ namespace UnitTests.Application.Calculators
         public void CalculateTotalExpenses_WithAllPropertiesNull_ReturnsZero()
         {
             // Arrange
-            var expenses = new Expenses();
+            var expenses = new ExpensesDetails();
 
             // Act
             var total = CalculateTotalExpenses(expenses);
@@ -63,15 +63,15 @@ namespace UnitTests.Application.Calculators
             Assert.Equal(0, total); // All properties are null, so the sum is 0
         }
 
-        private decimal CalculateTotalExpenses(Expenses expenses)
+        private decimal CalculateTotalExpenses(ExpensesDetails expensesDetails)
         {
-            if (expenses == null)
+            if (expensesDetails == null)
                 return 0;
 
-            return expenses.GetType()
+            return expensesDetails.GetType()
                 .GetProperties()
                 .Where(p => p.PropertyType == typeof(decimal?))
-                .Select(p => (decimal?)p.GetValue(expenses) ?? 0)
+                .Select(p => (decimal?)p.GetValue(expensesDetails) ?? 0)
                 .Sum();
         }
     }

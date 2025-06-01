@@ -4,12 +4,12 @@ namespace Application.Calculators
 {
     public class TotalEmploymentBenefitsCalculator
     {
-        public decimal Calculate(Incomes incomes)
+        public decimal Calculate(IncomeDetails incomeDetails)
         {
-            if (incomes?.EmploymentsAndFinancialDetails == null || !incomes.EmploymentsAndFinancialDetails.Any())
+            if (incomeDetails?.EmploymentsAndFinancialDetails == null || !incomeDetails.EmploymentsAndFinancialDetails.Any())
                 return 0;
 
-            return incomes.EmploymentsAndFinancialDetails
+            return incomeDetails.EmploymentsAndFinancialDetails
                 .Where(e => e.BenefitsInKind != null) // Filter out employments without BenefitsInKind
                 .SelectMany(e => e.BenefitsInKind!.GetType()
                     .GetProperties()
