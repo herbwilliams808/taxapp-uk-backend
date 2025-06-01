@@ -8,7 +8,7 @@ public class AzureBlobSettings
     /// <summary>
     /// The connection string to the Azure Blob Storage account.
     /// </summary>
-    public required string BlobConnectionString { get; set; }
+    public string? BlobConnectionString { get; set; }
 
     /// <summary>
     /// The name of the container where the tax rates JSON blob resides.

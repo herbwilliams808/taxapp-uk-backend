@@ -16,55 +16,56 @@ namespace Application.Services
         // Primary constructor for dependency injection, allowing BlobServiceClient to be mocked
         public AzureBlobDataLoaderService(IOptions<AzureBlobSettings> blobSettings, ILogger<AzureBlobDataLoaderService> logger, BlobServiceClient blobServiceClient)
         {
-            _blobSettings = blobSettings?.Value ?? throw new ArgumentNullException(nameof(blobSettings), "AzureBlobSettings value is null.");
+            _blobSettings = blobSettings?.Value ?? throw new ArgumentNullException(nameof(blobSettings), "AzureBlobSettings value is null in primary constructor.");
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _blobServiceClient = blobServiceClient ?? throw new ArgumentNullException(nameof(blobServiceClient));
 
-            // *** ADD THIS LOGGING ***
-            _logger.LogInformation($"AzureBlobSettings loaded: BlobConnectionString='{(_blobSettings.BlobConnectionString ?? "null")}', " +
-                                   $"ContainerName='{(_blobSettings.TaxRatesContainerName ?? "null")}', " +
-                                   $"BlobName='{(_blobSettings.TaxRatesUkBlobName ?? "null")}'.");
-            // Also log how the BlobServiceClient is being created:
-            _logger.LogInformation("Attempting to create BlobServiceClient...");
+            _logger.LogInformation($"AzureBlobDataLoaderService: Primary constructor entered. BlobConnectionString='{(_blobSettings.BlobConnectionString ?? "null")}', ContainerName='{(_blobSettings.TaxRatesContainerName ?? "null")}', BlobName='{(_blobSettings.TaxRatesUkBlobName ?? "null")}'.");
+            _logger.LogInformation("AzureBlobDataLoaderService: Attempting to create BlobServiceClient...");
         }
-        
 
         // Secondary constructor for production use, creating BlobServiceClient internally
         public AzureBlobDataLoaderService(IOptions<AzureBlobSettings> blobSettings, ILogger<AzureBlobDataLoaderService> logger)
             : this(
                   blobSettings,
                   logger,
-                  CreateBlobServiceClient(blobSettings?.Value) // Call a static helper to create the client
+                  // Pass the logger to the static helper method here!
+                  CreateBlobServiceClient(blobSettings?.Value, logger)
               )
         {
+            _logger.LogInformation("AzureBlobDataLoaderService: Secondary constructor entered.");
         }
 
         // Helper method to create BlobServiceClient based on settings
-        private static BlobServiceClient CreateBlobServiceClient(AzureBlobSettings? settings)
+        // Now accepts an ILogger to enable logging within this static method
+        private static BlobServiceClient CreateBlobServiceClient(AzureBlobSettings? settings, ILogger logger)
         {
+            logger.LogInformation("CreateBlobServiceClient: Entered static helper method.");
             if (settings == null)
             {
-                // This is the specific path leading to the "Storage account is not configured" type message,
-                // if your internal logging framework isn't precise about the ArgumentNullException being thrown.
-                // Let's add a more specific log here if it hits this path
-                Console.WriteLine("ERROR: CreateBlobServiceClient received null settings object. AzureBlobSettings binding likely failed.");
+                logger.LogError("CreateBlobServiceClient: AzureBlobSettings object received as null. Configuration binding issue suspected.");
                 throw new ArgumentNullException(nameof(settings), "AzureBlobSettings cannot be null when creating BlobServiceClient.");
             }
+
+            logger.LogInformation($"CreateBlobServiceClient: settings.BlobConnectionString isNullOrWhiteSpace: {string.IsNullOrWhiteSpace(settings.BlobConnectionString)}");
+            logger.LogInformation($"CreateBlobServiceClient: settings.TaxRatesContainerName: {settings.TaxRatesContainerName ?? "null"}");
+            logger.LogInformation($"CreateBlobServiceClient: settings.TaxRatesUkBlobName: {settings.TaxRatesUkBlobName ?? "null"}");
 
             if (string.IsNullOrWhiteSpace(settings.BlobConnectionString))
             {
                 // This is the path for Managed Identity
                 var blobUri = new Uri("https://taxappuksa.blob.core.windows.net"); // Confirm this URI is correct!
-                Console.WriteLine($"INFO: Using DefaultAzureCredential with URI: {blobUri}"); // Add for debug
+                logger.LogInformation($"CreateBlobServiceClient: Using DefaultAzureCredential with URI: {blobUri}");
                 return new BlobServiceClient(blobUri, new DefaultAzureCredential());
             }
             else
             {
                 // This is the path for Connection String
-                Console.WriteLine($"INFO: Using BlobConnectionString: {settings.BlobConnectionString.Substring(0, Math.Min(20, settings.BlobConnectionString.Length))}..."); // Log partial for security
+                logger.LogInformation($"CreateBlobServiceClient: Using BlobConnectionString: {settings.BlobConnectionString.Substring(0, Math.Min(20, settings.BlobConnectionString.Length))}..."); // Log partial for security
                 return new BlobServiceClient(settings.BlobConnectionString);
             }
         }
+
         /// <summary>
         /// Loads the blob data as a string from Azure Blob Storage.
         /// </summary>
@@ -73,8 +74,9 @@ namespace Application.Services
         {
             try
             {
-                _logger.LogInformation("Fetching data from Azure Blob Storage...");
+                _logger.LogInformation("LoadBlobDataAsync: Fetching data from Azure Blob Storage...");
 
+                // Use the correct property names from AzureBlobSettings
                 var containerClient = _blobServiceClient.GetBlobContainerClient(_blobSettings.TaxRatesContainerName);
                 var blobClient = containerClient.GetBlobClient(_blobSettings.TaxRatesUkBlobName);
 
@@ -85,12 +87,12 @@ namespace Application.Services
                 using var reader = new StreamReader(downloadStream, Encoding.UTF8);
                 var blobContent = await reader.ReadToEndAsync();
 
-                _logger.LogInformation("Data successfully fetched from Azure Blob Storage.");
+                _logger.LogInformation("LoadBlobDataAsync: Data successfully fetched from Azure Blob Storage.");
                 return blobContent;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed to fetch data from Azure Blob Storage.");
+                _logger.LogError(ex, "LoadBlobDataAsync: Failed to fetch data from Azure Blob Storage.");
                 throw;
             }
         }
