@@ -18,19 +18,20 @@ namespace UnitTests.Application.Calculators
             // Arrange
             var incomes = new IncomeDetails
             {
-                EmploymentsAndFinancialDetails = new()
-                {
+                EmploymentsAndFinancialDetails =
+                [
                     new EmploymentAndFinancialDetails
                     {
                         Pay = new Pay { TaxablePayToDate = 1500m },
                         Employer = new Employer { EmployerName = "Employer1" }
                     },
+
                     new EmploymentAndFinancialDetails
                     {
                         Pay = new Pay { TaxablePayToDate = 2500m },
                         Employer = new Employer { EmployerName = "Employer2" }
                     }
-                },
+                ],
                 NonPayeEmploymentIncome = new NonPayeEmploymentIncome
                 {
                     Tips = 500m

@@ -4,7 +4,8 @@ namespace Application.Calculators
 {
     public class TotalEmploymentExpensesCalculator
     {
-        public decimal Calculate(IncomeDetails incomeDetails)
+        // TODO: Added virtual. Implement interface
+        public virtual decimal Calculate(IncomeDetails incomeDetails)
         {
             if (incomeDetails?.EmploymentsAndFinancialDetails == null || !incomeDetails.EmploymentsAndFinancialDetails.Any())
                 return 0;

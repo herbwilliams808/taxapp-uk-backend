@@ -166,7 +166,7 @@ namespace Application.Services
         /// Retrieve a decimal tax rate value by tax year, region (optional), and property.
         /// Throws if value not found or not convertible.
         /// </summary>
-        public decimal GetDecimalTaxRateValue(int year, string? region, string property)
+        public virtual decimal GetDecimalTaxRateValue(int year, string? region, string property)
         {
             var valueObj = GetTaxRateValue(year, region, property);
 

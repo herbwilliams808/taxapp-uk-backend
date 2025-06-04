@@ -9,7 +9,8 @@ namespace Application.Calculators
         /// </summary>
         /// <param name="incomeDetails"></param>
         /// <returns>The profit from properties after deducting allowable expenses.</returns>
-        public decimal Calculate(IncomeDetails incomeDetails)
+        // TODO: Added virtual. Implement interface
+        public virtual decimal Calculate(IncomeDetails incomeDetails)
         {
             return (incomeDetails.UkPropertyBusiness?.Income ?? 0m) - (incomeDetails.UkPropertyBusiness?.AllowablePropertyLettingExpenses ?? 0m);
         }

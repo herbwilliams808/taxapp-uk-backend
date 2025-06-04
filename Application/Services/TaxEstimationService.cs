@@ -66,9 +66,9 @@ namespace Application.Services
 
             decimal taxOwed = 0;
 
-            if (totalIncome > basicRateLimit)
+            if (totalIncome > basicRateLimit.value)
             {
-                taxOwed = (totalIncome - basicRateLimit) * 0.2m; // Example tax calculation
+                taxOwed = (totalIncome - basicRateLimit.value) * 0.2m; // Example tax calculation
             }
 
             _logger.LogInformation("Tax calculated for year ending {TaxYearEnding}, region {Region}: {TaxOwed}",
@@ -77,13 +77,15 @@ namespace Application.Services
             var netIncome = totalIncome - taxOwed -
                             (incomes?.EmploymentsAndFinancialDetails?.Sum(e => e.Pay.TotalTaxToDate ?? 0m) ?? 0m);
 
-            return Task.FromResult(new TaxEstimationResponse
+            var taxEstimationResponse = new TaxEstimationResponse
             {
                 TotalIncome = totalIncome,
-                BasicRateLimit = basicRateLimit,
+                BasicRateLimitExtendedMessage = basicRateLimit.message,
+                BasicRateLimit = basicRateLimit.value,
                 TaxOwed = taxOwed,
                 NetIncome = netIncome
-            });
+            };
+            return Task.FromResult(taxEstimationResponse);
         }
     }
 }

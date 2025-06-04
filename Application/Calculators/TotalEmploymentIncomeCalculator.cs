@@ -7,7 +7,8 @@ namespace Application.Calculators;
 
 public class TotalEmploymentIncomeCalculator
 {
-    public decimal Calculate(
+    // TODO: Added virtual. Implement interface
+    public virtual decimal Calculate(
         IncomeDetails? incomes,
         // OtherDeductionsDetails otherDeductions,
         IndividualsForeignIncomeDetails? individualsForeignIncome,
