@@ -1,6 +1,5 @@
-// In Application/Services/TaxEstimationService.cs
-using Application.Calculators; // Keep this for now, will remove other concrete calculators later
 using Application.Interfaces.Calculators;
+using Application.Interfaces.Services;
 using Microsoft.Extensions.Logging;
 using Shared.Models.HttpMessages;
 using Shared.Models.Incomes;
@@ -11,9 +10,8 @@ using Shared.Models.OtherDeductions;
 
 namespace Application.Services;
 
-// NEW: No explicit private readonly fields for the injected services
 public class TaxEstimationService(
-    TaxRatesCacheService taxRatesCacheService,
+    ITaxRatesCacheService taxRatesCacheService,
     ILogger<TaxEstimationService> logger,
     ITotalEmploymentIncomeCalculator totalEmploymentIncomeCalculator,
     ITotalEmploymentBenefitsCalculator totalEmploymentBenefitsCalculator,

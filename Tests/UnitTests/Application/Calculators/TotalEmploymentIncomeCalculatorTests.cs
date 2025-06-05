@@ -1,89 +1,124 @@
-using Shared.Models.Incomes;
+using Shared.Models.Incomes; // Make sure IncomeSources is here
 using Shared.Models.IndividualsEmploymentIncomes.Employments;
 using Shared.Models.IndividualsEmploymentIncomes.OtherEmploymentIncome.LumpSum;
 using Shared.Models.OtherDeductions;
 using Shared.Models.IndividualsForeignIncome;
 using Shared.Models.IndividualsReliefs.ForeignReliefs;
-using Application.Calculators;
+using Application.Calculators; // For the concrete implementation
+// For the interface
 using Shared.Models.IndividualsEmploymentIncomes.NonPayeEmploymentIncome;
 using Shared.Models.IndividualsEmploymentIncomes.OtherEmploymentIncome;
+using Application.Interfaces.Calculators; // Needed for Sum()
 
-namespace UnitTests.Application.Calculators
+// For [Fact]
+
+namespace UnitTests.Application.Calculators;
+
+public class TotalEmploymentIncomeCalculatorTests
 {
-    public class TotalEmploymentIncomeCalculatorTests
+    [Fact]
+    public void Calculate_ReturnsCorrectTotalEmploymentIncome()
     {
-        [Fact]
-        public void Calculate_ReturnsCorrectTotalEmploymentIncome()
+        // Arrange
+        var incomes = new IncomeSources // <<< CORRECTED: Using IncomeSources as per your original test
         {
-            // Arrange
-            var incomes = new IncomeSources
-            {
-                EmploymentsAndFinancialDetails =
-                [
-                    new EmploymentAndFinancialDetails
-                    {
-                        Pay = new Pay { TaxablePayToDate = 1500m },
-                        Employer = new Employer { EmployerName = "Employer1" }
-                    },
-
-                    new EmploymentAndFinancialDetails
-                    {
-                        Pay = new Pay { TaxablePayToDate = 2500m },
-                        Employer = new Employer { EmployerName = "Employer2" }
-                    }
-                ],
-                NonPayeEmploymentIncome = new NonPayeEmploymentIncome
+            EmploymentsAndFinancialDetails =
+            [
+                new EmploymentAndFinancialDetails
                 {
-                    Tips = 500m
+                    Pay = new Pay { TaxablePayToDate = 1500m },
+                    Employer = new Employer { EmployerName = "Employer1" }
                 },
-                OtherEmploymentIncome = new OtherEmploymentIncome
+
+                new EmploymentAndFinancialDetails
                 {
-                    LumpSums = new()
+                    Pay = new Pay { TaxablePayToDate = 2500m },
+                    Employer = new Employer { EmployerName = "Employer2" }
+                }
+            ],
+            NonPayeEmploymentIncome = new NonPayeEmploymentIncome
+            {
+                Tips = 500m
+            },
+            OtherEmploymentIncome = new OtherEmploymentIncome
+            {
+                LumpSums = new()
+                {
+                    new LumpSum
                     {
-                        new LumpSum
-                        {
-                            TaxableLumpSumsAndCertainIncome = new TaxableLumpSumsAndCertainIncome { Amount = 300m },
-                            BenefitFromEmployerFinancedRetirementScheme = new BenefitFromEmployerFinancedRetirementScheme { Amount = 100m }
-                        },
-                        new LumpSum
-                        {
-                            TaxableLumpSumsAndCertainIncome = new TaxableLumpSumsAndCertainIncome { Amount = 700m },
-                            BenefitFromEmployerFinancedRetirementScheme = new BenefitFromEmployerFinancedRetirementScheme { Amount = 200m }
-                        }
+                        TaxableLumpSumsAndCertainIncome = new TaxableLumpSumsAndCertainIncome { Amount = 300m },
+                        BenefitFromEmployerFinancedRetirementScheme = new BenefitFromEmployerFinancedRetirementScheme { Amount = 100m }
+                    },
+                    new LumpSum
+                    {
+                        TaxableLumpSumsAndCertainIncome = new TaxableLumpSumsAndCertainIncome { Amount = 700m },
+                        BenefitFromEmployerFinancedRetirementScheme = new BenefitFromEmployerFinancedRetirementScheme { Amount = 200m }
                     }
                 }
-            };
+            }
+        };
 
-            var otherDeductions = new OtherDeductionsDetails();
-            var individualsForeignIncome = new IndividualsForeignIncomeDetails
-            {
-                ForeignEarnings = new ForeignEarnings(earningsNotTaxableUk: 400m)
-            };
-            var foreignReliefs = new ForeignReliefsDetails
-            {
-                ForeignTaxForFtcrNotClaimed = new ForeignTaxForFtcrNotClaimed { Amount = 50m }
-            };
+        var otherDeductions = new OtherDeductionsDetails(); // Still present in input, but not used by this calculator per its current scope.
+        var individualsForeignIncome = new IndividualsForeignIncomeDetails
+        {
+            ForeignEarnings = new ForeignEarnings(earningsNotTaxableUk: 400m)
+        };
+        var foreignReliefs = new ForeignReliefsDetails
+        {
+            ForeignTaxForFtcrNotClaimed = new ForeignTaxForFtcrNotClaimed { Amount = 50m }
+        };
 
-            var calculator = new TotalEmploymentIncomeCalculator();
+        // Declare as interface, instantiate concrete class
+        ITotalEmploymentIncomeCalculator calculator = new TotalEmploymentIncomeCalculator(); // <<< Changed type to interface
 
-            // Act
-            var result = calculator.Calculate(incomes, individualsForeignIncome, foreignReliefs);
+        // Act
+        var result = calculator.Calculate(incomes, individualsForeignIncome, foreignReliefs);
 
-            // Expected calculation:
-            // Sum Payable: 1500 + 2500 = 4000
-            // Tips: 500
-            // Taxable Lump Sums: 300 + 700 = 1000
-            // Employer Financed Retirement Benefits: 100 + 200 = 300
-            // Benefits in Kind (mocked): 800
-            // ExpensesDetails (mocked): 600
-            // Other Deductions (mocked): 200
-            // Earnings Not Taxable UK: 400
-            // Foreign Tax For FTCR Not Claimed: 50
-            //
-            // Total = 4000 + 500 + 1000 + 300 + 800 - 600 - 200 - 400 - 50 = 5350
+        // Expected calculation logic remains the same based on the fixed inputs and calculator scope
+        // (4000 + 500 + 1000 + 300) - (400 + 50) = 5800 - 450 = 5350
 
-            // Assert
-            Assert.Equal(5350m, result);
-        }
+        // Assert
+        Assert.Equal(5350m, result);
+    }
+
+    [Fact]
+    public void Calculate_ReturnsZero_WhenAllInputsAreNullOrEmpty()
+    {
+        // Arrange
+        ITotalEmploymentIncomeCalculator calculator = new TotalEmploymentIncomeCalculator();
+
+        // Act
+        var result = calculator.Calculate(null, null, null);
+
+        // Assert
+        Assert.Equal(0m, result);
+    }
+
+    [Fact]
+    public void Calculate_HandlesPartialInputs_Correctly()
+    {
+        // Arrange
+        var incomes = new IncomeSources // <<< CORRECTED: Using IncomeSources
+        {
+            EmploymentsAndFinancialDetails =
+            [
+                new EmploymentAndFinancialDetails
+                {
+                    Pay = new Pay { TaxablePayToDate = 1000m },
+                    Employer = new Employer { EmployerName = "Employer1" }
+
+                }
+            ]
+        };
+        var individualsForeignIncome = new IndividualsForeignIncomeDetails(); // No foreign earnings
+        var foreignReliefs = new ForeignReliefsDetails(); // No foreign reliefs
+
+        ITotalEmploymentIncomeCalculator calculator = new TotalEmploymentIncomeCalculator();
+
+        // Act
+        var result = calculator.Calculate(incomes, individualsForeignIncome, foreignReliefs);
+
+        // Assert
+        Assert.Equal(1000m, result);
     }
 }

@@ -12,7 +12,7 @@ public class ProfitFromPropertiesCalculator : IProfitFromPropertiesCalculator
     /// <returns>The profit from properties after deducting allowable expenses.</returns>
     public decimal Calculate(IncomeSources? incomeSources)
     {
-        return (incomeSources?.UkPropertyBusiness?.Income ?? 0m) - 
-               (incomeSources?.UkPropertyBusiness?.AllowablePropertyLettingExpenses ?? 0m);
+        return (incomeSources?.UkPropertyBusinessIncome?.Income ?? 0m) - 
+               (incomeSources?.UkPropertyBusinessIncome?.AllowablePropertyLettingExpenses ?? 0m);
     }
 }

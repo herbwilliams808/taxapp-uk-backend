@@ -42,7 +42,7 @@ namespace API.SwaggerExamples
                     {
                         Tips = 500
                     },
-                    UkPropertyBusiness = new UkPropertyBusinessIncome // Corrected class name based on your IncomeSources
+                    UkPropertyBusinessIncome = new UkPropertyBusinessIncome // Corrected class name based on your IncomeSources
                     {
                         Income = 20000,
                         AllowablePropertyLettingExpenses = 5000,

@@ -1,4 +1,5 @@
 using System.Text;
+using Application.Interfaces.Services;
 using Azure.Storage.Blobs;
 using Azure.Identity;
 using Microsoft.Extensions.Options;
@@ -7,7 +8,7 @@ using Shared.Models.Settings;
 
 namespace Application.Services
 {
-    public class AzureBlobDataLoaderService
+    public class AzureBlobDataLoaderService : IBlobDataLoaderService
     {
         private readonly AzureBlobSettings _blobSettings;
         private readonly ILogger<AzureBlobDataLoaderService> _logger;

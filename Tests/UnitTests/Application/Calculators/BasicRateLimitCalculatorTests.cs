@@ -18,7 +18,7 @@ namespace UnitTests.Application.Calculators
             var calculator = new BasicRateLimitCalculator();
 
             // Act
-            var result = BasicRateLimitCalculator.Calculate(basicRateThreshold, pensionContributions, giftAidContributions);
+            var result = new BasicRateLimitCalculator().Calculate(basicRateThreshold, pensionContributions, giftAidContributions);
 
             // Assert
             Assert.Equal(expectedLimit, result.Value);
@@ -35,7 +35,7 @@ namespace UnitTests.Application.Calculators
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                BasicRateLimitCalculator.Calculate(basicRateThreshold, pensionContributions, giftAidContributions));
+                new BasicRateLimitCalculator().Calculate(basicRateThreshold, pensionContributions, giftAidContributions));
         }
     }
 }

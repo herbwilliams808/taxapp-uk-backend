@@ -3,15 +3,15 @@ using Application.Services;
 using Microsoft.Extensions.Logging;
 using Moq;
 
-public class JsonDeserializerServiceTests
+public class JsonDeserialiserServiceTests
 {
-    private readonly JsonDeserializerService _service;
-    private readonly Mock<ILogger<JsonDeserializerService>> _loggerMock;
+    private readonly JsonDeserialiserService _service;
+    private readonly Mock<ILogger<JsonDeserialiserService>> _loggerMock;
 
-    public JsonDeserializerServiceTests()
+    public JsonDeserialiserServiceTests()
     {
-        _loggerMock = new Mock<ILogger<JsonDeserializerService>>();
-        _service = new JsonDeserializerService(_loggerMock.Object);
+        _loggerMock = new Mock<ILogger<JsonDeserialiserService>>();
+        _service = new JsonDeserialiserService(_loggerMock.Object);
     }
 
     [Fact]
@@ -21,7 +21,7 @@ public class JsonDeserializerServiceTests
         var json = "{\"Key\":\"Value\"}";
 
         // Act
-        var result = _service.Deserialize<Dictionary<string, string>>(json);
+        var result = _service.Deserialise<Dictionary<string, string>>(json);
 
         // Assert
         Assert.NotNull(result);
@@ -36,7 +36,7 @@ public class JsonDeserializerServiceTests
         var invalidJson = "{invalid json}";
 
         // Act & Assert
-        var ex = Assert.Throws<JsonException>(() => _service.Deserialize<Dictionary<string, string>>(invalidJson));
+        var ex = Assert.Throws<JsonException>(() => _service.Deserialise<Dictionary<string, string>>(invalidJson));
         Assert.NotNull(ex);
     }
 
@@ -47,7 +47,7 @@ public class JsonDeserializerServiceTests
         var emptyJson = "";
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => _service.Deserialize<Dictionary<string, string>>(emptyJson));
+        var ex = Assert.Throws<ArgumentException>(() => _service.Deserialise<Dictionary<string, string>>(emptyJson));
         Assert.Equal("JSON content cannot be null or empty. (Parameter 'jsonContent')", ex.Message);
     }
 
@@ -58,7 +58,7 @@ public class JsonDeserializerServiceTests
         var json = "{\"Key\":\"Value\"}";
 
         // Act
-        var result = _service.DeserializeDynamic(json);
+        var result = _service.DeserialiseDynamic(json);
 
         // Assert
         Assert.NotNull(result);
@@ -76,7 +76,7 @@ public class JsonDeserializerServiceTests
         var emptyJson = "";
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => _service.DeserializeDynamic(emptyJson));
+        var ex = Assert.Throws<ArgumentException>(() => _service.DeserialiseDynamic(emptyJson));
         Assert.Equal("JSON content cannot be null or empty. (Parameter 'jsonContent')", ex.Message);
     }
 }

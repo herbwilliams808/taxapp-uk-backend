@@ -1,78 +1,191 @@
-using Shared.Models.Expenses;
+using Shared.Models.Incomes; // Contains IncomeSources, EmploymentsAndFinancialDetails, BenefitsInKind
+using Shared.Models.IndividualsEmploymentIncomes.Employments; // Contains BenefitsInKind (nested in EmploymentAndFinancialDetails)
+using Application.Calculators; // To reference the concrete calculator
+using Application.Interfaces.Calculators; // To reference the calculator interface
 
-namespace UnitTests.Application.Calculators
+// For [Fact] and Assert
+
+namespace UnitTests.Application.Calculators;
+
+public class TotalEmploymentExpensesCalculatorTests
 {
-    public class TotalEmploymentExpensesCalculatorTests
+    private readonly ITotalEmploymentExpensesCalculator _calculator;
+
+    public TotalEmploymentExpensesCalculatorTests()
     {
-        [Fact]
-        public void CalculateTotalExpenses_WithAllPropertiesSet_ReturnsCorrectSum()
+        _calculator = new TotalEmploymentExpensesCalculator();
+    }
+
+    [Fact]
+    public void CalculateTotalExpenses_WithMultipleEmploymentsHavingExpenses_ReturnsCorrectSum()
+    {
+        // Arrange
+        var incomeSources = new IncomeSources
         {
-            // Arrange
-            var expenses = new ExpensesDetails
-            {
-                BusinessTravelCosts = 100,
-                JobExpenses = 200,
-                FlatRateJobExpenses = 300,
-                ProfessionalSubscriptions = 400,
-                HotelAndMealExpenses = 500,
-                OtherAndCapitalAllowances = 600,
-                VehicleExpenses = 700,
-                MileageAllowanceRelief = 800
-            };
+            EmploymentsAndFinancialDetails =
+            [
+                new EmploymentAndFinancialDetails
+                {
+                    Employer = new Employer { EmployerName = "Employer A" },
+                    BenefitsInKind = new BenefitsInKind { Expenses = 100m }
+                },
+                new EmploymentAndFinancialDetails
+                {
+                    Employer = new Employer { EmployerName = "Employer B" },
+                    BenefitsInKind = new BenefitsInKind { Expenses = 200m }
+                },
+                new EmploymentAndFinancialDetails
+                {
+                    Employer = new Employer { EmployerName = "Employer C" },
+                    BenefitsInKind = new BenefitsInKind { Expenses = 300m }
+                }
+            ]
+        };
 
-            // Act
-            var total = CalculateTotalExpenses(expenses);
+        // Act
+        var total = _calculator.Calculate(incomeSources);
 
-            // Assert
-            Assert.Equal(3600, total); // Sum of all property values
-        }
+        // Assert: 100 + 200 + 300 = 600
+        Assert.Equal(600m, total);
+    }
 
-        [Fact]
-        public void CalculateTotalExpenses_WithSomePropertiesSetToNull_ReturnsCorrectSum()
+    [Fact]
+    public void CalculateTotalExpenses_WithSomeEmploymentsHavingNullExpenses_ReturnsCorrectSum()
+    {
+        // Arrange
+        var incomeSources = new IncomeSources
         {
-            // Arrange
-            var expenses = new ExpensesDetails
-            {
-                BusinessTravelCosts = 100,
-                JobExpenses = null,
-                FlatRateJobExpenses = 300,
-                ProfessionalSubscriptions = null,
-                HotelAndMealExpenses = 500,
-                OtherAndCapitalAllowances = 600,
-                VehicleExpenses = 700,
-                MileageAllowanceRelief = null
-            };
+            EmploymentsAndFinancialDetails =
+            [
+                new EmploymentAndFinancialDetails
+                {
+                    Employer = new Employer { EmployerName = "Employer A" },
+                    BenefitsInKind = new BenefitsInKind { Expenses = 100m }
+                },
+                new EmploymentAndFinancialDetails
+                {
+                    Employer = new Employer { EmployerName = "Employer B" },
+                    BenefitsInKind = new BenefitsInKind { Expenses = null } // Explicitly null expenses
+                },
+                new EmploymentAndFinancialDetails
+                {
+                    Employer = new Employer { EmployerName = "Employer C" },
+                    BenefitsInKind = new BenefitsInKind { Expenses = 300m }
+                }
+            ]
+        };
 
-            // Act
-            var total = CalculateTotalExpenses(expenses);
+        // Act
+        var total = _calculator.Calculate(incomeSources);
 
-            // Assert
-            Assert.Equal(2200, total); // Sum of non-null property values
-        }
+        // Assert: 100 + 0 (for null) + 300 = 400
+        Assert.Equal(400m, total);
+    }
 
-        [Fact]
-        public void CalculateTotalExpenses_WithAllPropertiesNull_ReturnsZero()
+    [Fact]
+    public void CalculateTotalExpenses_WithSomeEmploymentsHavingNullBenefitsInKind_ReturnsCorrectSum()
+    {
+        // Arrange
+        var incomeSources = new IncomeSources
         {
-            // Arrange
-            var expenses = new ExpensesDetails();
+            EmploymentsAndFinancialDetails =
+            [
+                new EmploymentAndFinancialDetails
+                {
+                    Employer = new Employer { EmployerName = "Employer A" },
+                    BenefitsInKind = new BenefitsInKind { Expenses = 100m }
+                },
+                new EmploymentAndFinancialDetails
+                {
+                    Employer = new Employer { EmployerName = "Employer B" },
+                    BenefitsInKind = null // Explicitly null BenefitsInKind
+                },
+                new EmploymentAndFinancialDetails
+                {
+                    Employer = new Employer { EmployerName = "Employer C" },
+                    BenefitsInKind = new BenefitsInKind { Expenses = 300m }
+                }
+            ]
+        };
 
-            // Act
-            var total = CalculateTotalExpenses(expenses);
+        // Act
+        var total = _calculator.Calculate(incomeSources);
 
-            // Assert
-            Assert.Equal(0, total); // All properties are null, so the sum is 0
-        }
+        // Assert: 100 + 0 (for null BenefitsInKind) + 300 = 400
+        Assert.Equal(400m, total);
+    }
 
-        private decimal CalculateTotalExpenses(ExpensesDetails expensesDetails)
+
+    [Fact]
+    public void CalculateTotalExpenses_WithEmptyEmploymentsList_ReturnsZero()
+    {
+        // Arrange
+        var incomeSources = new IncomeSources
         {
-            if (expensesDetails == null)
-                return 0;
+            EmploymentsAndFinancialDetails = new() // Empty list
+        };
 
-            return expensesDetails.GetType()
-                .GetProperties()
-                .Where(p => p.PropertyType == typeof(decimal?))
-                .Select(p => (decimal?)p.GetValue(expensesDetails) ?? 0)
-                .Sum();
-        }
+        // Act
+        var total = _calculator.Calculate(incomeSources);
+
+        // Assert
+        Assert.Equal(0m, total);
+    }
+
+    [Fact]
+    public void CalculateTotalExpenses_WithNullEmploymentsList_ReturnsZero()
+    {
+        // Arrange
+        var incomeSources = new IncomeSources
+        {
+            EmploymentsAndFinancialDetails = null // Null list
+        };
+
+        // Act
+        var total = _calculator.Calculate(incomeSources);
+
+        // Assert
+        Assert.Equal(0m, total);
+    }
+
+    [Fact]
+    public void CalculateTotalExpenses_WithNullIncomeSources_ReturnsZero()
+    {
+        // Arrange
+        IncomeSources? incomeSources = null;
+
+        // Act
+        var total = _calculator.Calculate(incomeSources);
+
+        // Assert
+        Assert.Equal(0m, total);
+    }
+
+    [Fact]
+    public void CalculateTotalExpenses_WithNoExpensesSet_ReturnsZero()
+    {
+        // Arrange
+        var incomeSources = new IncomeSources
+        {
+            EmploymentsAndFinancialDetails =
+            [
+                new EmploymentAndFinancialDetails
+                {
+                    Employer = new Employer { EmployerName = "Employer A" },
+                    // No BenefitsInKind or Expenses property set, so it defaults to null
+                },
+                new EmploymentAndFinancialDetails
+                {
+                    Employer = new Employer { EmployerName = "Employer B" },
+                    BenefitsInKind = new BenefitsInKind { Expenses = null } // Explicitly null
+                }
+            ]
+        };
+
+        // Act
+        var total = _calculator.Calculate(incomeSources);
+
+        // Assert
+        Assert.Equal(0m, total);
     }
 }

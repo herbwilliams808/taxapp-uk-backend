@@ -5,21 +5,13 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Application.Calculators;
 using Application.Interfaces.Calculators;
+using Application.Interfaces.Services;
 using Application.Services;
-using Shared.Models.Settings; // Ensure this is the correct namespace for AzureBlobSettings
-// For BlobServiceClient
-// For DefaultAzureCredential
-
-// For IOptions
+using Shared.Models.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// --- FIX START: Correct Logging Configuration ---
-// Crucially, remove builder.Logging.ClearProviders() from the main logging setup.
-// WebApplication.CreateBuilder() already adds default providers.
-builder.Logging.AddAzureWebAppDiagnostics(); // This is essential for App Service filesystem logs
-builder.Logging.SetMinimumLevel(LogLevel.Trace); // Set to Trace for maximum verbosity during debugging
-// --- FIX END: Correct Logging Configuration ---
+builder.Logging.AddAzureWebAppDiagnostics();
+builder.Logging.SetMinimumLevel(LogLevel.Trace);
 
 // Load configuration
 builder.Configuration
@@ -30,16 +22,10 @@ builder.Configuration
 // Register services
 builder.Services.Configure<AzureBlobSettings>(builder.Configuration.GetSection("AzureBlobSettings"));
 
-// Register AzureBlobDataLoaderService as a Singleton.
-// Since AzureBlobDataLoaderService has two constructors, and we want to use the one
-// that creates BlobServiceClient internally for production/Azure, we just register it directly.
-// DI will prefer the most specific constructor it can satisfy.
-// Ensure BlobServiceClient is NOT directly registered as a service here if you rely on the
-// AzureBlobDataLoaderService's secondary constructor to create it internally.
-builder.Services.AddSingleton<AzureBlobDataLoaderService>();
+builder.Services.AddSingleton<IBlobDataLoaderService, AzureBlobDataLoaderService>();
+builder.Services.AddSingleton<IJsonDeserialiserService, JsonDeserialiserService>();
+builder.Services.AddSingleton<ITaxRatesCacheService, TaxRatesCacheService>();
 
-builder.Services.AddSingleton<JsonDeserializerService>();
-builder.Services.AddSingleton<TaxRatesCacheService>();
 builder.Services.AddScoped<ITotalEmploymentIncomeCalculator, TotalEmploymentIncomeCalculator>();
 builder.Services.AddScoped<ITotalEmploymentBenefitsCalculator, TotalEmploymentBenefitsCalculator>();
 builder.Services.AddScoped<ITotalEmploymentExpensesCalculator, TotalEmploymentExpensesCalculator>();
@@ -79,9 +65,9 @@ startupLogger.LogInformation("PROGRAM.CS: Application startup begins...");
 try
 {
     // Retrieve services directly for startup tasks (ensure they are singletons or scoped appropriately)
-    var blobLoader = app.Services.GetRequiredService<AzureBlobDataLoaderService>();
-    var jsonDeserializer = app.Services.GetRequiredService<JsonDeserializerService>();
-    var cacheService = app.Services.GetRequiredService<TaxRatesCacheService>();
+    var blobLoader = app.Services.GetRequiredService<IBlobDataLoaderService>();
+    var jsonDeserializer = app.Services.GetRequiredService<IJsonDeserialiserService>();
+    var cacheService = app.Services.GetRequiredService<ITaxRatesCacheService>();
 
     startupLogger.LogInformation("PROGRAM.CS: Attempting to load tax rates from blob at startup.");
     // Step 1: Load raw JSON string from Azure Blob storage
@@ -89,7 +75,7 @@ try
     startupLogger.LogInformation($"PROGRAM.CS: Successfully loaded {jsonString.Length} bytes from blob storage.");
 
     // Step 2: Parse JSON string into JsonDocument
-    using var jsonDoc = jsonDeserializer.Deserialize<JsonDocument>(jsonString);
+    using var jsonDoc = jsonDeserializer.Deserialise<JsonDocument>(jsonString);
     startupLogger.LogInformation("PROGRAM.CS: Successfully deserialized JSON document.");
 
     // Step 3: Load the tax rates cache with the JSON root element

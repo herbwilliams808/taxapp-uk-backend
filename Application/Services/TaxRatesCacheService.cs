@@ -1,9 +1,10 @@
 using System.Text.Json;
+using Application.Interfaces.Services;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Services;
 
-public class TaxRatesCacheService
+public class TaxRatesCacheService: ITaxRatesCacheService
 {
     private readonly ILogger<TaxRatesCacheService> _logger;
 
@@ -166,7 +167,7 @@ public class TaxRatesCacheService
     /// Retrieve a decimal tax rate value by tax year, region (optional), and property.
     /// Throws if value not found or not convertible.
     /// </summary>
-    public virtual decimal GetDecimalTaxRateValue(int year, string? region, string property)
+    public decimal GetDecimalTaxRateValue(int year, string? region, string property)
     {
         var valueObj = GetTaxRateValue(year, region, property);
 
