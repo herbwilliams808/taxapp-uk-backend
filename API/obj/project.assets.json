@@ -1971,16 +1971,6 @@
           "bin/placeholder/Application.dll": {}
         }
       },
-      "Infrastructure/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/Infrastructure.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Infrastructure.dll": {}
-        }
-      },
       "Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -5578,11 +5568,6 @@
       "path": "../Application/Application.csproj",
       "msbuildProject": "../Application/Application.csproj"
     },
-    "Infrastructure/1.0.0": {
-      "type": "project",
-      "path": "../Infrastructure/Infrastructure.csproj",
-      "msbuildProject": "../Infrastructure/Infrastructure.csproj"
-    },
     "Shared/1.0.0": {
       "type": "project",
       "path": "../Shared/Shared.csproj",
@@ -5593,7 +5578,6 @@
     "net8.0": [
       "Application >= 1.0.0",
       "Azure.Storage.Blobs >= 12.24.0",
-      "Infrastructure >= 1.0.0",
       "Microsoft.ApplicationInsights.AspNetCore >= 2.23.0",
       "Microsoft.AspNetCore.OpenApi >= 8.0.15",
       "Microsoft.Extensions.Logging >= 9.0.4",
@@ -5632,9 +5616,6 @@
           "projectReferences": {
             "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/Application.csproj": {
               "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/Application.csproj"
-            },
-            "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Infrastructure/Infrastructure.csproj": {
-              "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Infrastructure/Infrastructure.csproj"
             },
             "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/Shared.csproj": {
               "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/Shared.csproj"

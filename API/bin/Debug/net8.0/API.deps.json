@@ -10,7 +10,6 @@
         "dependencies": {
           "Application": "1.0.0",
           "Azure.Storage.Blobs": "12.24.0",
-          "Infrastructure": "1.0.0",
           "Microsoft.ApplicationInsights.AspNetCore": "2.23.0",
           "Microsoft.AspNetCore.OpenApi": "8.0.15",
           "Microsoft.Extensions.Logging": "9.0.4",
@@ -1083,14 +1082,6 @@
           }
         }
       },
-      "Infrastructure/1.0.0": {
-        "runtime": {
-          "Infrastructure.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
       "Shared/1.0.0": {
         "dependencies": {
           "Swashbuckle.AspNetCore.Annotations": "8.1.1"
@@ -1867,11 +1858,6 @@
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
     },
     "Application/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

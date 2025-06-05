@@ -4,8 +4,8 @@ namespace Application.Calculators
     {
         public class BasicRateLimitCalculationResult
         {
-            public decimal value { get; set; }
-            public string message { get; set; }
+            public decimal Value { get; set; }
+            public string? Message { get; set; }
         }
         public BasicRateLimitCalculationResult Calculate(decimal basicRateThreshold, decimal pensionContributions, decimal giftAidContributions)
         {
@@ -15,10 +15,10 @@ namespace Application.Calculators
             }
 
             var result = new BasicRateLimitCalculationResult();
-            result.value = basicRateThreshold + pensionContributions + giftAidContributions;
+            result.Value = basicRateThreshold + pensionContributions + giftAidContributions;
             if (pensionContributions > 0 || giftAidContributions > 0)
             {
-                result.message =
+                result.Message =
                     $"Your basic rate limit has been extended by {pensionContributions + giftAidContributions}";
             }
             return result;

@@ -57,9 +57,9 @@ public class TaxEstimationService(
 
         decimal taxOwed = 0;
 
-        if (totalIncome > basicRateLimit.value)
+        if (totalIncome > basicRateLimit.Value)
         {
-            taxOwed = (totalIncome - basicRateLimit.value) * 0.2m; // Example tax calculation
+            taxOwed = (totalIncome - basicRateLimit.Value) * 0.2m; // Example tax calculation
         }
 
         _logger.LogInformation("Tax calculated for year ending {TaxYearEnding}, region {Region}: {TaxOwed}",
@@ -71,8 +71,8 @@ public class TaxEstimationService(
         var taxEstimationResponse = new TaxEstimationResponse
         {
             TotalIncome = totalIncome,
-            BasicRateLimitExtendedMessage = basicRateLimit.message,
-            BasicRateLimit = basicRateLimit.value,
+            BasicRateLimitExtendedMessage = basicRateLimit.Message,
+            BasicRateLimit = basicRateLimit.Value,
             TaxOwed = taxOwed,
             NetIncome = netIncome
         };

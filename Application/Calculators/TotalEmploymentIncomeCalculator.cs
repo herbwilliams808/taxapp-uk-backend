@@ -13,19 +13,19 @@ public class TotalEmploymentIncomeCalculator
         IndividualsForeignIncomeDetails? individualsForeignIncome,
         ForeignReliefsDetails? foreignReliefs)
     {
-        var employmentIncomes = incomes?.EmploymentsAndFinancialDetails.Select(employment => employment.Pay?.TaxablePayToDate ?? 0m);
+        var employmentIncomes = incomes?.EmploymentsAndFinancialDetails?.Select(employment => employment.Pay?.TaxablePayToDate ?? 0m);
         var totalEmploymentIncome = employmentIncomes?.Sum() ?? 0m;
 
-        var nonPayeEmploymentIncome = incomes?.NonPayeEmploymentIncome.Tips ?? 0m;
+        var nonPayeEmploymentIncome = incomes?.NonPayeEmploymentIncome?.Tips ?? 0m;
 
         var taxableLumpSums =
-            incomes?.OtherEmploymentIncome.LumpSums?.Select(lumpSum =>
+            incomes?.OtherEmploymentIncome?.LumpSums?.Select(lumpSum =>
                 lumpSum.TaxableLumpSumsAndCertainIncome?.Amount ?? 0m);
         
         var totalTaxableLumpSums = taxableLumpSums?.Sum() ?? 0m;
 
         var employerFinancedRetirementSchemeBenefits =
-            incomes?.OtherEmploymentIncome.LumpSums?.Select(lumpSum =>
+            incomes?.OtherEmploymentIncome?.LumpSums?.Select(lumpSum =>
                 lumpSum.BenefitFromEmployerFinancedRetirementScheme?.Amount ?? 0m);
         
         var totalEmployerFinancedRetirementSchemeBenefits = employerFinancedRetirementSchemeBenefits?.Sum() ?? 0;
