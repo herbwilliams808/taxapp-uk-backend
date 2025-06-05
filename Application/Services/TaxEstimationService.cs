@@ -11,7 +11,7 @@ namespace Application.Services;
 
 public class TaxEstimationService(
     TaxRatesCacheService taxRatesCacheService,
-    ILogger<TaxEstimationService> logger)
+    ILogger<TaxEstimationService> logger) : GiftAidPaymentsCalculator
 {
     private readonly TaxRatesCacheService _taxRatesCacheService = taxRatesCacheService 
                                                                   ?? throw new ArgumentNullException(nameof(taxRatesCacheService));
@@ -26,8 +26,7 @@ public class TaxEstimationService(
         IndividualsForeignIncomeDetails? individualsForeignIncome,
         ForeignReliefsDetails? foreignReliefs)
     {
-        // Because GetDecimalTaxRateValue is synchronous, no need to await here.
-        decimal basicRateThreshold = _taxRatesCacheService.GetDecimalTaxRateValue(taxYearEnding, region, "basicRateThreshold");
+        var basicRateThreshold = _taxRatesCacheService.GetDecimalTaxRateValue(taxYearEnding, region, "basicRateThreshold");
 
         var totalEmploymentIncome = new TotalEmploymentIncomeCalculator().Calculate(incomeSources, individualsForeignIncome, foreignReliefs);
         var totalBenefitsInKind = new TotalEmploymentBenefitsCalculator().Calculate(incomeSources);
@@ -43,16 +42,10 @@ public class TaxEstimationService(
             profitFromProperties);
 
         var regularPensionContributions = individualsReliefs?.PensionReliefs?.RegularPensionContributions ?? 0m;
-        var giftAidCurrentYear = individualsReliefs?.GiftAidPayments?.CurrentYear ?? 0m;
-        var giftAidCurrentYearTreatedAsPrevious = individualsReliefs?.GiftAidPayments?.CurrentYearTreatedAsPreviousYear ?? 0m;
-        var giftAidNextYearTreatedAsCurrent = individualsReliefs?.GiftAidPayments?.NextYearTreatedAsCurrentYear ?? 0m;
-
-        var giftAidPayments = (giftAidCurrentYear - giftAidCurrentYearTreatedAsPrevious) + giftAidNextYearTreatedAsCurrent;
-        var paymentsIntoPensions = regularPensionContributions;
-
+        var giftAidPayments = Calculate(individualsReliefs);
         var basicRateLimit = new BasicRateLimitCalculator().Calculate(
             basicRateThreshold,
-            paymentsIntoPensions,
+            regularPensionContributions,
             giftAidPayments);
 
         decimal taxOwed = 0;
