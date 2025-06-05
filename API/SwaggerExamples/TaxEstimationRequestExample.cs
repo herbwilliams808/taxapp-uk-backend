@@ -1,15 +1,12 @@
 // API/SwaggerExamples/TaxEstimationRequestExample.cs
 using Swashbuckle.AspNetCore.Filters;
 using Shared.Models.HttpMessages; // Namespace for TaxEstimationRequest
-using Shared.Models.Incomes; // Namespace for IncomeDetails
+using Shared.Models.Incomes; // Namespace for IncomeSources
 using Shared.Models.IndividualsEmploymentIncomes.Employments; // Namespace for EmploymentAndFinancialDetails, Employer, Pay
 using Shared.Models.IndividualsEmploymentIncomes.NonPayeEmploymentIncome; // Namespace for NonPayeEmploymentIncome
 using Shared.Models.PropertyBusiness; // Namespace for UkPropertyBusinessIncome
 using Shared.Models.IndividualsReliefs; // Namespace for IndividualsReliefsDetails
 using Shared.Models.IndividualsReliefs.Pensions; // Namespace for PensionReliefs
-
-using System.Collections.Generic;
-using Shared.Models.IndividualsEmploymentIncomes.OtherEmploymentIncome;
 
 namespace API.SwaggerExamples
 {
@@ -21,7 +18,7 @@ namespace API.SwaggerExamples
             {
                 TaxYearEnding = 2025,
                 Region = "england",
-                Incomes = new IncomeDetails
+                Incomes = new IncomeSources
                 {
                     EmploymentsAndFinancialDetails = new List<EmploymentAndFinancialDetails>
                     {
@@ -45,13 +42,13 @@ namespace API.SwaggerExamples
                     {
                         Tips = 500
                     },
-                    UkPropertyBusiness = new UkPropertyBusinessIncome // Corrected class name based on your IncomeDetails
+                    UkPropertyBusiness = new UkPropertyBusinessIncome // Corrected class name based on your IncomeSources
                     {
                         Income = 20000,
                         AllowablePropertyLettingExpenses = 5000,
                         PropertyLettingLoanInterestAndFinanceCosts = 10000
                     },
-                    // Initialize other IncomeDetails properties if they have default values or are required
+                    // Initialize other IncomeSources properties if they have default values or are required
                     OtherEmploymentIncome = null // Initialize if not nullable and has defaults
                 },
                 IndividualsReliefs = new IndividualsReliefsDetails

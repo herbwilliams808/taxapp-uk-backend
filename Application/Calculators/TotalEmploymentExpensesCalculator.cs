@@ -5,12 +5,13 @@ namespace Application.Calculators
     public class TotalEmploymentExpensesCalculator
     {
         // TODO: Added virtual. Implement interface
-        public virtual decimal Calculate(IncomeDetails incomeDetails)
+        public virtual decimal Calculate(IncomeSources? incomeSources)
         {
-            if (incomeDetails?.EmploymentsAndFinancialDetails == null || !incomeDetails.EmploymentsAndFinancialDetails.Any())
+            if (incomeSources?.EmploymentsAndFinancialDetails == null || 
+                incomeSources.EmploymentsAndFinancialDetails.Count == 0)
                 return 0;
 
-            return incomeDetails.EmploymentsAndFinancialDetails
+            return incomeSources.EmploymentsAndFinancialDetails
                 .Select(e => e.BenefitsInKind?.Expenses)?.Sum() ?? 0;
         }
     }

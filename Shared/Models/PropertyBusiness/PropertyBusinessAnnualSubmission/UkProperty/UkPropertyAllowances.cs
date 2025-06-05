@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Shared.Models.PropertyBusiness.PropertyBusinessAnnualSubmission.UkProperty
 {
     /// <summary>

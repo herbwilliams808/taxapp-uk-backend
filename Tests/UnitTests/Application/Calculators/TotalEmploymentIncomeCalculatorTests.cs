@@ -16,7 +16,7 @@ namespace UnitTests.Application.Calculators
         public void Calculate_ReturnsCorrectTotalEmploymentIncome()
         {
             // Arrange
-            var incomes = new IncomeDetails
+            var incomes = new IncomeSources
             {
                 EmploymentsAndFinancialDetails =
                 [

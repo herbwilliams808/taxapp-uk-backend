@@ -1,22 +1,21 @@
 using Shared.Models.Incomes;
 
-namespace Application.Calculators
-{
-    public class TotalEmploymentBenefitsCalculator
-    {
-        // TODO: Added virtual. Implement interface
-        public virtual decimal Calculate(IncomeDetails incomeDetails)
-        {
-            if (incomeDetails?.EmploymentsAndFinancialDetails == null || !incomeDetails.EmploymentsAndFinancialDetails.Any())
-                return 0;
+namespace Application.Calculators;
 
-            return incomeDetails.EmploymentsAndFinancialDetails
-                .Where(e => e.BenefitsInKind != null) // Filter out employments without BenefitsInKind
-                .SelectMany(e => e.BenefitsInKind!.GetType()
-                    .GetProperties()
-                    .Where(p => p.PropertyType == typeof(decimal?))
-                    .Select(p => (decimal?)p.GetValue(e.BenefitsInKind) ?? 0))
-                .Sum();
-        }
+public class TotalEmploymentBenefitsCalculator
+{
+    // TODO: Added virtual. Implement interface
+    public virtual decimal Calculate(IncomeSources? incomeSources)
+    {
+        if (incomeSources?.EmploymentsAndFinancialDetails == null || incomeSources.EmploymentsAndFinancialDetails.Count == 0)
+            return 0;
+
+        return incomeSources.EmploymentsAndFinancialDetails
+            .Where(e => e.BenefitsInKind != null) // Filter out employments without BenefitsInKind
+            .SelectMany(e => e.BenefitsInKind!.GetType()
+                .GetProperties()
+                .Where(p => p.PropertyType == typeof(decimal?))
+                .Select(p => (decimal?)p.GetValue(e.BenefitsInKind) ?? 0))
+            .Sum();
     }
 }

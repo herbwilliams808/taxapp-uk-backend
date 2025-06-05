@@ -5,10 +5,10 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Application.Services;
 using Shared.Models.Settings; // Ensure this is the correct namespace for AzureBlobSettings
-using Microsoft.Extensions.Logging;
-using Azure.Storage.Blobs; // For BlobServiceClient
-using Azure.Identity;     // For DefaultAzureCredential
-using Microsoft.Extensions.Options; // For IOptions
+// For BlobServiceClient
+// For DefaultAzureCredential
+
+// For IOptions
 
 var builder = WebApplication.CreateBuilder(args);
 

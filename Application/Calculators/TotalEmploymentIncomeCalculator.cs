@@ -1,7 +1,6 @@
 using Shared.Models.Incomes;
 using Shared.Models.IndividualsForeignIncome;
 using Shared.Models.IndividualsReliefs.ForeignReliefs;
-using Shared.Models.OtherDeductions;
 
 namespace Application.Calculators;
 
@@ -9,7 +8,7 @@ public class TotalEmploymentIncomeCalculator
 {
     // TODO: Added virtual. Implement interface
     public virtual decimal Calculate(
-        IncomeDetails? incomes,
+        IncomeSources? incomes,
         // OtherDeductionsDetails otherDeductions,
         IndividualsForeignIncomeDetails? individualsForeignIncome,
         ForeignReliefsDetails? foreignReliefs)

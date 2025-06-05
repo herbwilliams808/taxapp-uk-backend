@@ -42,7 +42,7 @@ namespace UnitTests.Application.Calculators
                 NonCash = 600
             };
 
-            var incomes = new IncomeDetails
+            var incomes = new IncomeSources
             {
                 EmploymentsAndFinancialDetails = new List<EmploymentAndFinancialDetails>
                 {
@@ -75,7 +75,7 @@ namespace UnitTests.Application.Calculators
                 OtherItems = 500
             };
 
-            var incomes = new IncomeDetails
+            var incomes = new IncomeSources
             {
                 EmploymentsAndFinancialDetails = new List<EmploymentAndFinancialDetails>
                 {
@@ -100,7 +100,7 @@ namespace UnitTests.Application.Calculators
         public void CalculateTotalBenefits_HandlesMultipleEmploymentsWithDifferentProperties()
         {
             // Arrange
-            var incomes = new IncomeDetails
+            var incomes = new IncomeSources
             {
                 EmploymentsAndFinancialDetails = new List<EmploymentAndFinancialDetails>
                 {
@@ -138,7 +138,7 @@ namespace UnitTests.Application.Calculators
         public void CalculateTotalBenefits_ReturnsZero_WhenNoBenefitsArePresent()
         {
             // Arrange
-            var incomes = new IncomeDetails
+            var incomes = new IncomeSources
             {
                 EmploymentsAndFinancialDetails = new List<EmploymentAndFinancialDetails>
                 {

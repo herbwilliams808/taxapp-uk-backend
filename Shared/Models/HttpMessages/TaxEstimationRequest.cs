@@ -31,7 +31,7 @@ namespace Shared.Models.HttpMessages
         [DefaultValue("england")]
         public string Region { get; set; } = "england";
 
-        public IncomeDetails? Incomes { get; set; }
+        public IncomeSources? Incomes { get; set; }
         public IndividualsReliefsDetails? IndividualsReliefs { get; set; }
 
         public ForeignReliefsDetails? ForeignReliefs { get; set; }

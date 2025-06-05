@@ -1,5 +1,3 @@
-using System;
-
 namespace Shared.Models.PropertyBusiness.PropertyBusinessAnnualSubmission.UkProperty
 {
     /// <summary>

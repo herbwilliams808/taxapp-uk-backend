@@ -1,8 +1,6 @@
 using Application.Services;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Models;
 using Shared.Models.HttpMessages;
-using System.Threading.Tasks;
 using API.SwaggerExamples;
 using Swashbuckle.AspNetCore.Filters;
 

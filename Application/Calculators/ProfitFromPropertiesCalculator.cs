@@ -1,18 +1,18 @@
 using Shared.Models.Incomes;
 
-namespace Application.Calculators
+namespace Application.Calculators;
+
+public class ProfitFromPropertiesCalculator
 {
-    public class ProfitFromPropertiesCalculator
+    /// <summary>
+    /// Calculates the profit from properties.
+    /// </summary>
+    /// <param name="incomeSources"></param>
+    /// <returns>The profit from properties after deducting allowable expenses.</returns>
+    // TODO: Added virtual. Implement interface
+    public virtual decimal Calculate(IncomeSources? incomeSources)
     {
-        /// <summary>
-        /// Calculates the profit from properties.
-        /// </summary>
-        /// <param name="incomeDetails"></param>
-        /// <returns>The profit from properties after deducting allowable expenses.</returns>
-        // TODO: Added virtual. Implement interface
-        public virtual decimal Calculate(IncomeDetails incomeDetails)
-        {
-            return (incomeDetails.UkPropertyBusiness?.Income ?? 0m) - (incomeDetails.UkPropertyBusiness?.AllowablePropertyLettingExpenses ?? 0m);
-        }
+        return (incomeSources?.UkPropertyBusiness?.Income ?? 0m) - 
+               (incomeSources?.UkPropertyBusiness?.AllowablePropertyLettingExpenses ?? 0m);
     }
 }

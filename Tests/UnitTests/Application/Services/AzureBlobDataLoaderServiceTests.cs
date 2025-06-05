@@ -1,17 +1,9 @@
-using System;
-using System.IO;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Application.Services;
-using Azure;
 using Azure.Storage.Blobs;
-using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 using Shared.Models.Settings;
-using Xunit;
 
 namespace UnitTests.Application.Services;
 

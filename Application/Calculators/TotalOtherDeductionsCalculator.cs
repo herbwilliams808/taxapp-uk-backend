@@ -5,9 +5,9 @@ namespace Application.Calculators;
 public class TotalOtherDeductionsCalculator
 {
    // TODO: Added virtual. Implement interface
-   public virtual decimal Calculate(OtherDeductionsDetails otherDeductionsDetails)
+   public virtual decimal Calculate(OtherDeductionsDetails? otherDeductionsDetails)
    {
-      var seafarersdeductions = otherDeductionsDetails?.Seafarers?.Select(seafarer => seafarer.AmountDeducted);
-      return seafarersdeductions?.Sum() ?? 0;
+      var seafarersDeductions = otherDeductionsDetails?.Seafarers?.Select(seafarer => seafarer.AmountDeducted);
+      return seafarersDeductions?.Sum() ?? 0;
    } 
 }

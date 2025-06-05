@@ -1,0 +1,12 @@
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/bin/Debug/net8.0/Application.Interfaces.deps.json
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/bin/Debug/net8.0/Application.Interfaces.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/bin/Debug/net8.0/Application.Interfaces.pdb
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/obj/Debug/net8.0/Application.Interfaces.GeneratedMSBuildEditorConfig.editorconfig
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/obj/Debug/net8.0/Application.Interfaces.AssemblyInfoInputs.cache
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/obj/Debug/net8.0/Application.Interfaces.AssemblyInfo.cs
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/obj/Debug/net8.0/Application.Interfaces.csproj.CoreCompileInputs.cache
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/obj/Debug/net8.0/Application.Interfaces.sourcelink.json
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/obj/Debug/net8.0/Application.Interfaces.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/obj/Debug/net8.0/refint/Application.Interfaces.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/obj/Debug/net8.0/Application.Interfaces.pdb
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/obj/Debug/net8.0/ref/Application.Interfaces.dll
