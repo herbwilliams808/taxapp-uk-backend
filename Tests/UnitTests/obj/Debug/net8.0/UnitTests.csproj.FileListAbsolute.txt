@@ -178,3 +178,5 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/obj/Debug/net8.0/UnitTests.pdb
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/obj/Debug/net8.0/UnitTests.genruntimeconfig.cache
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/obj/Debug/net8.0/ref/UnitTests.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Application.Interfaces.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/bin/Debug/net8.0/Application.Interfaces.pdb

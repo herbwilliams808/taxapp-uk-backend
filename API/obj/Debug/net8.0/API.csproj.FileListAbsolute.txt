@@ -98,3 +98,5 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/obj/Debug/net8.0/API.pdb
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/obj/Debug/net8.0/API.genruntimeconfig.cache
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/obj/Debug/net8.0/ref/API.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Application.Interfaces.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/API/bin/Debug/net8.0/Application.Interfaces.pdb

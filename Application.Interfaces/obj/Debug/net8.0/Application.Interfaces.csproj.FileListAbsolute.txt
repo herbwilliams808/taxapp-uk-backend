@@ -10,3 +10,7 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/obj/Debug/net8.0/refint/Application.Interfaces.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/obj/Debug/net8.0/Application.Interfaces.pdb
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/obj/Debug/net8.0/ref/Application.Interfaces.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/bin/Debug/net8.0/Shared.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/bin/Debug/net8.0/Shared.pdb
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/obj/Debug/net8.0/Application.Interfaces.csproj.AssemblyReference.cache
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/obj/Debug/net8.0/Applicat.6851DF05.Up2Date

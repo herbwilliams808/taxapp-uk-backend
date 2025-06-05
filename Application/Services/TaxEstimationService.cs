@@ -1,4 +1,6 @@
-using Application.Calculators;
+// In Application/Services/TaxEstimationService.cs
+using Application.Calculators; // Keep this for now, will remove other concrete calculators later
+using Application.Interfaces.Calculators;
 using Microsoft.Extensions.Logging;
 using Shared.Models.HttpMessages;
 using Shared.Models.Incomes;
@@ -9,14 +11,19 @@ using Shared.Models.OtherDeductions;
 
 namespace Application.Services;
 
+// NEW: No explicit private readonly fields for the injected services
 public class TaxEstimationService(
     TaxRatesCacheService taxRatesCacheService,
-    ILogger<TaxEstimationService> logger) : GiftAidPaymentsCalculator
+    ILogger<TaxEstimationService> logger,
+    ITotalEmploymentIncomeCalculator totalEmploymentIncomeCalculator,
+    ITotalEmploymentBenefitsCalculator totalEmploymentBenefitsCalculator,
+    ITotalEmploymentExpensesCalculator totalEmploymentExpensesCalculator,
+    ITotalOtherDeductionsCalculator totalOtherDeductionsCalculator,
+    IProfitFromPropertiesCalculator profitFromPropertiesCalculator,
+    ITotalIncomeCalculator totalIncomeCalculator,
+    IGiftAidPaymentsCalculator giftAidPaymentsCalculator,
+    IBasicRateLimitCalculator basicRateLimitCalculator)
 {
-    private readonly TaxRatesCacheService _taxRatesCacheService = taxRatesCacheService 
-                                                                  ?? throw new ArgumentNullException(nameof(taxRatesCacheService));
-    private readonly ILogger<TaxEstimationService> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-
     public Task<TaxEstimationResponse> CalculateTaxAsync(
         int taxYearEnding,
         string region,
@@ -26,15 +33,14 @@ public class TaxEstimationService(
         IndividualsForeignIncomeDetails? individualsForeignIncome,
         ForeignReliefsDetails? foreignReliefs)
     {
-        var basicRateThreshold = _taxRatesCacheService.GetDecimalTaxRateValue(taxYearEnding, region, "basicRateThreshold");
+        var basicRateThreshold = taxRatesCacheService.GetDecimalTaxRateValue(taxYearEnding, region, "basicRateThreshold");
+        var totalEmploymentIncome = totalEmploymentIncomeCalculator.Calculate(incomeSources, individualsForeignIncome, foreignReliefs);
+        var totalBenefitsInKind = totalEmploymentBenefitsCalculator.Calculate(incomeSources);
+        var totalEmploymentExpenses = totalEmploymentExpensesCalculator.Calculate(incomeSources);
+        var totalOtherDeductions = totalOtherDeductionsCalculator.Calculate(otherDeductions);
+        var profitFromProperties = profitFromPropertiesCalculator.Calculate(incomeSources);
 
-        var totalEmploymentIncome = new TotalEmploymentIncomeCalculator().Calculate(incomeSources, individualsForeignIncome, foreignReliefs);
-        var totalBenefitsInKind = new TotalEmploymentBenefitsCalculator().Calculate(incomeSources);
-        var totalEmploymentExpenses = new TotalEmploymentExpensesCalculator().Calculate(incomeSources);
-        var totalOtherDeductions = new TotalOtherDeductionsCalculator().Calculate(otherDeductions);
-        var profitFromProperties = new ProfitFromPropertiesCalculator().Calculate(incomeSources);
-
-        var totalIncome = new TotalIncomeCalculator().Calculate(
+        var totalIncome = totalIncomeCalculator.Calculate(
             totalEmploymentIncome,
             totalBenefitsInKind,
             totalEmploymentExpenses,
@@ -42,8 +48,8 @@ public class TaxEstimationService(
             profitFromProperties);
 
         var regularPensionContributions = individualsReliefs?.PensionReliefs?.RegularPensionContributions ?? 0m;
-        var giftAidPayments = Calculate(individualsReliefs);
-        var basicRateLimit = new BasicRateLimitCalculator().Calculate(
+        var giftAidPayments = giftAidPaymentsCalculator.Calculate(individualsReliefs);
+        var basicRateLimit = basicRateLimitCalculator.Calculate(
             basicRateThreshold,
             regularPensionContributions,
             giftAidPayments);
@@ -55,7 +61,8 @@ public class TaxEstimationService(
             taxOwed = (totalIncome - basicRateLimit.Value) * 0.2m; // Example tax calculation
         }
 
-        _logger.LogInformation("Tax calculated for year ending {TaxYearEnding}, region {Region}: {TaxOwed}",
+        // CHANGED: Access parameter directly
+        logger.LogInformation("Tax calculated for year ending {TaxYearEnding}, region {Region}: {TaxOwed}",
             taxYearEnding, region, taxOwed);
 
         var netIncome = totalIncome - taxOwed -

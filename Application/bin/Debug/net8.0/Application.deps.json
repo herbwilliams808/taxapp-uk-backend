@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "Application/1.0.0": {
         "dependencies": {
+          "Application.Interfaces": "1.0.0",
           "Azure.Identity": "1.13.2",
           "Azure.Storage.Blobs": "12.24.0",
           "Microsoft.Extensions.Hosting": "8.0.0",
@@ -440,6 +441,17 @@
         }
       },
       "System.Threading.Tasks.Extensions/4.5.4": {},
+      "Application.Interfaces/1.0.0": {
+        "dependencies": {
+          "Shared": "1.0.0"
+        },
+        "runtime": {
+          "Application.Interfaces.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Shared/1.0.0": {
         "dependencies": {
           "Swashbuckle.AspNetCore.Annotations": "8.1.1"
@@ -815,6 +827,11 @@
       "sha512": "sha512-zteT+G8xuGu6mS+mzDzYXbzS7rd3K6Fjb9RiZlYlJPam2/hU7JCBZBVEcywNuR+oZ1ncTvc/cq0faRr3P01OVg==",
       "path": "system.threading.tasks.extensions/4.5.4",
       "hashPath": "system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+    },
+    "Application.Interfaces/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Shared/1.0.0": {
       "type": "project",

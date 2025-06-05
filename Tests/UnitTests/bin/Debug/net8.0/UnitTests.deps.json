@@ -1987,6 +1987,7 @@
       },
       "Application/1.0.0": {
         "dependencies": {
+          "Application.Interfaces": "1.0.0",
           "Azure.Identity": "1.13.2",
           "Azure.Storage.Blobs": "12.24.0",
           "Microsoft.Extensions.Hosting": "8.0.0",
@@ -1996,6 +1997,17 @@
         },
         "runtime": {
           "Application.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Application.Interfaces/1.0.0": {
+        "dependencies": {
+          "Shared": "1.0.0"
+        },
+        "runtime": {
+          "Application.Interfaces.dll": {
             "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -3286,6 +3298,11 @@
       "sha512": ""
     },
     "Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Application.Interfaces/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

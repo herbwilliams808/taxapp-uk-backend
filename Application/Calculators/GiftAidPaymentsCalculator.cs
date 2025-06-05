@@ -1,8 +1,9 @@
+using Application.Interfaces.Calculators;
 using Shared.Models.IndividualsReliefs;
 
 namespace Application.Calculators;
 
-public class GiftAidPaymentsCalculator
+public class GiftAidPaymentsCalculator : IGiftAidPaymentsCalculator
 {
     /// <summary>
     /// Calculates the total Gift Aid payments based on the provided individual's reliefs details.
@@ -12,7 +13,7 @@ public class GiftAidPaymentsCalculator
     /// The calculated total Gift Aid payments as a decimal value.
     /// This includes payments for the current year, adjusted by subtracting the amount treated as the previous year and adding the amount treated as the next year.
     /// </returns>
-    protected static decimal Calculate(IndividualsReliefsDetails? individualsReliefs)
+    public decimal Calculate(IndividualsReliefsDetails? individualsReliefs)
     {
         var giftAidCurrentYear = individualsReliefs?.GiftAidPayments?.CurrentYear ?? 0m;
         var giftAidCurrentYearTreatedAsPrevious = individualsReliefs?.GiftAidPayments?.CurrentYearTreatedAsPreviousYear ?? 0m;

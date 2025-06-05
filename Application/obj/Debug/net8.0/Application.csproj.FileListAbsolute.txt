@@ -14,3 +14,5 @@
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/obj/Debug/net8.0/refint/Application.dll
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/obj/Debug/net8.0/Application.pdb
 /Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/obj/Debug/net8.0/ref/Application.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/bin/Debug/net8.0/Application.Interfaces.dll
+/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/bin/Debug/net8.0/Application.Interfaces.pdb

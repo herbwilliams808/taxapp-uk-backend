@@ -1,6 +1,8 @@
+using Application.Interfaces.Calculators;
+
 namespace Application.Calculators;
 
-public class TotalIncomeCalculator
+public class TotalIncomeCalculator : ITotalIncomeCalculator
 {
     /// <summary>
     ///     Calculates the total income received.
@@ -13,7 +15,6 @@ public class TotalIncomeCalculator
     /// <returns>The total income received.</returns>
     public decimal Calculate(decimal? employmentIncome, decimal? benefitsInKind, decimal? employmentExpenses,
         decimal? otherDeductions, decimal? profitFromProperties)
-
     {
         employmentIncome ??= 0m;
         benefitsInKind ??= 0m;

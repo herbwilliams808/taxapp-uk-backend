@@ -3450,6 +3450,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "Application.Interfaces": "1.0.0",
           "Azure.Identity": "1.13.2",
           "Azure.Storage.Blobs": "12.24.0",
           "Microsoft.Extensions.Hosting": "8.0.0",
@@ -3462,6 +3463,19 @@
         },
         "runtime": {
           "bin/placeholder/Application.dll": {}
+        }
+      },
+      "Application.Interfaces/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Shared": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Application.Interfaces.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Application.Interfaces.dll": {}
         }
       },
       "Shared/1.0.0": {
@@ -9853,6 +9867,11 @@
       "type": "project",
       "path": "../../Application/Application.csproj",
       "msbuildProject": "../../Application/Application.csproj"
+    },
+    "Application.Interfaces/1.0.0": {
+      "type": "project",
+      "path": "../../Application.Interfaces/Application.Interfaces.csproj",
+      "msbuildProject": "../../Application.Interfaces/Application.Interfaces.csproj"
     },
     "Shared/1.0.0": {
       "type": "project",

@@ -3,6 +3,8 @@ using API.SwaggerExamples;
 using Microsoft.OpenApi.Models;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Application.Calculators;
+using Application.Interfaces.Calculators;
 using Application.Services;
 using Shared.Models.Settings; // Ensure this is the correct namespace for AzureBlobSettings
 // For BlobServiceClient
@@ -38,7 +40,16 @@ builder.Services.AddSingleton<AzureBlobDataLoaderService>();
 
 builder.Services.AddSingleton<JsonDeserializerService>();
 builder.Services.AddSingleton<TaxRatesCacheService>();
-builder.Services.AddSingleton<TaxEstimationService>();
+builder.Services.AddScoped<ITotalEmploymentIncomeCalculator, TotalEmploymentIncomeCalculator>();
+builder.Services.AddScoped<ITotalEmploymentBenefitsCalculator, TotalEmploymentBenefitsCalculator>();
+builder.Services.AddScoped<ITotalEmploymentExpensesCalculator, TotalEmploymentExpensesCalculator>();
+builder.Services.AddScoped<ITotalOtherDeductionsCalculator, TotalOtherDeductionsCalculator>();
+builder.Services.AddScoped<IProfitFromPropertiesCalculator, ProfitFromPropertiesCalculator>();
+builder.Services.AddScoped<ITotalIncomeCalculator, TotalIncomeCalculator>();
+builder.Services.AddScoped<IGiftAidPaymentsCalculator, GiftAidPaymentsCalculator>();
+builder.Services.AddScoped<IBasicRateLimitCalculator, BasicRateLimitCalculator>();
+builder.Services.AddScoped<TaxEstimationService>();
+
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>

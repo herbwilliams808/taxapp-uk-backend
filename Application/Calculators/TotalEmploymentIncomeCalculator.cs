@@ -1,13 +1,13 @@
+using Application.Interfaces.Calculators;
 using Shared.Models.Incomes;
 using Shared.Models.IndividualsForeignIncome;
 using Shared.Models.IndividualsReliefs.ForeignReliefs;
 
 namespace Application.Calculators;
 
-public class TotalEmploymentIncomeCalculator
+public class TotalEmploymentIncomeCalculator : ITotalEmploymentIncomeCalculator
 {
-    // TODO: Added virtual. Implement interface
-    public virtual decimal Calculate(
+    public decimal Calculate(
         IncomeSources? incomes,
         // OtherDeductionsDetails otherDeductions,
         IndividualsForeignIncomeDetails? individualsForeignIncome,

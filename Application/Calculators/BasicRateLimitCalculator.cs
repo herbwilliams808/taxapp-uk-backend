@@ -1,12 +1,10 @@
+using Application.Interfaces.Calculators;
+using Shared.Models.CalculationResults;
+
 namespace Application.Calculators;
 
-public class BasicRateLimitCalculator
+public class BasicRateLimitCalculator : IBasicRateLimitCalculator
 {
-    public class BasicRateLimitCalculationResult
-    {
-        public decimal Value { get; set; }
-        public string? Message { get; set; }
-    }
     public BasicRateLimitCalculationResult Calculate(decimal basicRateThreshold, decimal pensionContributions, decimal giftAidContributions)
     {
         if (pensionContributions < 0 || giftAidContributions < 0)
