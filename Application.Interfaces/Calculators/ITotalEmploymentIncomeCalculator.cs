@@ -7,7 +7,7 @@ namespace Application.Interfaces.Calculators;
 public interface ITotalEmploymentIncomeCalculator
 {
     decimal Calculate(
-        IncomeSources? incomes,
+        IncomeSourcesDetails? incomes,
         // OtherDeductionsDetails otherDeductions,
         IndividualsForeignIncomeDetails? individualsForeignIncome,
         ForeignReliefsDetails? foreignReliefs);

@@ -1,4 +1,4 @@
-using Shared.Models.Incomes; // Make sure IncomeSources is here
+using Shared.Models.Incomes; // Make sure IncomeSourcesDetails is here
 using Shared.Models.IndividualsEmploymentIncomes.Employments;
 using Shared.Models.IndividualsEmploymentIncomes.OtherEmploymentIncome.LumpSum;
 using Shared.Models.OtherDeductions;
@@ -20,7 +20,7 @@ public class TotalEmploymentIncomeCalculatorTests
     public void Calculate_ReturnsCorrectTotalEmploymentIncome()
     {
         // Arrange
-        var incomes = new IncomeSources // <<< CORRECTED: Using IncomeSources as per your original test
+        var incomes = new IncomeSourcesDetails
         {
             EmploymentsAndFinancialDetails =
             [
@@ -98,7 +98,7 @@ public class TotalEmploymentIncomeCalculatorTests
     public void Calculate_HandlesPartialInputs_Correctly()
     {
         // Arrange
-        var incomes = new IncomeSources // <<< CORRECTED: Using IncomeSources
+        var incomes = new IncomeSourcesDetails // <<< CORRECTED: Using IncomeSourcesDetails
         {
             EmploymentsAndFinancialDetails =
             [

@@ -8,7 +8,7 @@ namespace Application.Calculators;
 public class TotalEmploymentIncomeCalculator : ITotalEmploymentIncomeCalculator
 {
     public decimal Calculate(
-        IncomeSources? incomes,
+        IncomeSourcesDetails? incomes,
         // OtherDeductionsDetails otherDeductions,
         IndividualsForeignIncomeDetails? individualsForeignIncome,
         ForeignReliefsDetails? foreignReliefs)

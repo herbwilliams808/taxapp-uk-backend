@@ -42,7 +42,7 @@ public class TotalEmploymentBenefitsCalculatorTests
             NonCash = 600
         };
 
-        var incomes = new IncomeSources
+        var incomes = new IncomeSourcesDetails
         {
             EmploymentsAndFinancialDetails = new List<EmploymentAndFinancialDetails>
             {
@@ -75,7 +75,7 @@ public class TotalEmploymentBenefitsCalculatorTests
             OtherItems = 500
         };
 
-        var incomes = new IncomeSources
+        var incomes = new IncomeSourcesDetails
         {
             EmploymentsAndFinancialDetails = new List<EmploymentAndFinancialDetails>
             {
@@ -100,7 +100,7 @@ public class TotalEmploymentBenefitsCalculatorTests
     public void CalculateTotalBenefits_HandlesMultipleEmploymentsWithDifferentProperties()
     {
         // Arrange
-        var incomes = new IncomeSources
+        var incomes = new IncomeSourcesDetails
         {
             EmploymentsAndFinancialDetails = new List<EmploymentAndFinancialDetails>
             {
@@ -138,7 +138,7 @@ public class TotalEmploymentBenefitsCalculatorTests
     public void CalculateTotalBenefits_ReturnsZero_WhenNoBenefitsArePresent()
     {
         // Arrange
-        var incomes = new IncomeSources
+        var incomes = new IncomeSourcesDetails
         {
             EmploymentsAndFinancialDetails = new List<EmploymentAndFinancialDetails>
             {

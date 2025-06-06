@@ -25,7 +25,7 @@ public class TaxEstimationService(
     public Task<TaxEstimationResponse> CalculateTaxAsync(
         int taxYearEnding,
         string region,
-        IncomeSources? incomeSources,
+        IncomeSourcesDetails? incomeSources,
         IndividualsReliefsDetails? individualsReliefs,
         OtherDeductionsDetails? otherDeductions,
         IndividualsForeignIncomeDetails? individualsForeignIncome,

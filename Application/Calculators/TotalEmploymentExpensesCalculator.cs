@@ -5,7 +5,7 @@ namespace Application.Calculators
 {
     public class TotalEmploymentExpensesCalculator : ITotalEmploymentExpensesCalculator
     {
-        public decimal Calculate(IncomeSources? incomeSources)
+        public decimal Calculate(IncomeSourcesDetails? incomeSources)
         {
             if (incomeSources?.EmploymentsAndFinancialDetails == null || 
                 incomeSources.EmploymentsAndFinancialDetails.Count == 0)

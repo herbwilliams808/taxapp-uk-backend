@@ -1,4 +1,4 @@
-using Shared.Models.Incomes; // For IncomeSources, UkPropertyBusinessIncome
+using Shared.Models.Incomes; // For IncomeSourcesDetails, UkPropertyBusinessIncome
 using Application.Calculators; // To reference the concrete calculator
 using Application.Interfaces;
 using Application.Interfaces.Calculators;
@@ -20,7 +20,7 @@ public class ProfitFromPropertiesCalculatorTests
     public void Calculate_ReturnsCorrectProfit_WhenBothIncomeAndExpensesAreSet()
     {
         // Arrange
-        var incomeSources = new IncomeSources
+        var incomeSources = new IncomeSourcesDetails
         {
             UkPropertyBusinessIncome = new UkPropertyBusinessIncome
             {
@@ -40,7 +40,7 @@ public class ProfitFromPropertiesCalculatorTests
     public void Calculate_ReturnsIncome_WhenExpensesAreNull()
     {
         // Arrange
-        var incomeSources = new IncomeSources
+        var incomeSources = new IncomeSourcesDetails
         {
             UkPropertyBusinessIncome = new UkPropertyBusinessIncome
             {
@@ -60,7 +60,7 @@ public class ProfitFromPropertiesCalculatorTests
     public void Calculate_ReturnsNegativeExpenses_WhenIncomeIsNull()
     {
         // Arrange
-        var incomeSources = new IncomeSources
+        var incomeSources = new IncomeSourcesDetails
         {
             UkPropertyBusinessIncome = new UkPropertyBusinessIncome
             {
@@ -80,7 +80,7 @@ public class ProfitFromPropertiesCalculatorTests
     public void Calculate_ReturnsZero_WhenBothIncomeAndExpensesAreNull()
     {
         // Arrange
-        var incomeSources = new IncomeSources
+        var incomeSources = new IncomeSourcesDetails
         {
             UkPropertyBusinessIncome = new UkPropertyBusinessIncome
             {
@@ -100,7 +100,7 @@ public class ProfitFromPropertiesCalculatorTests
     public void Calculate_ReturnsZero_WhenUkPropertyBusinessIsNull()
     {
         // Arrange
-        var incomeSources = new IncomeSources
+        var incomeSources = new IncomeSourcesDetails
         {
             UkPropertyBusinessIncome = null // UkPropertyBusinessIncome itself is null
         };
@@ -116,7 +116,7 @@ public class ProfitFromPropertiesCalculatorTests
     public void Calculate_ReturnsZero_WhenIncomeSourcesIsNull()
     {
         // Arrange
-        IncomeSources? incomeSources = null; // Entire input is null
+        IncomeSourcesDetails? incomeSources = null; // Entire input is null
 
         // Act
         var result = _calculator.Calculate(incomeSources);
@@ -129,7 +129,7 @@ public class ProfitFromPropertiesCalculatorTests
     public void Calculate_WithZeroValues_ReturnsZero()
     {
         // Arrange
-        var incomeSources = new IncomeSources
+        var incomeSources = new IncomeSourcesDetails
         {
             UkPropertyBusinessIncome = new UkPropertyBusinessIncome
             {

@@ -33,7 +33,7 @@ namespace API.Controllers
             var response = await taxEstimationService.CalculateTaxAsync(
                 taxYearEnding,
                 region,
-                request.Incomes, 
+                request.IncomeSources, 
                 request.IndividualsReliefs,
                 request.OtherDeductions,
                 request.IndividualsForeignIncome,

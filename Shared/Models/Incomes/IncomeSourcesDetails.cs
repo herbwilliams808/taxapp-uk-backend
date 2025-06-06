@@ -5,7 +5,7 @@ using Shared.Models.PropertyBusiness;
 
 namespace Shared.Models.Incomes;
 
-public class IncomeSources
+public class IncomeSourcesDetails
 {
     public List<EmploymentAndFinancialDetails>? EmploymentsAndFinancialDetails { get; set; } = [];
     public NonPayeEmploymentIncome? NonPayeEmploymentIncome { get; set; } = new();

@@ -1,4 +1,4 @@
-using Shared.Models.Incomes; // Contains IncomeSources, EmploymentsAndFinancialDetails, BenefitsInKind
+using Shared.Models.Incomes; // Contains IncomeSourcesDetails, EmploymentsAndFinancialDetails, BenefitsInKind
 using Shared.Models.IndividualsEmploymentIncomes.Employments; // Contains BenefitsInKind (nested in EmploymentAndFinancialDetails)
 using Application.Calculators; // To reference the concrete calculator
 using Application.Interfaces.Calculators; // To reference the calculator interface
@@ -20,7 +20,7 @@ public class TotalEmploymentExpensesCalculatorTests
     public void CalculateTotalExpenses_WithMultipleEmploymentsHavingExpenses_ReturnsCorrectSum()
     {
         // Arrange
-        var incomeSources = new IncomeSources
+        var incomeSources = new IncomeSourcesDetails
         {
             EmploymentsAndFinancialDetails =
             [
@@ -53,7 +53,7 @@ public class TotalEmploymentExpensesCalculatorTests
     public void CalculateTotalExpenses_WithSomeEmploymentsHavingNullExpenses_ReturnsCorrectSum()
     {
         // Arrange
-        var incomeSources = new IncomeSources
+        var incomeSources = new IncomeSourcesDetails
         {
             EmploymentsAndFinancialDetails =
             [
@@ -86,7 +86,7 @@ public class TotalEmploymentExpensesCalculatorTests
     public void CalculateTotalExpenses_WithSomeEmploymentsHavingNullBenefitsInKind_ReturnsCorrectSum()
     {
         // Arrange
-        var incomeSources = new IncomeSources
+        var incomeSources = new IncomeSourcesDetails
         {
             EmploymentsAndFinancialDetails =
             [
@@ -120,7 +120,7 @@ public class TotalEmploymentExpensesCalculatorTests
     public void CalculateTotalExpenses_WithEmptyEmploymentsList_ReturnsZero()
     {
         // Arrange
-        var incomeSources = new IncomeSources
+        var incomeSources = new IncomeSourcesDetails
         {
             EmploymentsAndFinancialDetails = new() // Empty list
         };
@@ -136,7 +136,7 @@ public class TotalEmploymentExpensesCalculatorTests
     public void CalculateTotalExpenses_WithNullEmploymentsList_ReturnsZero()
     {
         // Arrange
-        var incomeSources = new IncomeSources
+        var incomeSources = new IncomeSourcesDetails
         {
             EmploymentsAndFinancialDetails = null // Null list
         };
@@ -152,7 +152,7 @@ public class TotalEmploymentExpensesCalculatorTests
     public void CalculateTotalExpenses_WithNullIncomeSources_ReturnsZero()
     {
         // Arrange
-        IncomeSources? incomeSources = null;
+        IncomeSourcesDetails? incomeSources = null;
 
         // Act
         var total = _calculator.Calculate(incomeSources);
@@ -165,7 +165,7 @@ public class TotalEmploymentExpensesCalculatorTests
     public void CalculateTotalExpenses_WithNoExpensesSet_ReturnsZero()
     {
         // Arrange
-        var incomeSources = new IncomeSources
+        var incomeSources = new IncomeSourcesDetails
         {
             EmploymentsAndFinancialDetails =
             [

@@ -4,5 +4,5 @@ namespace Application.Interfaces.Calculators;
 
 public interface ITotalEmploymentExpensesCalculator
 {
-    decimal Calculate(IncomeSources? incomeSources);
+    decimal Calculate(IncomeSourcesDetails? incomeSources);
 }

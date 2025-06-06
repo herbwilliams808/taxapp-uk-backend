@@ -1,7 +1,7 @@
 // API/SwaggerExamples/TaxEstimationRequestExample.cs
 using Swashbuckle.AspNetCore.Filters;
 using Shared.Models.HttpMessages; // Namespace for TaxEstimationRequest
-using Shared.Models.Incomes; // Namespace for IncomeSources
+using Shared.Models.Incomes; // Namespace for IncomeSourcesDetails
 using Shared.Models.IndividualsEmploymentIncomes.Employments; // Namespace for EmploymentAndFinancialDetails, Employer, Pay
 using Shared.Models.IndividualsEmploymentIncomes.NonPayeEmploymentIncome; // Namespace for NonPayeEmploymentIncome
 using Shared.Models.PropertyBusiness; // Namespace for UkPropertyBusinessIncome
@@ -18,7 +18,7 @@ namespace API.SwaggerExamples
             {
                 TaxYearEnding = 2025,
                 Region = "england",
-                Incomes = new IncomeSources
+                IncomeSources = new IncomeSourcesDetails
                 {
                     EmploymentsAndFinancialDetails = new List<EmploymentAndFinancialDetails>
                     {
@@ -42,13 +42,13 @@ namespace API.SwaggerExamples
                     {
                         Tips = 500
                     },
-                    UkPropertyBusinessIncome = new UkPropertyBusinessIncome // Corrected class name based on your IncomeSources
+                    UkPropertyBusinessIncome = new UkPropertyBusinessIncome // Corrected class name based on your IncomeSourcesDetails
                     {
                         Income = 20000,
                         AllowablePropertyLettingExpenses = 5000,
                         PropertyLettingLoanInterestAndFinanceCosts = 10000
                     },
-                    // Initialize other IncomeSources properties if they have default values or are required
+                    // Initialize other IncomeSourcesDetails properties if they have default values or are required
                     OtherEmploymentIncome = null // Initialize if not nullable and has defaults
                 },
                 IndividualsReliefs = new IndividualsReliefsDetails
