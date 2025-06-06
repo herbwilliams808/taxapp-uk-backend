@@ -159,11 +159,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/Shared.csproj",
+      "projectUniqueName": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Shared/Shared.csproj",
       "projectName": "Shared",
-      "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/Shared.csproj",
+      "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Shared/Shared.csproj",
       "packagesPath": "/Users/herbwilliams/.nuget/packages/",
-      "outputPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/obj/",
+      "outputPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Shared/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/herbwilliams/.nuget/NuGet/NuGet.Config"

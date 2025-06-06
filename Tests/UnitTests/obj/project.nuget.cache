@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BZMTYRkWtmE=",
+  "dgSpecHash": "Db7QUZuabUM=",
   "success": true,
-  "projectFilePath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Tests/UnitTests/UnitTests.csproj",
+  "projectFilePath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Tests/UnitTests/UnitTests.csproj",
   "expectedPackageFiles": [
     "/Users/herbwilliams/.nuget/packages/azure.core/1.44.1/azure.core.1.44.1.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/azure.identity/1.13.2/azure.identity.1.13.2.nupkg.sha512",

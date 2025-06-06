@@ -1,41 +1,28 @@
 using Moq;
 using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Logging;
 using Shared.Models.Settings;
 using Application.Services;
 using Azure.Storage.Blobs;
 using System.Text;
 using Azure;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 using Xunit.Abstractions;
-using System;
-using System.Collections.Generic;
-using UnitTests.TestHelpers; // ✨ NEW: Add using directive for your helper namespace
+using UnitTests.TestHelpers;
 
 namespace UnitTests.Application.Services
 {
     public class AzureBlobDataLoaderServiceTests
     {
-        private readonly ITestOutputHelper _testOutputHelper;
         private readonly Mock<IOptions<AzureBlobSettings>> _mockBlobSettingsOptions;
         private readonly Mock<BlobServiceClient> _mockBlobServiceClient;
-        private readonly Mock<BlobContainerClient> _mockBlobContainerClient;
         private readonly Mock<BlobClient> _mockBlobClient;
-
         private readonly AzureBlobSettings _testBlobSettings;
-        private readonly MockLogger<AzureBlobDataLoaderService> _mockLoggerHelper; // ✨ NEW: Use the helper
+        private readonly MockLogger<AzureBlobDataLoaderService> _mockLoggerHelper;
 
         public AzureBlobDataLoaderServiceTests(ITestOutputHelper testOutputHelper)
         {
-            _testOutputHelper = testOutputHelper;
-
             _mockBlobSettingsOptions = new Mock<IOptions<AzureBlobSettings>>();
-            // _mockLogger = new Mock<ILogger<AzureBlobDataLoaderService>>(); // ✨ REMOVED: No longer needed directly
             _mockBlobServiceClient = new Mock<BlobServiceClient>();
-            _mockBlobContainerClient = new Mock<BlobContainerClient>();
+            var mockBlobContainerClient = new Mock<BlobContainerClient>();
             _mockBlobClient = new Mock<BlobClient>();
 
             _testBlobSettings = new AzureBlobSettings
@@ -49,18 +36,14 @@ namespace UnitTests.Application.Services
 
             _mockBlobServiceClient
                 .Setup(s => s.GetBlobContainerClient(_testBlobSettings.TaxRatesContainerName))
-                .Returns(_mockBlobContainerClient.Object);
+                .Returns(mockBlobContainerClient.Object);
 
-            _mockBlobContainerClient
+            mockBlobContainerClient
                 .Setup(c => c.GetBlobClient(_testBlobSettings.TaxRatesUkBlobName))
                 .Returns(_mockBlobClient.Object);
 
-            // ✨ NEW: Initialize the logger helper
-            _mockLoggerHelper = new MockLogger<AzureBlobDataLoaderService>(_testOutputHelper);
-
-            // The logger setup and message capturing are now handled internally by _mockLoggerHelper
-            // _loggedMessages = new List<string>(); // ✨ REMOVED
-            // _mockLogger.Setup(...) // ✨ REMOVED
+            _mockLoggerHelper = new MockLogger<AzureBlobDataLoaderService>(testOutputHelper);
+            
         }
 
         #region Constructor Tests

@@ -177,11 +177,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/Application.Interfaces.csproj",
+      "projectUniqueName": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Application.Interfaces/Application.Interfaces.csproj",
       "projectName": "Application.Interfaces",
-      "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/Application.Interfaces.csproj",
+      "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Application.Interfaces/Application.Interfaces.csproj",
       "packagesPath": "/Users/herbwilliams/.nuget/packages/",
-      "outputPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/obj/",
+      "outputPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Application.Interfaces/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/herbwilliams/.nuget/NuGet/NuGet.Config"
@@ -196,8 +196,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/Shared.csproj": {
-              "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/Shared.csproj"
+            "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Shared/Shared.csproj": {
+              "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Shared/Shared.csproj"
             }
           }
         }

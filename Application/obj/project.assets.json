@@ -2578,11 +2578,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/Application.csproj",
+      "projectUniqueName": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Application/Application.csproj",
       "projectName": "Application",
-      "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/Application.csproj",
+      "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Application/Application.csproj",
       "packagesPath": "/Users/herbwilliams/.nuget/packages/",
-      "outputPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/obj/",
+      "outputPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Application/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/herbwilliams/.nuget/NuGet/NuGet.Config"
@@ -2597,11 +2597,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/Application.Interfaces.csproj": {
-              "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application.Interfaces/Application.Interfaces.csproj"
+            "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Application.Interfaces/Application.Interfaces.csproj": {
+              "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Application.Interfaces/Application.Interfaces.csproj"
             },
-            "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/Shared.csproj": {
-              "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/Shared.csproj"
+            "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Shared/Shared.csproj": {
+              "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Shared/Shared.csproj"
             }
           }
         }

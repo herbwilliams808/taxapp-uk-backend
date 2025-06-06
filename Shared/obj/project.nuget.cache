@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6CJzXWxjQlA=",
+  "dgSpecHash": "nqukhyKeeoc=",
   "success": true,
-  "projectFilePath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Shared/Shared.csproj",
+  "projectFilePath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Shared/Shared.csproj",
   "expectedPackageFiles": [
     "/Users/herbwilliams/.nuget/packages/microsoft.openapi/1.6.23/microsoft.openapi.1.6.23.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/swashbuckle.aspnetcore.annotations/8.1.1/swashbuckle.aspnetcore.annotations.8.1.1.nupkg.sha512",

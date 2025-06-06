@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "x+2ZAzzVUmA=",
+  "dgSpecHash": "nzxklmkqGsI=",
   "success": true,
-  "projectFilePath": "/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Application/Application.csproj",
+  "projectFilePath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Application/Application.csproj",
   "expectedPackageFiles": [
     "/Users/herbwilliams/.nuget/packages/azure.core/1.44.1/azure.core.1.44.1.nupkg.sha512",
     "/Users/herbwilliams/.nuget/packages/azure.identity/1.13.2/azure.identity.1.13.2.nupkg.sha512",
