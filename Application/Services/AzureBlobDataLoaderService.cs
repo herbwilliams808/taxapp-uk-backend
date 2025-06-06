@@ -1,3 +1,4 @@
+using System; // Required for ArgumentNullException, ArgumentException, Uri
 using System.Text;
 using Application.Interfaces.Services;
 using Azure.Storage.Blobs;
@@ -5,6 +6,8 @@ using Azure.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
 using Shared.Models.Settings;
+using System.IO; // Required for MemoryStream, StreamReader
+using System.Threading.Tasks; // Required for Task
 
 namespace Application.Services
 {
@@ -15,13 +18,27 @@ namespace Application.Services
         private readonly BlobServiceClient _blobServiceClient;
 
         // Primary constructor for dependency injection, allowing BlobServiceClient to be mocked
-        public AzureBlobDataLoaderService(IOptions<AzureBlobSettings> blobSettings, ILogger<AzureBlobDataLoaderService> logger, BlobServiceClient blobServiceClient)
+        public AzureBlobDataLoaderService(IOptions<AzureBlobSettings> blobSettingsOptions, ILogger<AzureBlobDataLoaderService> logger, BlobServiceClient blobServiceClient)
         {
-            _blobSettings = blobSettings?.Value ?? throw new ArgumentNullException(nameof(blobSettings), "AzureBlobSettings value is null in primary constructor.");
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _blobServiceClient = blobServiceClient ?? throw new ArgumentNullException(nameof(blobServiceClient));
+            // Null checks for injected dependencies
+            _blobSettings = blobSettingsOptions?.Value ?? throw new ArgumentNullException(nameof(blobSettingsOptions), "AzureBlobSettings value is null in primary constructor.");
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger), "Logger cannot be null.");
+            _blobServiceClient = blobServiceClient ?? throw new ArgumentNullException(nameof(blobServiceClient), "BlobServiceClient cannot be null.");
 
-            _logger.LogInformation($"AzureBlobDataLoaderService: Primary constructor entered. BlobConnectionString='{(_blobSettings.BlobConnectionString ?? "null")}', ContainerName='{(_blobSettings.TaxRatesContainerName ?? "null")}', BlobName='{(_blobSettings.TaxRatesUkBlobName ?? "null")}'.");
+            // ✨ ADDED VALIDATION CHECKS FOR BLOB SETTINGS ✨
+            if (string.IsNullOrWhiteSpace(_blobSettings.TaxRatesContainerName))
+            {
+                throw new ArgumentException("Container name cannot be null or empty in AzureBlobSettings.", nameof(_blobSettings.TaxRatesContainerName));
+            }
+
+            if (string.IsNullOrWhiteSpace(_blobSettings.TaxRatesUkBlobName))
+            {
+                throw new ArgumentException("Blob name cannot be null or empty in AzureBlobSettings.", nameof(_blobSettings.TaxRatesUkBlobName));
+            }
+            // ✨ END OF ADDED VALIDATION CHECKS ✨
+
+            _logger.LogInformation("AzureBlobDataLoaderService: Primary constructor entered. BlobConnectionString='{BlobConnectionString}', ContainerName='{ContainerName}', BlobName='{BlobName}'.",
+                _blobSettings.BlobConnectionString ?? "null", _blobSettings.TaxRatesContainerName, _blobSettings.TaxRatesUkBlobName);
             _logger.LogInformation("AzureBlobDataLoaderService: Attempting to create BlobServiceClient...");
         }
 

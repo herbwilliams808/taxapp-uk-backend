@@ -9,6 +9,5 @@ public interface IProfitFromPropertiesCalculator
     /// </summary>
     /// <param name="incomeSources"></param>
     /// <returns>The profit from properties after deducting allowable expenses.</returns>
-    // TODO: Added virtual. Implement interface
     decimal Calculate(IncomeSourcesDetails? incomeSources);
 }
