@@ -32,11 +32,11 @@ jobs:
       - name: Publish the API project for deployment
         # IMPORTANT CHANGE: Use 'dotnet publish' instead of 'dotnet build'
         # We explicitly set stdoutLogEnabled=true via MSBuild property
-        run: dotnet publish ./API/API.csproj --no-restore --configuration Release --output ./API/bin/Release/net8.0/publish /p:EnableStdoutLog=true
+        run: dotnet publish ./Src/API/API.csproj --no-restore --configuration Release --output ./Src/API/bin/Release/net8.0/publish /p:EnableStdoutLog=true
         working-directory: .
 
       - name: Verify web.config in publish output (for debugging)
-        run: cat ./API/bin/Release/net8.0/publish/web.config
+        run: cat ./Src/API/bin/Release/net8.0/publish/web.config
         working-directory: .
 
       # New step: Explicitly build the UnitTests project
@@ -66,4 +66,4 @@ jobs:
         with:
           app-name: 'TaxAppUK-WebApp'
           # Ensure this path matches the output path from 'dotnet publish'
-          package: './API/bin/Release/net8.0/publish/'
+          package: './Src/API/bin/Release/net8.0/publish/'
