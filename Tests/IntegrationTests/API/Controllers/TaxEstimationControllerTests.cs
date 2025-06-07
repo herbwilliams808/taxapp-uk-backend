@@ -1,5 +1,3 @@
-// In your test project (e.g., TaxApp.Tests/TaxEstimationControllerTests.cs)
-
 using System.Net;
 using System.Text;
 using System.Text.Json;
@@ -7,10 +5,6 @@ using Shared.Models.HttpMessages;
 using Shared.Models.Incomes;
 using Shared.Models.IndividualsEmploymentIncomes.Employments;
 using API;
-
-// Reference to your API project's Program.cs
-
-// Reference to your shared models
 
 namespace IntegrationTests.API.Controllers;
 

@@ -68,6 +68,8 @@ public class TaxEstimationService(
 
         var taxEstimationResponse = new TaxEstimationResponse
         {
+            PayFromAllEmployments = totalEmploymentIncome,
+            ProfitFromUkLandAndProperty = profitFromProperties,
             TotalIncome = totalIncome,
             BasicRateLimitExtendedMessage = basicRateLimit.Message,
             BasicRateLimit = basicRateLimit.Value,
