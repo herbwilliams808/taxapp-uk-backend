@@ -24,13 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\API\API.csproj" />
-    <ProjectReference Include="..\..\Application\Application.csproj" />
-    <ProjectReference Include="..\..\Shared\Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Application\Interfaces\" />
+    <ProjectReference Include="..\..\Src\API\API.csproj" />
+    <ProjectReference Include="..\..\Src\Application\Application.csproj" />
+    <ProjectReference Include="..\..\Src\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>

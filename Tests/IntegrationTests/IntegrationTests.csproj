@@ -23,8 +23,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\API\API.csproj" />
-      <ProjectReference Include="..\..\Shared\Shared.csproj" />
+      <ProjectReference Include="..\..\Src\API\API.csproj" />
+      <ProjectReference Include="..\..\Src\Shared\Shared.csproj" />
     </ItemGroup>
 
 </Project>

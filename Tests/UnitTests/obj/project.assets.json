@@ -9860,23 +9860,23 @@
     },
     "API/1.0.0": {
       "type": "project",
-      "path": "../../API/API.csproj",
-      "msbuildProject": "../../API/API.csproj"
+      "path": "../../Src/API/API.csproj",
+      "msbuildProject": "../../Src/API/API.csproj"
     },
     "Application/1.0.0": {
       "type": "project",
-      "path": "../../Application/Application.csproj",
-      "msbuildProject": "../../Application/Application.csproj"
+      "path": "../../Src/Application/Application.csproj",
+      "msbuildProject": "../../Src/Application/Application.csproj"
     },
     "Application.Interfaces/1.0.0": {
       "type": "project",
-      "path": "../../Application.Interfaces/Application.Interfaces.csproj",
-      "msbuildProject": "../../Application.Interfaces/Application.Interfaces.csproj"
+      "path": "../../Src/Application.Interfaces/Application.Interfaces.csproj",
+      "msbuildProject": "../../Src/Application.Interfaces/Application.Interfaces.csproj"
     },
     "Shared/1.0.0": {
       "type": "project",
-      "path": "../../Shared/Shared.csproj",
-      "msbuildProject": "../../Shared/Shared.csproj"
+      "path": "../../Src/Shared/Shared.csproj",
+      "msbuildProject": "../../Src/Shared/Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -9918,14 +9918,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/API/API.csproj": {
-              "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/API/API.csproj"
+            "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Src/API/API.csproj": {
+              "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Src/API/API.csproj"
             },
-            "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Application/Application.csproj": {
-              "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Application/Application.csproj"
+            "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Src/Application/Application.csproj": {
+              "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Src/Application/Application.csproj"
             },
-            "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Shared/Shared.csproj": {
-              "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Shared/Shared.csproj"
+            "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Src/Shared/Shared.csproj": {
+              "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Src/Shared/Shared.csproj"
             }
           }
         }
