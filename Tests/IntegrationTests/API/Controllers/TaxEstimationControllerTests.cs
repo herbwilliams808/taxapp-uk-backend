@@ -5,6 +5,7 @@ using Shared.Models.HttpMessages;
 using Shared.Models.Incomes;
 using Shared.Models.IndividualsEmploymentIncomes.Employments;
 using API;
+using Xunit.Abstractions;
 
 namespace IntegrationTests.API.Controllers;
 
@@ -12,10 +13,12 @@ public class TaxEstimationControllerTests : IClassFixture<CustomWebApplicationFa
 {
     private readonly HttpClient _client;
     private readonly CustomWebApplicationFactory<Program> _factory;
+    private readonly ITestOutputHelper _testOutputHelper;
 
-    public TaxEstimationControllerTests(CustomWebApplicationFactory<Program> factory)
+    public TaxEstimationControllerTests(CustomWebApplicationFactory<Program> factory, ITestOutputHelper testOutputHelper)
     {
         _factory = factory;
+        _testOutputHelper = testOutputHelper;
         _client = factory.CreateClient(); // Creates an HttpClient for your in-memory app
     }
 
@@ -53,6 +56,10 @@ public class TaxEstimationControllerTests : IClassFixture<CustomWebApplicationFa
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
         Assert.NotNull(taxResponse);
+        var prettyResponseString = JsonSerializer.Serialize(taxResponse, 
+            new JsonSerializerOptions { WriteIndented = true });
+        
+        _testOutputHelper.WriteLine(prettyResponseString);
         Assert.Equal(50000m, taxResponse.TotalIncome); // Example assertion based on expected calculation
         Assert.Null(taxResponse.BasicRateLimitExtendedMessage); // Example assertion based on expected calculation
         Assert.True(taxResponse.TaxOwed > 0); // Example assertion based on expected calculation
