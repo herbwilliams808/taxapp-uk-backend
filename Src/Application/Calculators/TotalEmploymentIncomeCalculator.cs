@@ -34,11 +34,11 @@ public class TotalEmploymentIncomeCalculator : ITotalEmploymentIncomeCalculator
 
         var foreignTaxForFtcrNotClaimed = foreignReliefs?.ForeignTaxForFtcrNotClaimed?.Amount ?? 0;
 
-        return totalEmploymentIncome +
-               nonPayeEmploymentIncome +
-               totalTaxableLumpSums +
-               totalEmployerFinancedRetirementSchemeBenefits -
-               earningsEarningsNotTaxableUk -
-               foreignTaxForFtcrNotClaimed;
+        return Math.Round(totalEmploymentIncome, 0, MidpointRounding.ToNegativeInfinity) +
+               Math.Round(nonPayeEmploymentIncome, 0, MidpointRounding.ToNegativeInfinity) +
+               Math.Round(totalTaxableLumpSums, 0, MidpointRounding.ToNegativeInfinity) +
+               Math.Round(totalEmployerFinancedRetirementSchemeBenefits, 0, MidpointRounding.ToNegativeInfinity) -
+               Math.Round(earningsEarningsNotTaxableUk, 0, MidpointRounding.ToPositiveInfinity) -
+               Math.Round(foreignTaxForFtcrNotClaimed, 0, MidpointRounding.ToPositiveInfinity);
     }
 }

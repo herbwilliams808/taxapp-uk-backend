@@ -1,6 +1,8 @@
+using Application.Calculators;
 using Application.Interfaces.Calculators;
 using Application.Interfaces.Services;
 using Microsoft.Extensions.Logging;
+using Shared.Models.CalculationResults;
 using Shared.Models.HttpMessages;
 using Shared.Models.Incomes;
 using Shared.Models.IndividualsForeignIncome;
@@ -19,8 +21,11 @@ public class TaxEstimationService(
     ITotalOtherDeductionsCalculator totalOtherDeductionsCalculator,
     IProfitFromPropertiesCalculator profitFromPropertiesCalculator,
     ITotalIncomeCalculator totalIncomeCalculator,
+    IAdjustedNetIncomeCalculator adjustedNetIncomeCalculator,
+    IPersonalAllowanceCalculator personalAllowanceCalculator,
     IGiftAidPaymentsCalculator giftAidPaymentsCalculator,
-    IBasicRateLimitCalculator basicRateLimitCalculator)
+    IBasicRateLimitCalculator basicRateLimitCalculator,
+    ITaxOwedCalculator taxOwedCalculator)
 {
     public Task<TaxEstimationResponse> CalculateTaxAsync(
         int taxYearEnding,
@@ -47,17 +52,25 @@ public class TaxEstimationService(
 
         var regularPensionContributions = individualsReliefs?.PensionReliefs?.RegularPensionContributions ?? 0m;
         var giftAidPayments = giftAidPaymentsCalculator.Calculate(individualsReliefs);
+        
+        var adjustedNetIncome = adjustedNetIncomeCalculator.Calculate(totalIncome, regularPensionContributions, giftAidPayments);
+        
+        var standardPersonalAllowance = taxRatesCacheService.GetDecimalTaxRateValue(taxYearEnding, region, "personalAllowance");
+        var personalAllowanceIncomeLimit = taxRatesCacheService.GetDecimalTaxRateValue(taxYearEnding, region, "personalAllowanceIncomeLimit");
+        
+        var personalAllowance = personalAllowanceCalculator.Calculate(
+            standardPersonalAllowance,
+            adjustedNetIncome,
+            personalAllowanceIncomeLimit);
+        
+        var taxableIncome = totalIncome - personalAllowance;
+
         var basicRateLimit = basicRateLimitCalculator.Calculate(
             basicRateThreshold,
             regularPensionContributions,
             giftAidPayments);
 
-        decimal taxOwed = 0;
-
-        if (totalIncome > basicRateLimit.Value)
-        {
-            taxOwed = (totalIncome - basicRateLimit.Value) * 0.2m; // Example tax calculation
-        }
+        var taxOwed = taxOwedCalculator.Calculate(totalIncome, basicRateLimit);
 
         // CHANGED: Access parameter directly
         logger.LogInformation("Tax calculated for year ending {TaxYearEnding}, region {Region}: {TaxOwed}",
@@ -71,8 +84,9 @@ public class TaxEstimationService(
             PayFromAllEmployments = totalEmploymentIncome,
             ProfitFromUkLandAndProperty = profitFromProperties,
             TotalIncome = totalIncome,
-            BasicRateLimitExtendedMessage = basicRateLimit.Message,
-            BasicRateLimit = basicRateLimit.Value,
+            PersonalAllowance = personalAllowance,
+            TaxableIncome = taxableIncome,
+            BasicRateLimitDetails = basicRateLimit,
             TaxOwed = taxOwed,
             NetIncome = netIncome
         };

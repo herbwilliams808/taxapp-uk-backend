@@ -16,12 +16,11 @@ public class TotalIncomeCalculator : ITotalIncomeCalculator
     public decimal Calculate(decimal? employmentIncome, decimal? benefitsInKind, decimal? employmentExpenses,
         decimal? otherDeductions, decimal? profitFromProperties)
     {
-        employmentIncome ??= 0m;
-        benefitsInKind ??= 0m;
-        employmentExpenses ??= 0m;
-        otherDeductions ??= 0m;
-        profitFromProperties ??= 0m;
-
-        return (decimal)(employmentIncome + benefitsInKind - employmentExpenses - otherDeductions + profitFromProperties);
+        return
+            Math.Round(employmentIncome?? 0m, 0, MidpointRounding.ToNegativeInfinity) +
+            Math.Round(benefitsInKind?? 0m, 0, MidpointRounding.ToNegativeInfinity) -
+            Math.Round(employmentExpenses?? 0m, 0, MidpointRounding.ToPositiveInfinity) -
+            Math.Round(otherDeductions?? 0m, 0, MidpointRounding.ToPositiveInfinity) +
+            Math.Round(profitFromProperties?? 0m, 0, MidpointRounding.ToNegativeInfinity);
     }
 }

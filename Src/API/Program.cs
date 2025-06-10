@@ -39,6 +39,9 @@ public partial class Program
         builder.Services.AddScoped<ITotalIncomeCalculator, TotalIncomeCalculator>();
         builder.Services.AddScoped<IGiftAidPaymentsCalculator, GiftAidPaymentsCalculator>();
         builder.Services.AddScoped<IBasicRateLimitCalculator, BasicRateLimitCalculator>();
+        builder.Services.AddScoped<IAdjustedNetIncomeCalculator, AdjustedNetIncomeCalculator>();
+        builder.Services.AddScoped<IPersonalAllowanceCalculator, PersonalAllowanceCalculator>();
+        builder.Services.AddScoped<ITaxOwedCalculator, TaxOwedCalculator>();
         builder.Services.AddScoped<TaxEstimationService>();
 
 

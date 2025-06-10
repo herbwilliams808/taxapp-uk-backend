@@ -1,3 +1,5 @@
+using Shared.Models.CalculationResults;
+
 namespace Shared.Models.HttpMessages
 {
     public class TaxEstimationResponse
@@ -6,8 +8,9 @@ namespace Shared.Models.HttpMessages
         public decimal? ProfitFromUkLandAndProperty { get; set; }
         
         public decimal TotalIncome { get; set; }
-        public string? BasicRateLimitExtendedMessage { get; set; }
-        public decimal BasicRateLimit { get; set; }
+        public decimal PersonalAllowance { get; set; }
+        public decimal TaxableIncome { get; set; }
+        public required BasicRateLimitCalculationResult BasicRateLimitDetails { get; set; }
         public decimal TaxOwed { get; set; }
         public decimal NetIncome { get; set; }
     }

@@ -1,31 +1,98 @@
 using System.Net;
 using System.Text;
 using System.Text.Json;
+using API;
 using Shared.Models.HttpMessages;
 using Shared.Models.Incomes;
 using Shared.Models.IndividualsEmploymentIncomes.Employments;
-using API;
+using Shared.Models.IndividualsReliefs;
+using Shared.Models.IndividualsReliefs.CharitableGivings;
+using Shared.Models.IndividualsReliefs.Pensions;
 using Xunit.Abstractions;
 
 namespace IntegrationTests.API.Controllers;
 
-public class TaxEstimationControllerTests : IClassFixture<CustomWebApplicationFactory<Program>>
+public class TaxEstimationControllerTests(
+    CustomWebApplicationFactory<Program> factory,
+    ITestOutputHelper testOutputHelper)
+    : IClassFixture<CustomWebApplicationFactory<Program>>
 {
-    private readonly HttpClient _client;
-    private readonly CustomWebApplicationFactory<Program> _factory;
-    private readonly ITestOutputHelper _testOutputHelper;
+    private readonly HttpClient _client = factory.CreateClient(); // Creates an HttpClient for your in-memory app
+    private readonly CustomWebApplicationFactory<Program> _factory = factory;
 
-    public TaxEstimationControllerTests(CustomWebApplicationFactory<Program> factory, ITestOutputHelper testOutputHelper)
+    [Fact]
+    public async Task CalculateTaxAsync_Employment_Property_Pension_Giftaid_ReturnsOkWithResponse()
     {
-        _factory = factory;
-        _testOutputHelper = testOutputHelper;
-        _client = factory.CreateClient(); // Creates an HttpClient for your in-memory app
+        // Arrange
+        const decimal pay = 130252.56m;
+        var request = new TaxEstimationRequest
+        {
+            Region = "england",
+            TaxYearEnding = 2025,
+            IncomeSources = new IncomeSourcesDetails
+            {
+                EmploymentsAndFinancialDetails =
+                [
+                    new EmploymentAndFinancialDetails
+                    {
+                        Pay = new Pay { TaxablePayToDate = pay },
+                        Employer = new Employer { EmployerName = "Employer1" }
+                    }
+                ],
+                UkPropertyBusinessIncome =
+                {
+                    AllowablePropertyLettingExpenses = 10408m,
+                    Income = 28066m,
+                    PropertyLettingLoanInterestAndFinanceCosts = 11801m
+                }
+            },
+            IndividualsReliefs = new IndividualsReliefsDetails
+            {
+                PensionReliefs = new PensionReliefs 
+                {
+                    RegularPensionContributions = 44087.46m
+                },
+                GiftAidPayments = new GiftAidPayments
+                {
+                    CurrentYear = 200m
+                }
+            }
+        };
+        var jsonContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
+
+        // Act
+        var response = await _client.PostAsync("/api/TaxEstimation", jsonContent);
+
+        // Assert
+        response.EnsureSuccessStatusCode(); // Status Code 200-299
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        var responseString = await response.Content.ReadAsStringAsync();
+        var taxResponse = JsonSerializer.Deserialize<TaxEstimationResponse>(responseString,
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+        Assert.NotNull(taxResponse);
+        var prettyResponseString = JsonSerializer.Serialize(taxResponse,
+            new JsonSerializerOptions { WriteIndented = true });
+
+        testOutputHelper.WriteLine(prettyResponseString);
+        Assert.Equal(130252, taxResponse.PayFromAllEmployments); // Example assertion based on expected calculation
+        Assert.Equal(17658, taxResponse.ProfitFromUkLandAndProperty); // Example assertion based on expected calculation
+        Assert.Equal(147910, taxResponse.TotalIncome); // Example assertion based on expected calculation
+        Assert.Equal(10759, taxResponse.PersonalAllowance); // Example assertion based on expected calculation
+        Assert.Equal(137151, taxResponse.TaxableIncome); // Example assertion based on expected calculation
+        Assert.Contains("Your basic rate limit has been extended", taxResponse.BasicRateLimitDetails.Message); // Example assertion based on expected calculation
+        Assert.Equal(13184, taxResponse.TaxOwed); // Example assertion based on expected calculation
+        Assert.Equal(134726, taxResponse.NetIncome);
+
+        // Add more specific assertions based on your tax calculation logic
     }
 
     [Fact]
     public async Task CalculateTaxAsync_ValidRequest_ReturnsOkWithResponse()
     {
         // Arrange
+        const decimal pay = 120000m;
         var request = new TaxEstimationRequest
         {
             Region = "england",
@@ -36,7 +103,7 @@ public class TaxEstimationControllerTests : IClassFixture<CustomWebApplicationFa
                 [
                     new EmploymentAndFinancialDetails
                     {
-                        Pay = new Pay { TaxablePayToDate = 50000m },
+                        Pay = new Pay { TaxablePayToDate = pay },
                         Employer = new Employer { EmployerName = "Employer1" }
                     }
                 ]
@@ -56,14 +123,14 @@ public class TaxEstimationControllerTests : IClassFixture<CustomWebApplicationFa
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
         Assert.NotNull(taxResponse);
-        var prettyResponseString = JsonSerializer.Serialize(taxResponse, 
+        var prettyResponseString = JsonSerializer.Serialize(taxResponse,
             new JsonSerializerOptions { WriteIndented = true });
-        
-        _testOutputHelper.WriteLine(prettyResponseString);
-        Assert.Equal(50000m, taxResponse.TotalIncome); // Example assertion based on expected calculation
-        Assert.Null(taxResponse.BasicRateLimitExtendedMessage); // Example assertion based on expected calculation
+
+        testOutputHelper.WriteLine(prettyResponseString);
+        Assert.Equal(pay, taxResponse.TotalIncome); // Example assertion based on expected calculation
+        Assert.Null(taxResponse.BasicRateLimitDetails.Message); // Example assertion based on expected calculation
         Assert.True(taxResponse.TaxOwed > 0); // Example assertion based on expected calculation
-        Assert.Equal(47540, taxResponse.NetIncome);
+        Assert.Equal(103540, taxResponse.NetIncome);
 
         // Add more specific assertions based on your tax calculation logic
     }
@@ -88,7 +155,8 @@ public class TaxEstimationControllerTests : IClassFixture<CustomWebApplicationFa
                         Employer = new Employer { EmployerName = "Employer1" }
                     }
                 ]
-            }        };
+            }
+        };
         var jsonContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
 
         // Act

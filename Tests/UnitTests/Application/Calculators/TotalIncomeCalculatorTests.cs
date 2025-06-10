@@ -13,11 +13,11 @@ public class TotalIncomeCalculatorTests
     public void Calculate_ReturnsCorrectTotal_WhenAllInputsArePositive()
     {
         // Arrange
-        decimal employmentIncome = 1000m;
-        decimal benefitsInKind = 200m;
-        decimal employmentExpenses = 150m;
-        decimal otherDeductions = 50m;
-        decimal profitFromProperties = 300m;
+        const decimal employmentIncome = 1000.99m;
+        const decimal benefitsInKind = 200.50m;
+        const decimal employmentExpenses = 149.90m;
+        const decimal otherDeductions = 49.40m;
+        const decimal profitFromProperties = 300.30m;
 
         // Act
         var result = _calculator.Calculate(

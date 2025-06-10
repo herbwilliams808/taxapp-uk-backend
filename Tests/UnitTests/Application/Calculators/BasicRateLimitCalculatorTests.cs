@@ -21,7 +21,7 @@ namespace UnitTests.Application.Calculators
             var result = new BasicRateLimitCalculator().Calculate(basicRateThreshold, pensionContributions, giftAidContributions);
 
             // Assert
-            Assert.Equal(expectedLimit, result.Value);
+            Assert.Equal(expectedLimit, result.BasicRateLimitValue);
         }
 
         [Fact]
