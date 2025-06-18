@@ -6,10 +6,17 @@ using System.Text.Json.Serialization;
 using Application.Calculators;
 using Application.Interfaces.Calculators;
 using Application.Interfaces.Services;
+using Application.Interfaces.Services.HmrcTutorial;
 using Application.Services;
+using Application.Services.HMRCTutorial;
 using Shared.Models.Settings;
+using System;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using API.Controllers.HMRCTutorial; // Make sure this is present for your controllers
 
 namespace API;
+
 public partial class Program
 {
     public static async Task Main(string[] args)
@@ -18,14 +25,77 @@ public partial class Program
         builder.Logging.AddAzureWebAppDiagnostics();
         builder.Logging.SetMinimumLevel(LogLevel.Trace);
 
-// Load configuration
+        // Load configuration
         builder.Configuration
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .AddEnvironmentVariables(); // Ensures Azure App Service settings override appsettings.json
+            .AddEnvironmentVariables();
 
-// Register services
+        // Register services
         builder.Services.Configure<AzureBlobSettings>(builder.Configuration.GetSection("AzureBlobSettings"));
+
+        // Constants for HttpClient names
+        const string HmrcAuthClientName = "HMRCAuthClient";
+        const string HmrcApiClientName = "HMRCApiClient";
+
+
+        // Register HttpClient for HMRC Auth Service (for token endpoint)
+        builder.Services.AddHttpClient(HmrcAuthClientName, client =>
+        {
+            var tokenUrl = builder.Configuration.GetValue<string>("HMRC_TestApi:TokenUrl") ?? "https://test-api.service.hmrc.gov.uk/oauth/token";
+            client.BaseAddress = new Uri(tokenUrl);
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+        });
+
+        // Register HMRC Auth Service (for application-restricted tokens)
+        builder.Services.AddScoped<IHmrcAuthService, HmrcAuthService>(provider =>
+        {
+            var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
+            var httpClient = httpClientFactory.CreateClient(HmrcAuthClientName);
+            var configuration = provider.GetRequiredService<IConfiguration>();
+            return new HmrcAuthService(httpClient, configuration);
+        });
+
+        // Register HMRC User Auth Service (for user-restricted tokens)
+        builder.Services.AddScoped<IHmrcUserAuthService, HmrcUserAuthService>(provider =>
+        {
+            var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
+            var httpClient = httpClientFactory.CreateClient(HmrcAuthClientName);
+            var configuration = provider.GetRequiredService<IConfiguration>();
+            return new HmrcUserAuthService(httpClient, configuration);
+        });
+
+        // Register HttpClient for HMRC Test API Service (for test user creation and Hello World/Application/User)
+        builder.Services.AddHttpClient(HmrcApiClientName, client =>
+        {
+            var baseUrl = builder.Configuration.GetValue<string>("HMRC_TestApi:BaseUrl");
+            if (string.IsNullOrEmpty(baseUrl))
+            {
+                throw new InvalidOperationException("HMRC_TestApi:BaseUrl is not configured in appsettings.json.");
+            }
+            client.BaseAddress = new Uri(baseUrl);
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+        });
+
+        // Register HMRC Test User Service
+        builder.Services.AddScoped<IHmrcTestUserService, HmrcTestUserService>(provider =>
+        {
+            var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
+            var httpClient = httpClientFactory.CreateClient(HmrcApiClientName);
+            var hmrcAuthService = provider.GetRequiredService<IHmrcAuthService>();
+            return new HmrcTestUserService(httpClient, hmrcAuthService);
+        });
+
+        // Register HmrcTutorialService (now includes IHmrcUserAuthService dependency)
+        builder.Services.AddScoped<IHmrcTutorialService, HmrcTutorialService>(provider =>
+        {
+            var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
+            var httpClient = httpClientFactory.CreateClient(HmrcApiClientName);
+            var hmrcAuthService = provider.GetRequiredService<IHmrcAuthService>();
+            var hmrcUserAuthService = provider.GetRequiredService<IHmrcUserAuthService>(); // Get the user auth service
+            return new HmrcTutorialService(httpClient, hmrcAuthService, hmrcUserAuthService); // Pass all dependencies
+        });
+
 
         builder.Services.AddSingleton<IBlobDataLoaderService, AzureBlobDataLoaderService>();
         builder.Services.AddSingleton<IJsonDeserialiserService, JsonDeserialiserService>();
@@ -63,32 +133,27 @@ public partial class Program
 
         var app = builder.Build();
 
-// --- STARTUP LOGGING AND TAX RATES LOADING ---
-// Retrieve a logger instance for startup actions
+        // --- STARTUP LOGGING AND TAX RATES LOADING ---
         var startupLogger = app.Services.GetRequiredService<ILogger<Program>>();
 
         startupLogger.LogInformation(
-            "### PROGRAM.CS: APPLICATION STARTUP LOG: Trying to log to Azure filesystem. ###"); // Your explicit test log
+            "### PROGRAM.CS: APPLICATION STARTUP LOG: Trying to log to Azure filesystem. ###");
         startupLogger.LogInformation("PROGRAM.CS: Application startup begins...");
 
         try
         {
-            // Retrieve services directly for startup tasks (ensure they are singletons or scoped appropriately)
             var blobLoader = app.Services.GetRequiredService<IBlobDataLoaderService>();
             var jsonDeserializer = app.Services.GetRequiredService<IJsonDeserialiserService>();
             var cacheService = app.Services.GetRequiredService<ITaxRatesCacheService>();
 
             startupLogger.LogInformation("PROGRAM.CS: Attempting to load tax rates from blob at startup.");
-            // Step 1: Load raw JSON string from Azure Blob storage
             var jsonString = await blobLoader.LoadBlobDataAsync();
             startupLogger.LogInformation(
                 $"PROGRAM.CS: Successfully loaded {jsonString.Length} bytes from blob storage.");
 
-            // Step 2: Parse JSON string into JsonDocument
             using var jsonDoc = jsonDeserializer.Deserialise<JsonDocument>(jsonString);
             startupLogger.LogInformation("PROGRAM.CS: Successfully deserialized JSON document.");
 
-            // Step 3: Load the tax rates cache with the JSON root element
             cacheService.LoadCache(jsonDoc.RootElement);
 
             startupLogger.LogInformation("PROGRAM.CS: Tax rates cache loaded successfully at startup.");
@@ -97,13 +162,11 @@ public partial class Program
         {
             startupLogger.LogError(ex,
                 "PROGRAM.CS: FATAL ERROR during application startup: Failed to load tax rates cache. Application will terminate.");
-            // Re-throw the exception to prevent the application from starting if critical data is missing
             throw;
         }
-// --- END STARTUP LOGGING AND TAX RATES LOADING ---
+        // --- END STARTUP LOGGING AND TAX RATES LOADING ---
 
 
-// Enable swagger UI only in development
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
@@ -113,6 +176,5 @@ public partial class Program
         app.MapControllers();
 
         app.Run();
-
     }
 }
