@@ -1,6 +1,6 @@
-using System.Threading.Tasks;
+using Shared.Models.HmrcIntegration.Auth;
 
-namespace Application.Interfaces.Services;
+namespace Application.Interfaces.Services.HmrcIntegration.Auth;
 
 public interface IHmrcUserAuthService
 {
@@ -17,7 +17,7 @@ public interface IHmrcUserAuthService
     /// </summary>
     /// <param name="code">The authorization code received from HMRC.</param>
     /// <returns>An AccessTokenResponse containing the access token, refresh token, etc.</returns>
-    Task<Shared.Models.Hmrc.Auth.AccessTokenResponse> ExchangeCodeForTokensAsync(string code);
+    Task<AccessTokenResponse> ExchangeCodeForTokensAsync(string code);
 
     /// <summary>
     /// Stores the user's access and refresh tokens temporarily for a session.
@@ -25,19 +25,19 @@ public interface IHmrcUserAuthService
     /// </summary>
     /// <param name="accessTokenResponse">The token response from HMRC.</param>
     /// <param name="userId">A unique identifier for the user (e.g., session ID).</param>
-    void StoreUserTokens(Shared.Models.Hmrc.Auth.AccessTokenResponse accessTokenResponse, string userId);
+    void StoreUserTokens(AccessTokenResponse accessTokenResponse, string userId);
 
     /// <summary>
     /// Retrieves the user's access token from temporary storage.
     /// </summary>
     /// <param name="userId">The unique identifier for the user.</param>
     /// <returns>The stored AccessTokenResponse, or null if not found.</returns>
-    Shared.Models.Hmrc.Auth.AccessTokenResponse? GetUserTokens(string userId);
+    AccessTokenResponse? GetUserTokens(string userId);
 
     /// <summary>
     /// Refreshes the user's access token using the refresh token.
     /// </summary>
     /// <param name="refreshToken">The refresh token.</param>
     /// <returns>A new AccessTokenResponse.</returns>
-    Task<Shared.Models.Hmrc.Auth.AccessTokenResponse> RefreshUserTokensAsync(string refreshToken);
+    Task<AccessTokenResponse> RefreshUserTokensAsync(string refreshToken);
 }

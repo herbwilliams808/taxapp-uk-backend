@@ -1,29 +1,22 @@
-using System.Threading.Tasks;
-using Application.Interfaces.Services;
+using Application.Interfaces.Services.HmrcIntegration.TestUser;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Models.Hmrc.TestUser;
+using Shared.Models.HmrcIntegration.TestUser;
 using Swashbuckle.AspNetCore.Annotations;
-using Microsoft.Extensions.Logging; // Required for ILogger
-using System; // Required for Exception
 
-namespace API.Controllers;
+// Required for ILogger
+
+// Required for Exception
+
+namespace API.Controllers.HmrcIntegration.TestUser;
 
 [ApiController]
 [Route("api/hmrc/test-users")] // Specific route for test user operations
 [SwaggerTag("Operations related to HMRC Test Users for MTD API development.")]
-public class HmrcTestUserController : ControllerBase
+public class HmrcTestUserController(
+    IHmrcTestUserService hmrcTestUserService,
+    ILogger<HmrcTestUserController> logger)
+    : ControllerBase
 {
-    private readonly IHmrcTestUserService _hmrcTestUserService;
-    private readonly ILogger<HmrcTestUserController> _logger;
-
-    public HmrcTestUserController(
-        IHmrcTestUserService hmrcTestUserService,
-        ILogger<HmrcTestUserController> logger)
-    {
-        _hmrcTestUserService = hmrcTestUserService;
-        _logger = logger;
-    }
-
     /// <summary>
     /// Creates a new individual test user for HMRC MTD API access.
     /// </summary>
@@ -52,20 +45,20 @@ public class HmrcTestUserController : ControllerBase
 
         try
         {
-            _logger.LogInformation("Attempting to create individual test user with services: {ServiceNames}", string.Join(", ", request.ServiceNames));
-            var response = await _hmrcTestUserService.CreateIndividualTestUserAsync(request);
-            _logger.LogInformation("Successfully created individual test user with MTD ID: {MtdId}", response.MtdId);
+            logger.LogInformation("Attempting to create individual test user with services: {ServiceNames}", string.Join(", ", request.ServiceNames));
+            var response = await hmrcTestUserService.CreateIndividualTestUserAsync(request);
+            logger.LogInformation("Successfully created individual test user with MTD ID: {MtdId}", response.MtdId);
             return Ok(response);
         }
         catch (HttpRequestException httpEx)
         {
-            _logger.LogError(httpEx, "HttpRequestException while creating individual test user: {Message}", httpEx.Message);
+            logger.LogError(httpEx, "HttpRequestException while creating individual test user: {Message}", httpEx.Message);
             // If StatusCode is null, default to 500
             return StatusCode((int?)(httpEx.StatusCode) ?? 500, new { error = httpEx.Message, detail = httpEx.InnerException?.Message });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An unexpected error occurred while creating individual test user: {Message}", ex.Message);
+            logger.LogError(ex, "An unexpected error occurred while creating individual test user: {Message}", ex.Message);
             return StatusCode(500, new { error = "An internal server error occurred.", detail = ex.Message });
         }
     }

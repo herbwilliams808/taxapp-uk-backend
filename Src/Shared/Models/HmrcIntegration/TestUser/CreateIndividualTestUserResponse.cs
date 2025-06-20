@@ -1,6 +1,6 @@
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Shared.Models.Hmrc.TestUser;
+namespace Shared.Models.HmrcIntegration.TestUser;
 
 /// <summary>
 /// Represents the response received after successfully creating an individual test user.

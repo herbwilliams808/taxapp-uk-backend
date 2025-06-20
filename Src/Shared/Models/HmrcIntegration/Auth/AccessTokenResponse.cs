@@ -1,6 +1,8 @@
-using System.Text.Json.Serialization; // Required for [JsonPropertyName]
+using System.Text.Json.Serialization;
 
-namespace Shared.Models.Hmrc.Auth;
+// Required for [JsonPropertyName]
+
+namespace Shared.Models.HmrcIntegration.Auth;
 
 public class AccessTokenResponse
 {

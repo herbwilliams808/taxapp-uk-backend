@@ -1,13 +1,13 @@
-using Application.Interfaces.Services;
+using System.Collections.Concurrent;
+using Application.Interfaces.Services.HmrcIntegration.Auth;
+using Application.Interfaces.Services.HmrcIntegration.TestUser;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
-using System.Linq; // For Query.SingleOrDefault
-using System.Collections.Concurrent; // For ConcurrentDictionary
+// For Query.SingleOrDefault
 
-namespace API.Controllers;
+// For ConcurrentDictionary
+
+namespace API.Controllers.HmrcIntegration.Auth;
 
 [ApiController]
 [Route("api/hmrc/user-auth")] // Base route for user authentication operations

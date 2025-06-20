@@ -1,12 +1,12 @@
 using System.Text;
-using Application.Interfaces.Services;
+using Application.Interfaces.Services.HmrcIntegration.TestUser;
 using Azure.Storage.Blobs;
 using Azure.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
 using Shared.Models.Settings;
 
-namespace Application.Services;
+namespace Application.Services.HmrcIntegration.Auth;
 
 public class AzureBlobDataLoaderService : IBlobDataLoaderService
 {

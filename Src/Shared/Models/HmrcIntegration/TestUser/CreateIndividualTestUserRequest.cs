@@ -1,6 +1,6 @@
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Shared.Models.Hmrc.TestUser;
+namespace Shared.Models.HmrcIntegration.TestUser;
 
 /// <summary>
 /// Represents the request body for creating an individual test user with specific service enrolments.

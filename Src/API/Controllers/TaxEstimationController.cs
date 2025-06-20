@@ -1,10 +1,10 @@
-using Application.Services;
+using Application.Services.HmrcIntegration.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Models.HttpMessages;
 using API.SwaggerExamples;
 using Swashbuckle.AspNetCore.Filters;
 
-namespace API.Controllers
+namespace API.Controllers.HmrcIntegration.Auth
 {
     [ApiController]
     [Route("api/[controller]")]

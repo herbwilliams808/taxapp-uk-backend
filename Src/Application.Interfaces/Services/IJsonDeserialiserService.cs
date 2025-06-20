@@ -1,4 +1,4 @@
-namespace Application.Interfaces.Services;
+namespace Application.Interfaces.Services.HmrcIntegration.TestUser;
 
 public interface IJsonDeserialiserService
 {

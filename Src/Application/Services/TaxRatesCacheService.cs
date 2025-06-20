@@ -1,8 +1,8 @@
 using System.Text.Json;
-using Application.Interfaces.Services;
+using Application.Interfaces.Services.HmrcIntegration.TestUser;
 using Microsoft.Extensions.Logging;
 
-namespace Application.Services;
+namespace Application.Services.HmrcIntegration.Auth;
 
 public class TaxRatesCacheService: ITaxRatesCacheService
 {

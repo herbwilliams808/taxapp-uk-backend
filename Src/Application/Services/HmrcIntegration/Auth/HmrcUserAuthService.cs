@@ -1,16 +1,16 @@
-using System.Net.Http;
+using System.Collections.Concurrent;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Application.Interfaces.Services;
-using Microsoft.Extensions.Configuration;
-using Shared.Models.Hmrc.Auth;
-using System;
-using System.Web; // For HttpUtility.ParseQueryString and HtmlEncode
-using System.Collections.Generic;
 using System.Net.Http.Json;
-using System.Collections.Concurrent; // For ConcurrentDictionary for in-memory token storage
+using System.Web;
+using Application.Interfaces.Services.HmrcIntegration.Auth;
+using Application.Interfaces.Services.HmrcIntegration.TestUser;
+using Microsoft.Extensions.Configuration;
+using Shared.Models.HmrcIntegration.Auth;
+// For HttpUtility.ParseQueryString and HtmlEncode
 
-namespace Application.Services;
+// For ConcurrentDictionary for in-memory token storage
+
+namespace Application.Services.HmrcIntegration.Auth;
 
 public class HmrcUserAuthService : IHmrcUserAuthService
 {

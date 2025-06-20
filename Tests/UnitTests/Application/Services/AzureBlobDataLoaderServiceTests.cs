@@ -1,7 +1,7 @@
 using Moq;
 using Microsoft.Extensions.Options;
 using Shared.Models.Settings;
-using Application.Services;
+using Application.Services.HmrcIntegration.Auth;
 using Azure.Storage.Blobs;
 using System.Text;
 using Azure;

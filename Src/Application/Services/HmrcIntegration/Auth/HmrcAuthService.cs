@@ -1,13 +1,13 @@
-using Application.Interfaces.Services;
-using Shared.Models.Hmrc.Auth;
-using Microsoft.Extensions.Configuration;
-using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Collections.Generic;
 using System.Net.Http.Json;
-using System; // Required for ArgumentNullException
+using Application.Interfaces.Services.HmrcIntegration.Auth;
+using Application.Interfaces.Services.HmrcIntegration.TestUser;
+using Microsoft.Extensions.Configuration;
+using Shared.Models.HmrcIntegration.Auth;
 
-namespace Application.Services;
+// Required for ArgumentNullException
+
+namespace Application.Services.HmrcIntegration.Auth;
 
 public class HmrcAuthService : IHmrcAuthService
 {

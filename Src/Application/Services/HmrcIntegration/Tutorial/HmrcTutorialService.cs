@@ -1,11 +1,14 @@
-using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Application.Interfaces.Services; // Keep this for IHmrcAuthService and IHmrcUserAuthService
-using Application.Interfaces.Services.HmrcTutorial; // For IHmrcTutorialService
-using System; // Required for ArgumentNullException
+using Application.Interfaces.Services.HmrcIntegration.Auth;
+using Application.Interfaces.Services.HmrcIntegration.TestUser;
+using Application.Interfaces.Services.HmrcIntegration.Tutorial;
 
-namespace Application.Services.HMRCTutorial;
+// Keep this for IHmrcAuthService and IHmrcUserAuthService
+// For IHmrcTutorialService
+
+// Required for ArgumentNullException
+
+namespace Application.Services.HmrcIntegration.Tutorial;
 
 public class HmrcTutorialService : IHmrcTutorialService
 {

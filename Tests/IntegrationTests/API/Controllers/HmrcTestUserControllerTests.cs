@@ -5,12 +5,12 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using API;
-using Application.Interfaces.Services;
+using Application.Interfaces.Services.HmrcIntegration.TestUser;
 using Moq;
-using Shared.Models.Hmrc.TestUser;
 using Xunit;
 using Xunit.Abstractions;
-using Microsoft.Extensions.DependencyInjection; // Required for WithWebHostBuilder and ConfigureServices
+using Microsoft.Extensions.DependencyInjection;
+using Shared.Models.HmrcIntegration.TestUser; // Required for WithWebHostBuilder and ConfigureServices
 
 namespace IntegrationTests.API.Controllers;
 

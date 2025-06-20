@@ -1,28 +1,17 @@
-using System.Threading.Tasks;
-using Application.Interfaces.Services.HmrcTutorial;
+using Application.Interfaces.Services.HmrcIntegration.Tutorial;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using Microsoft.Extensions.Logging;
-using System;
 
-namespace API.Controllers.HMRCTutorial;
+namespace API.Controllers.HmrcIntegration.HmrcTutorial;
 
 [ApiController]
 [Route("api/hmrc")] // General route for HMRC tutorial endpoints
 [SwaggerTag("Operations related to basic HMRC API connectivity tests.")]
-public class HmrcTutorialController : ControllerBase
+public class HmrcTutorialController(
+    IHmrcTutorialService hmrcTutorialService,
+    ILogger<HmrcTutorialController> logger)
+    : ControllerBase
 {
-    private readonly IHmrcTutorialService _hmrcTutorialService;
-    private readonly ILogger<HmrcTutorialController> _logger;
-
-    public HmrcTutorialController(
-        IHmrcTutorialService hmrcTutorialService,
-        ILogger<HmrcTutorialController> logger)
-    {
-        _hmrcTutorialService = hmrcTutorialService;
-        _logger = logger;
-    }
-
     /// <summary>
     /// Calls the HMRC "Hello World" test endpoint. (No Auth)
     /// </summary>
@@ -41,19 +30,19 @@ public class HmrcTutorialController : ControllerBase
     {
         try
         {
-            _logger.LogInformation("Attempting to call HMRC Hello World endpoint.");
-            var response = await _hmrcTutorialService.GetHelloWorldAsync();
-            _logger.LogInformation("Successfully received response from Hello World: {Response}", response);
+            logger.LogInformation("Attempting to call HMRC Hello World endpoint.");
+            var response = await hmrcTutorialService.GetHelloWorldAsync();
+            logger.LogInformation("Successfully received response from Hello World: {Response}", response);
             return Ok(response);
         }
         catch (HttpRequestException httpEx)
         {
-            _logger.LogError(httpEx, "HttpRequestException while calling Hello World API: {Message}", httpEx.Message);
+            logger.LogError(httpEx, "HttpRequestException while calling Hello World API: {Message}", httpEx.Message);
             return StatusCode((int?)(httpEx.StatusCode) ?? 500, new { error = httpEx.Message, detail = httpEx.InnerException?.Message });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An unexpected error occurred while calling Hello World API: {Message}", ex.Message);
+            logger.LogError(ex, "An unexpected error occurred while calling Hello World API: {Message}", ex.Message);
             return StatusCode(500, new { error = "An internal server error occurred.", detail = ex.Message });
         }
     }
@@ -78,19 +67,19 @@ public class HmrcTutorialController : ControllerBase
     {
         try
         {
-            _logger.LogInformation("Attempting to call HMRC Hello Application endpoint.");
-            var response = await _hmrcTutorialService.GetHelloApplicationAsync();
-            _logger.LogInformation("Successfully received response from Hello Application: {Response}", response);
+            logger.LogInformation("Attempting to call HMRC Hello Application endpoint.");
+            var response = await hmrcTutorialService.GetHelloApplicationAsync();
+            logger.LogInformation("Successfully received response from Hello Application: {Response}", response);
             return Ok(response);
         }
         catch (HttpRequestException httpEx)
         {
-            _logger.LogError(httpEx, "HttpRequestException while calling Hello Application API: {Message}", httpEx.Message);
+            logger.LogError(httpEx, "HttpRequestException while calling Hello Application API: {Message}", httpEx.Message);
             return StatusCode((int?)(httpEx.StatusCode) ?? 500, new { error = httpEx.Message, detail = httpEx.InnerException?.Message });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An unexpected error occurred while calling Hello Application API: {Message}", ex.Message);
+            logger.LogError(ex, "An unexpected error occurred while calling Hello Application API: {Message}", ex.Message);
             return StatusCode(500, new { error = "An internal server error occurred.", detail = ex.Message });
         }
     }
@@ -124,24 +113,24 @@ public class HmrcTutorialController : ControllerBase
 
         try
         {
-            _logger.LogInformation("Attempting to call HMRC Hello User endpoint for userId: {UserId}", userId);
-            var response = await _hmrcTutorialService.GetHelloUserAsync(userId); // Call the service method
-            _logger.LogInformation("Successfully received response from Hello User for userId {UserId}: {Response}", userId, response);
+            logger.LogInformation("Attempting to call HMRC Hello User endpoint for userId: {UserId}", userId);
+            var response = await hmrcTutorialService.GetHelloUserAsync(userId); // Call the service method
+            logger.LogInformation("Successfully received response from Hello User for userId {UserId}: {Response}", userId, response);
             return Ok(response);
         }
         catch (InvalidOperationException ioEx) // Catch specific error if user not authorized
         {
-            _logger.LogWarning("InvalidOperationException calling Hello User for userId {UserId}: {Message}", userId, ioEx.Message);
+            logger.LogWarning("InvalidOperationException calling Hello User for userId {UserId}: {Message}", userId, ioEx.Message);
             return BadRequest(new { error = ioEx.Message });
         }
         catch (HttpRequestException httpEx)
         {
-            _logger.LogError(httpEx, "HttpRequestException while calling Hello User API for userId {UserId}: {Message}", userId, httpEx.Message);
+            logger.LogError(httpEx, "HttpRequestException while calling Hello User API for userId {UserId}: {Message}", userId, httpEx.Message);
             return StatusCode((int?)(httpEx.StatusCode) ?? 500, new { error = httpEx.Message, detail = httpEx.InnerException?.Message });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An unexpected error occurred while calling Hello User API for userId {UserId}: {Message}", userId, ex.Message);
+            logger.LogError(ex, "An unexpected error occurred while calling Hello User API for userId {UserId}: {Message}", userId, ex.Message);
             return StatusCode(500, new { error = "An internal server error occurred.", detail = ex.Message });
         }
     }

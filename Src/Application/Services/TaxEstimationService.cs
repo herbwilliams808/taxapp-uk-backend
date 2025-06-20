@@ -1,6 +1,6 @@
 using Application.Calculators;
 using Application.Interfaces.Calculators;
-using Application.Interfaces.Services;
+using Application.Interfaces.Services.HmrcIntegration.TestUser;
 using Microsoft.Extensions.Logging;
 using Shared.Models.CalculationResults;
 using Shared.Models.HttpMessages;
@@ -10,7 +10,7 @@ using Shared.Models.IndividualsReliefs;
 using Shared.Models.IndividualsReliefs.ForeignReliefs;
 using Shared.Models.OtherDeductions;
 
-namespace Application.Services;
+namespace Application.Services.HmrcIntegration.Auth;
 
 public class TaxEstimationService(
     ITaxRatesCacheService taxRatesCacheService,

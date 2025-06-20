@@ -1,16 +1,18 @@
 using Moq;
 using Xunit;
-using Application.Services;
-using Application.Interfaces.Services;
-using Shared.Models.Hmrc.TestUser;
-using Shared.Models.Hmrc.Auth;
+using Application.Services.HmrcIntegration.Auth;
 using System.Net.Http;
 using System.Threading;
 using System.Net;
 using System.Text.Json;
 using System.Text;
 using System.Net.Http.Headers;
-using Moq.Protected; // Added this using directive
+using Application.Interfaces.Services.HmrcIntegration.Auth;
+using Application.Interfaces.Services.HmrcIntegration.TestUser;
+using Application.Services.HmrcIntegration.TestUser;
+using Moq.Protected;
+using Shared.Models.HmrcIntegration.Auth;
+using Shared.Models.HmrcIntegration.TestUser; // Added this using directive
 
 namespace UnitTests.Application.Services;
 

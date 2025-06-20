@@ -1,15 +1,15 @@
 using Moq;
 using Xunit;
 using Microsoft.Extensions.Configuration;
-using Application.Services;
-using Shared.Models.Hmrc.Auth;
+using Application.Services.HmrcIntegration.Auth;
 using System.Net.Http;
 using System.Threading;
 using System.Net;
 using System.Text.Json;
 using System.Text;
 using System.Diagnostics;
-using Moq.Protected; // For Stopwatch
+using Moq.Protected;
+using Shared.Models.HmrcIntegration.Auth; // For Stopwatch
 
 namespace UnitTests.Application.Services;
 

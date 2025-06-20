@@ -1,6 +1,4 @@
-using System.Threading.Tasks;
-
-namespace Application.Interfaces.Services.HmrcTutorial;
+namespace Application.Interfaces.Services.HmrcIntegration.Tutorial;
 
 public interface IHmrcTutorialService
 {

@@ -1,6 +1,6 @@
 using System.Text.Json; // For JsonElement
 
-namespace Application.Interfaces.Services;
+namespace Application.Interfaces.Services.HmrcIntegration.TestUser;
 
 public interface ITaxRatesCacheService
 {

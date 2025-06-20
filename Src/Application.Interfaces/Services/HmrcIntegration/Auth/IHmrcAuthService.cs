@@ -1,6 +1,6 @@
-using Shared.Models.Hmrc.Auth;
+using Shared.Models.HmrcIntegration.Auth;
 
-namespace Application.Interfaces.Services;
+namespace Application.Interfaces.Services.HmrcIntegration.Auth;
 
 public interface IHmrcAuthService
 {

@@ -1,11 +1,12 @@
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Net.Http.Headers;
-using Application.Interfaces.Services;
-using Shared.Models.Hmrc.TestUser;
-using System; // Required for ArgumentNullException
+using System.Net.Http.Json;
+using Application.Interfaces.Services.HmrcIntegration.Auth;
+using Application.Interfaces.Services.HmrcIntegration.TestUser;
+using Shared.Models.HmrcIntegration.TestUser;
 
-namespace Application.Services;
+// Required for ArgumentNullException
+
+namespace Application.Services.HmrcIntegration.TestUser;
 
 public class HmrcTestUserService : IHmrcTestUserService
 {

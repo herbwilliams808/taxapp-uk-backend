@@ -1,6 +1,6 @@
-using Shared.Models.Hmrc.TestUser;
+using Shared.Models.HmrcIntegration.TestUser;
 
-namespace Application.Interfaces.Services;
+namespace Application.Interfaces.Services.HmrcIntegration.TestUser;
 
 public interface IHmrcTestUserService
 {

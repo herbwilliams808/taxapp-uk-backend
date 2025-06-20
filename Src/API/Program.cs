@@ -5,15 +5,15 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Application.Calculators;
 using Application.Interfaces.Calculators;
-using Application.Interfaces.Services;
-using Application.Interfaces.Services.HmrcTutorial;
-using Application.Services;
-using Application.Services.HMRCTutorial;
+using Application.Interfaces.Services.HmrcIntegration.Auth;
+using Application.Interfaces.Services.HmrcIntegration.TestUser;
+using Application.Interfaces.Services.HmrcIntegration.Tutorial;
+using Application.Services.HmrcIntegration.Auth;
+using Application.Services.HmrcIntegration.TestUser;
+using Application.Services.HmrcIntegration.Tutorial;
 using Shared.Models.Settings;
-using System;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using API.Controllers.HMRCTutorial; // Make sure this is present for your controllers
+
+// Make sure this is present for your controllers
 
 namespace API;
 

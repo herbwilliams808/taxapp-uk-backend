@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Shared.Models.Settings;
 
-namespace Application.Services
+namespace Application.Services.HmrcIntegration.Auth
 {
     public class AzureBlobTaxRatesService(
         IOptions<AzureBlobSettings> blobSettings,
