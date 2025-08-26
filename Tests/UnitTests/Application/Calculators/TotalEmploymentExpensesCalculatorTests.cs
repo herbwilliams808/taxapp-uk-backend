@@ -1,7 +1,11 @@
-using Shared.Models.Incomes; // Contains IncomeSourcesDetails, EmploymentsAndFinancialDetails, BenefitsInKind
-using Shared.Models.IndividualsEmploymentIncomes.Employments; // Contains BenefitsInKind (nested in EmploymentAndFinancialDetails)
-using Application.Calculators; // To reference the concrete calculator
-using Application.Interfaces.Calculators; // To reference the calculator interface
+// Contains IncomeSourcesDetails, EmploymentsAndFinancialDetails, BenefitsInKind
+// Contains BenefitsInKind (nested in EmploymentAndFinancialDetails)
+using Application.Calculators;
+using Core.Interfaces.Calculators;
+using Core.Models.Incomes;
+using Core.Models.IndividualsEmploymentIncomes.Employments; // To reference the concrete calculator
+
+// To reference the calculator interface
 
 // For [Fact] and Assert
 

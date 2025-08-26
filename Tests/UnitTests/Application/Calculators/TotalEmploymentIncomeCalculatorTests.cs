@@ -1,14 +1,17 @@
-using Shared.Models.Incomes; // Make sure IncomeSourcesDetails is here
-using Shared.Models.IndividualsEmploymentIncomes.Employments;
-using Shared.Models.IndividualsEmploymentIncomes.OtherEmploymentIncome.LumpSum;
-using Shared.Models.OtherDeductions;
-using Shared.Models.IndividualsForeignIncome;
-using Shared.Models.IndividualsReliefs.ForeignReliefs;
-using Application.Calculators; // For the concrete implementation
+// Make sure IncomeSourcesDetails is here
+using Application.Calculators;
+using Core.Interfaces.Calculators;
+using Core.Models.Incomes;
+using Core.Models.IndividualsEmploymentIncomes.Employments;
+using Core.Models.IndividualsEmploymentIncomes.NonPayeEmploymentIncome;
+using Core.Models.IndividualsEmploymentIncomes.OtherEmploymentIncome;
+using Core.Models.IndividualsEmploymentIncomes.OtherEmploymentIncome.LumpSum;
+using Core.Models.IndividualsForeignIncome;
+using Core.Models.IndividualsReliefs.ForeignReliefs;
+using Core.Models.OtherDeductions; // For the concrete implementation
 // For the interface
-using Shared.Models.IndividualsEmploymentIncomes.NonPayeEmploymentIncome;
-using Shared.Models.IndividualsEmploymentIncomes.OtherEmploymentIncome;
-using Application.Interfaces.Calculators; // Needed for Sum()
+
+// Needed for Sum()
 
 // For [Fact]
 

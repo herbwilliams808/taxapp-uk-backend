@@ -1,16 +1,14 @@
-using Application.Calculators;
-using Application.Interfaces.Calculators;
-using Application.Interfaces.Services.HmrcIntegration.TestUser;
+using Core.Interfaces.Calculators;
+using Core.Interfaces.Services;
+using Core.Models.HttpMessages;
+using Core.Models.Incomes;
+using Core.Models.IndividualsForeignIncome;
+using Core.Models.IndividualsReliefs;
+using Core.Models.IndividualsReliefs.ForeignReliefs;
+using Core.Models.OtherDeductions;
 using Microsoft.Extensions.Logging;
-using Shared.Models.CalculationResults;
-using Shared.Models.HttpMessages;
-using Shared.Models.Incomes;
-using Shared.Models.IndividualsForeignIncome;
-using Shared.Models.IndividualsReliefs;
-using Shared.Models.IndividualsReliefs.ForeignReliefs;
-using Shared.Models.OtherDeductions;
 
-namespace Application.Services.HmrcIntegration.Auth;
+namespace Application.Services;
 
 public class TaxEstimationService(
     ITaxRatesCacheService taxRatesCacheService,

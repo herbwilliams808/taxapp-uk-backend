@@ -1,4 +1,4 @@
-using Application.Interfaces.Calculators;
+using Core.Interfaces.Calculators;
 
 namespace Application.Calculators;
 

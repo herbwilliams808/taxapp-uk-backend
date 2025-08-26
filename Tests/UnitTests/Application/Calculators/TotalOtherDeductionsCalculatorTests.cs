@@ -1,6 +1,7 @@
 using Application.Calculators;
-using Application.Interfaces.Calculators;
-using Shared.Models.OtherDeductions;
+using Core.Interfaces.Calculators;
+using Core.Models.OtherDeductions;
+
 // For OtherDeductionsDetails, Seafarer
 // To reference the concrete calculator
 // To reference the calculator interface

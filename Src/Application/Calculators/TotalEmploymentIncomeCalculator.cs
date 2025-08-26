@@ -1,7 +1,7 @@
-using Application.Interfaces.Calculators;
-using Shared.Models.Incomes;
-using Shared.Models.IndividualsForeignIncome;
-using Shared.Models.IndividualsReliefs.ForeignReliefs;
+using Core.Interfaces.Calculators;
+using Core.Models.Incomes;
+using Core.Models.IndividualsForeignIncome;
+using Core.Models.IndividualsReliefs.ForeignReliefs;
 
 namespace Application.Calculators;
 

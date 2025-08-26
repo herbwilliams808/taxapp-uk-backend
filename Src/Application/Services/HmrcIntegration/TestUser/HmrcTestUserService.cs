@@ -1,49 +1,40 @@
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using Application.Interfaces.Services.HmrcIntegration.Auth;
-using Application.Interfaces.Services.HmrcIntegration.TestUser;
-using Shared.Models.HmrcIntegration.TestUser;
-
-// Required for ArgumentNullException
+using Core.Interfaces.HmrcIntegration.Auth;
+using Core.Interfaces.HmrcIntegration.TestUser;
+using Core.Interfaces.Http;
+using Core.Models.HmrcIntegration.TestUser;
 
 namespace Application.Services.HmrcIntegration.TestUser;
 
 public class HmrcTestUserService : IHmrcTestUserService
 {
-    private readonly HttpClient _httpClient;
+    private readonly IApiClient _hmrcClient;
     private readonly IHmrcAuthService _hmrcAuthService;
+    private const string CreateIndividualTestUserEndpoint = "/create-test-user/individuals";
 
-    public HmrcTestUserService(HttpClient httpClient, IHmrcAuthService hmrcAuthService)
+    public HmrcTestUserService(IApiClient hmrcClient, IHmrcAuthService hmrcAuthService)
     {
-        // Add null checks at the very beginning for all required dependencies
-        if (httpClient == null) throw new ArgumentNullException(nameof(httpClient));
-        if (hmrcAuthService == null) throw new ArgumentNullException(nameof(hmrcAuthService));
-
-        _httpClient = httpClient;
-        _hmrcAuthService = hmrcAuthService;
+        _hmrcClient = hmrcClient ?? throw new ArgumentNullException(nameof(hmrcClient));
+        _hmrcAuthService = hmrcAuthService ?? throw new ArgumentNullException(nameof(hmrcAuthService));
     }
 
-    /// <inheritdoc/>
     public async Task<CreateIndividualTestUserResponse> CreateIndividualTestUserAsync(CreateIndividualTestUserRequest request)
     {
-        // Get the access token
         var tokenResponse = await _hmrcAuthService.GetAccessTokenAsync();
 
-        // Clear any existing Authorization header to avoid duplicates or stale tokens
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenResponse.TokenType, tokenResponse.AccessToken);
-        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); // Ensure Accept header is set for this client
+        var testUserResponse = await _hmrcClient.PostAsync<CreateIndividualTestUserRequest, CreateIndividualTestUserResponse>(
+            CreateIndividualTestUserEndpoint,
+            request,
+            tokenResponse.AccessToken,
+            tokenResponse.TokenType
+        );
 
-        // The endpoint is relative to the base address configured for HttpClient
-        var response = await _httpClient.PostAsJsonAsync("/create-test-user/individuals", request);
-
-        response.EnsureSuccessStatusCode(); // Throws an exception if the HTTP response status is an error code.
-
-        var testUserResponse = await response.Content.ReadFromJsonAsync<CreateIndividualTestUserResponse>();
-
-        // Modified check: Ensure the response object is not null AND a crucial property (MtdId) is present
+        // The application service retains the responsibility of validating the domain-specifics of the response.
+        // The underlying client ensures the request was successful and deserialization worked.
         if (testUserResponse == null || string.IsNullOrEmpty(testUserResponse.MtdId))
         {
-            throw new HttpRequestException("Failed to deserialize individual test user response or essential data (e.g., MtdId) is missing.");
+            // Using a more specific exception type is better. HttpRequestException implies a transport-level error,
+            // but here the transport succeeded and the response content was invalid from our application's perspective.
+            throw new InvalidOperationException("Received a valid response from HMRC, but it was missing essential data (e.g., MtdId).");
         }
 
         return testUserResponse;

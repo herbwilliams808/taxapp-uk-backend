@@ -1,5 +1,5 @@
 using System.Text.Json;
-using Application.Services.HmrcIntegration.Auth;
+using Application.Services;
 using Microsoft.Extensions.Logging;
 using Moq;
 using UnitTests.TestHelpers;

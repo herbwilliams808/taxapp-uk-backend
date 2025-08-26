@@ -1,7 +1,8 @@
 using Application.Calculators; // To reference the concrete calculator
-using Application.Interfaces;
-using Application.Interfaces.Calculators; // To reference the calculator interface
-using Xunit; // For [Fact] and Assert
+using Core.Interfaces.Calculators;
+// To reference the calculator interface
+
+// For [Fact] and Assert
 
 namespace UnitTests.Application.Calculators;
 

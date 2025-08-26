@@ -1,6 +1,6 @@
 using Application.Calculators;
-using Shared.Models.Incomes;
-using Shared.Models.IndividualsEmploymentIncomes.Employments;
+using Core.Models.Incomes;
+using Core.Models.IndividualsEmploymentIncomes.Employments;
 
 namespace UnitTests.Application.Calculators;
 

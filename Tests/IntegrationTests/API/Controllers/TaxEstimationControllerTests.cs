@@ -2,12 +2,12 @@ using System.Net;
 using System.Text;
 using System.Text.Json;
 using API;
-using Shared.Models.HttpMessages;
-using Shared.Models.Incomes;
-using Shared.Models.IndividualsEmploymentIncomes.Employments;
-using Shared.Models.IndividualsReliefs;
-using Shared.Models.IndividualsReliefs.CharitableGivings;
-using Shared.Models.IndividualsReliefs.Pensions;
+using Core.Models.HttpMessages;
+using Core.Models.Incomes;
+using Core.Models.IndividualsEmploymentIncomes.Employments;
+using Core.Models.IndividualsReliefs;
+using Core.Models.IndividualsReliefs.CharitableGivings;
+using Core.Models.IndividualsReliefs.Pensions;
 using Xunit.Abstractions;
 
 namespace IntegrationTests.API.Controllers;

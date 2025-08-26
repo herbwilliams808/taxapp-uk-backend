@@ -1,6 +1,5 @@
-using System.Globalization;
-using Application.Interfaces.Calculators;
-using Shared.Models.CalculationResults;
+using Core.Interfaces.Calculators;
+using Core.Models.CalculationResults;
 
 namespace Application.Calculators;
 

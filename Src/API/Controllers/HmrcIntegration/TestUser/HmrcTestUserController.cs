@@ -1,6 +1,6 @@
-using Application.Interfaces.Services.HmrcIntegration.TestUser;
+using Core.Interfaces.HmrcIntegration.TestUser;
+using Core.Models.HmrcIntegration.TestUser;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Models.HmrcIntegration.TestUser;
 using Swashbuckle.AspNetCore.Annotations;
 
 // Required for ILogger

@@ -1,17 +1,23 @@
-using Swashbuckle.AspNetCore.Filters;
-using API.SwaggerExamples;
-using Microsoft.OpenApi.Models;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using API.SwaggerExamples;
 using Application.Calculators;
-using Application.Interfaces.Calculators;
-using Application.Interfaces.Services.HmrcIntegration.Auth;
-using Application.Interfaces.Services.HmrcIntegration.TestUser;
-using Application.Interfaces.Services.HmrcIntegration.Tutorial;
+using Application.Services;
 using Application.Services.HmrcIntegration.Auth;
 using Application.Services.HmrcIntegration.TestUser;
 using Application.Services.HmrcIntegration.Tutorial;
-using Shared.Models.Settings;
+using Core.Interfaces.Calculators;
+using Core.Interfaces.HmrcIntegration.Auth;
+using Core.Interfaces.HmrcIntegration.TestUser;
+using Core.Interfaces.HmrcIntegration.Tutorial;
+using Core.Interfaces.Http;
+using Core.Interfaces.Services;
+using Core.Models.Settings;
+using Core.Services;
+using Infrastructure.Http;
+using Infrastructure.Services;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 // Make sure this is present for your controllers
 
@@ -73,27 +79,34 @@ public partial class Program
             {
                 throw new InvalidOperationException("HMRC_TestApi:BaseUrl is not configured in appsettings.json.");
             }
+
             client.BaseAddress = new Uri(baseUrl);
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            // The default Accept header is now set in the HmrcClient constructor for better encapsulation.
+        });
+
+        // Register the new HmrcClient which abstracts HttpClient usage for API calls
+        builder.Services.AddScoped<IApiClient, ApiClient>(provider =>
+        {
+            var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
+            var httpClient = httpClientFactory.CreateClient(HmrcApiClientName);
+            return new ApiClient(httpClient);
         });
 
         // Register HMRC Test User Service
         builder.Services.AddScoped<IHmrcTestUserService, HmrcTestUserService>(provider =>
         {
-            var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
-            var httpClient = httpClientFactory.CreateClient(HmrcApiClientName);
+            var hmrcClient = provider.GetRequiredService<IApiClient>();
             var hmrcAuthService = provider.GetRequiredService<IHmrcAuthService>();
-            return new HmrcTestUserService(httpClient, hmrcAuthService);
+            return new HmrcTestUserService(hmrcClient, hmrcAuthService);
         });
 
         // Register HmrcTutorialService (now includes IHmrcUserAuthService dependency)
         builder.Services.AddScoped<IHmrcTutorialService, HmrcTutorialService>(provider =>
         {
-            var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
-            var httpClient = httpClientFactory.CreateClient(HmrcApiClientName);
+            var hmrcClient = provider.GetRequiredService<IApiClient>();
             var hmrcAuthService = provider.GetRequiredService<IHmrcAuthService>();
             var hmrcUserAuthService = provider.GetRequiredService<IHmrcUserAuthService>(); // Get the user auth service
-            return new HmrcTutorialService(httpClient, hmrcAuthService, hmrcUserAuthService); // Pass all dependencies
+            return new HmrcTutorialService(hmrcClient, hmrcAuthService, hmrcUserAuthService); // Pass all dependencies
         });
 
 

@@ -8,7 +8,7 @@
   &lt;Assembly Path="/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Application/bin/Debug/net8.0/Application.dll" /&gt;
   &lt;Assembly Path="/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Application/bin/Release/net8.0/Application.dll" /&gt;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">/Users/herbwilliams/Library/Caches/JetBrains/Rider2025.1/resharper-host/temp/Rider/vAny/CoverageData/_TaxAppUK.Backend.1929408077/Snapshot/snapshot.utdcvr</s:String>
+	
 	
 	<s:Boolean x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/ShowAdvancedOptions/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=0CADA375_002D9276_002D4EBA_002D8A06_002DA282A597F3D8/@EntryIndexedValue">6E0CD938-20F2-4B67-9585-60E92DDE8387</s:String>
@@ -19,6 +19,11 @@
   &lt;Not&gt;
     &lt;Project Location="/Users/herbwilliams/RiderProjects/TaxAppUK/Backend/Requirements" Presentation="&amp;lt;Requirements&amp;gt;" /&gt;
   &lt;/Not&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9bfd942f_002D7b12_002D4bdb_002Db305_002D4e84cf4df7cd/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="HmrcTestUserServiceTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::6E0CD938-20F2-4B67-9585-60E92DDE8387::net8.0::UnitTests.Application.Services.HmrcTestUserServiceTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c2cd4e96_002D1801_002D476f_002D8b4b_002D7c1933d56b18/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;Solution /&gt;

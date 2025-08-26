@@ -1,12 +1,12 @@
 using System.Text.Json;
-using Azure.Storage.Blobs;
 using Azure.Identity;
-using Microsoft.Extensions.Options;
+using Azure.Storage.Blobs;
+using Core.Models.Settings;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Shared.Models.Settings;
+using Microsoft.Extensions.Options;
 
-namespace Application.Services.HmrcIntegration.Auth
+namespace Application.Services
 {
     public class AzureBlobTaxRatesService(
         IOptions<AzureBlobSettings> blobSettings,

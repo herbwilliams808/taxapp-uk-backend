@@ -1,12 +1,21 @@
 // API/SwaggerExamples/TaxEstimationRequestExample.cs
+
+using Core.Models.HttpMessages;
+using Core.Models.Incomes;
+using Core.Models.IndividualsEmploymentIncomes.Employments;
+using Core.Models.IndividualsEmploymentIncomes.NonPayeEmploymentIncome;
+using Core.Models.IndividualsReliefs;
+using Core.Models.IndividualsReliefs.Pensions;
+using Core.Models.PropertyBusiness;
 using Swashbuckle.AspNetCore.Filters;
-using Shared.Models.HttpMessages; // Namespace for TaxEstimationRequest
-using Shared.Models.Incomes; // Namespace for IncomeSourcesDetails
-using Shared.Models.IndividualsEmploymentIncomes.Employments; // Namespace for EmploymentAndFinancialDetails, Employer, Pay
-using Shared.Models.IndividualsEmploymentIncomes.NonPayeEmploymentIncome; // Namespace for NonPayeEmploymentIncome
-using Shared.Models.PropertyBusiness; // Namespace for UkPropertyBusinessIncome
-using Shared.Models.IndividualsReliefs; // Namespace for IndividualsReliefsDetails
-using Shared.Models.IndividualsReliefs.Pensions; // Namespace for PensionReliefs
+// Namespace for TaxEstimationRequest
+// Namespace for IncomeSourcesDetails
+// Namespace for EmploymentAndFinancialDetails, Employer, Pay
+// Namespace for NonPayeEmploymentIncome
+// Namespace for UkPropertyBusinessIncome
+// Namespace for IndividualsReliefsDetails
+
+// Namespace for PensionReliefs
 
 namespace API.SwaggerExamples
 {

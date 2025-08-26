@@ -1,5 +1,5 @@
-using Application.Interfaces.Calculators;
-using Shared.Models.OtherDeductions;
+using Core.Interfaces.Calculators;
+using Core.Models.OtherDeductions;
 
 namespace Application.Calculators;
 

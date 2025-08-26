@@ -1,5 +1,5 @@
-using Application.Interfaces.Calculators;
-using Shared.Models.IndividualsReliefs;
+using Core.Interfaces.Calculators;
+using Core.Models.IndividualsReliefs;
 
 namespace Application.Calculators;
 

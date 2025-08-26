@@ -1,6 +1,5 @@
 using System.Collections.Concurrent;
-using Application.Interfaces.Services.HmrcIntegration.Auth;
-using Application.Interfaces.Services.HmrcIntegration.TestUser;
+using Core.Interfaces.HmrcIntegration.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 // For Query.SingleOrDefault

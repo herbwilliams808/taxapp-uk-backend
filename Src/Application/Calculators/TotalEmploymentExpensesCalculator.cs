@@ -1,5 +1,5 @@
-using Application.Interfaces.Calculators;
-using Shared.Models.Incomes;
+using Core.Interfaces.Calculators;
+using Core.Models.Incomes;
 
 namespace Application.Calculators
 {

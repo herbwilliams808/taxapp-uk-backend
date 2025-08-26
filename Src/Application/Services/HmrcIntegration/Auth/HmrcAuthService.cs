@@ -1,9 +1,8 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using Application.Interfaces.Services.HmrcIntegration.Auth;
-using Application.Interfaces.Services.HmrcIntegration.TestUser;
+using Core.Interfaces.HmrcIntegration.Auth;
+using Core.Models.HmrcIntegration.Auth;
 using Microsoft.Extensions.Configuration;
-using Shared.Models.HmrcIntegration.Auth;
 
 // Required for ArgumentNullException
 

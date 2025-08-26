@@ -1,63 +1,36 @@
-using System.Net.Http.Headers;
-using Application.Interfaces.Services.HmrcIntegration.Auth;
-using Application.Interfaces.Services.HmrcIntegration.TestUser;
-using Application.Interfaces.Services.HmrcIntegration.Tutorial;
-
-// Keep this for IHmrcAuthService and IHmrcUserAuthService
-// For IHmrcTutorialService
-
-// Required for ArgumentNullException
+using Core.Interfaces.HmrcIntegration.Auth;
+using Core.Interfaces.HmrcIntegration.Tutorial;
+using Core.Interfaces.Http;
 
 namespace Application.Services.HmrcIntegration.Tutorial;
 
 public class HmrcTutorialService : IHmrcTutorialService
 {
-    private readonly HttpClient _httpClient;
+    private readonly IApiClient _hmrcClient;
     private readonly IHmrcAuthService _hmrcAuthService; // For application-restricted token
     private readonly IHmrcUserAuthService _hmrcUserAuthService; // For user-restricted token
 
     public HmrcTutorialService(
-        HttpClient httpClient,
+        IApiClient hmrcClient,
         IHmrcAuthService hmrcAuthService,
-        IHmrcUserAuthService hmrcUserAuthService) // Inject new dependency
+        IHmrcUserAuthService hmrcUserAuthService)
     {
-        if (httpClient == null) throw new ArgumentNullException(nameof(httpClient));
-        if (hmrcAuthService == null) throw new ArgumentNullException(nameof(hmrcAuthService));
-        if (hmrcUserAuthService == null) throw new ArgumentNullException(nameof(hmrcUserAuthService)); // Null check
-
-        _httpClient = httpClient;
-        _hmrcAuthService = hmrcAuthService;
-        _hmrcUserAuthService = hmrcUserAuthService; // Assign new dependency
+        _hmrcClient = hmrcClient ?? throw new ArgumentNullException(nameof(hmrcClient));
+        _hmrcAuthService = hmrcAuthService ?? throw new ArgumentNullException(nameof(hmrcAuthService));
+        _hmrcUserAuthService = hmrcUserAuthService ?? throw new ArgumentNullException(nameof(hmrcUserAuthService));
     }
 
-    /// <inheritdoc/>
     public async Task<string> GetHelloWorldAsync()
     {
-        _httpClient.DefaultRequestHeaders.Accept.Clear();
-        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.hmrc.1.0+json"));
-
-        var response = await _httpClient.GetAsync("/hello/world");
-        response.EnsureSuccessStatusCode();
-        return await response.Content.ReadAsStringAsync();
+        return await _hmrcClient.GetAsync("/hello/world");
     }
 
-    /// <inheritdoc/>
     public async Task<string> GetHelloApplicationAsync()
     {
         var tokenResponse = await _hmrcAuthService.GetAccessTokenAsync();
-
-        // Clear headers before setting to avoid conflicts from previous calls
-        _httpClient.DefaultRequestHeaders.Clear();
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenResponse.TokenType, tokenResponse.AccessToken);
-        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.hmrc.1.0+json"));
-
-        var response = await _httpClient.GetAsync("/hello/application");
-
-        response.EnsureSuccessStatusCode();
-        return await response.Content.ReadAsStringAsync();
+        return await _hmrcClient.GetWithAuthAsync("/hello/application", tokenResponse.AccessToken, tokenResponse.TokenType);
     }
 
-    /// <inheritdoc/>
     public async Task<string> GetHelloUserAsync(string userId) // New method implementation
     {
         var userTokens = _hmrcUserAuthService.GetUserTokens(userId);
@@ -79,14 +52,6 @@ public class HmrcTutorialService : IHmrcTutorialService
             _hmrcUserAuthService.StoreUserTokens(userTokens, userId); // Store the new tokens
         }
 
-        // Clear headers before setting to avoid conflicts from previous calls
-        _httpClient.DefaultRequestHeaders.Clear();
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(userTokens.TokenType, userTokens.AccessToken);
-        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.hmrc.1.0+json"));
-
-        var response = await _httpClient.GetAsync("/hello/user");
-
-        response.EnsureSuccessStatusCode();
-        return await response.Content.ReadAsStringAsync();
+        return await _hmrcClient.GetWithAuthAsync("/hello/user", userTokens.AccessToken, userTokens.TokenType);
     }
 }

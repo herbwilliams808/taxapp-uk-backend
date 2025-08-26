@@ -1,9 +1,12 @@
 // File: API/Controllers/TaxRatesController.cs
-using Microsoft.AspNetCore.Mvc;
-using Application.Services.HmrcIntegration.Auth; // Keep this if other concrete services are used here, otherwise remove
-using Application.Interfaces.Services.HmrcIntegration.TestUser; // NEW: Add this using directive
 
-namespace API.Controllers.HmrcIntegration.Auth
+using Core.Interfaces.Services;
+using Microsoft.AspNetCore.Mvc;
+// Keep this if other concrete services are used here, otherwise remove
+
+// NEW: Add this using directive
+
+namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

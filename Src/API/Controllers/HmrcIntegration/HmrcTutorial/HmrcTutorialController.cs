@@ -1,4 +1,4 @@
-using Application.Interfaces.Services.HmrcIntegration.Tutorial;
+using Core.Interfaces.HmrcIntegration.Tutorial;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 

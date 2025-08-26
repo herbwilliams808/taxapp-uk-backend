@@ -1,53 +1,23 @@
-using Moq;
-using Xunit;
-using Application.Services.HmrcIntegration.Auth;
-using System.Net.Http;
-using System.Threading;
-using System.Net;
-using System.Text.Json;
-using System.Text;
-using System.Net.Http.Headers;
-using Application.Interfaces.Services.HmrcIntegration.Auth;
-using Application.Interfaces.Services.HmrcIntegration.TestUser;
 using Application.Services.HmrcIntegration.TestUser;
-using Moq.Protected;
-using Shared.Models.HmrcIntegration.Auth;
-using Shared.Models.HmrcIntegration.TestUser; // Added this using directive
+using Core.Interfaces.HmrcIntegration.Auth;
+using Core.Interfaces.Http;
+using Core.Models.HmrcIntegration.Auth;
+using Core.Models.HmrcIntegration.TestUser;
+using Moq;
 
 namespace UnitTests.Application.Services;
 
 public class HmrcTestUserServiceTests
 {
-    private readonly Mock<HttpClient> _mockHttpClient;
-    private readonly Mock<HttpMessageHandler> _mockHttpMessageHandler;
+    private readonly Mock<IApiClient> _mockHmrcClient;
     private readonly Mock<IHmrcAuthService> _mockAuthService;
+    private readonly HmrcTestUserService _sut;
 
     public HmrcTestUserServiceTests()
     {
-        _mockHttpMessageHandler = new Mock<HttpMessageHandler>();
-        _mockHttpClient = new Mock<HttpClient>(_mockHttpMessageHandler.Object)
-        {
-            CallBase = true // Ensures real methods are called on HttpClient where not mocked
-        };
-        _mockHttpClient.Object.BaseAddress = new Uri("https://test-api.service.hmrc.gov.uk/");
-
+        _mockHmrcClient = new Mock<IApiClient>();
         _mockAuthService = new Mock<IHmrcAuthService>();
-    }
-
-    private HttpResponseMessage CreateTestUserHttpResponse(string mtdId, string gatewayId, string password)
-    {
-        var responseContent = new CreateIndividualTestUserResponse
-        {
-            MtdId = mtdId,
-            GatewayId = gatewayId,
-            Password = password,
-            UserFullName = "Test User",
-            EmailAddress = "test@example.com"
-        };
-        return new HttpResponseMessage(HttpStatusCode.OK)
-        {
-            Content = new StringContent(JsonSerializer.Serialize(responseContent), Encoding.UTF8, "application/json")
-        };
+        _sut = new HmrcTestUserService(_mockHmrcClient.Object, _mockAuthService.Object);
     }
 
     #region Constructor Tests
@@ -56,10 +26,8 @@ public class HmrcTestUserServiceTests
     public void Constructor_WithValidParameters_InitializesService()
     {
         // Arrange & Act
-        var service = new HmrcTestUserService(_mockHttpClient.Object, _mockAuthService.Object);
-
         // Assert
-        Assert.NotNull(service);
+        Assert.NotNull(_sut);
     }
 
     [Fact]
@@ -73,7 +41,7 @@ public class HmrcTestUserServiceTests
     public void Constructor_WithNullAuthService_ThrowsArgumentNullException()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>(() => new HmrcTestUserService(_mockHttpClient.Object, null!));
+        Assert.Throws<ArgumentNullException>(() => new HmrcTestUserService(_mockHmrcClient.Object, null!));
     }
 
     #endregion
@@ -84,100 +52,101 @@ public class HmrcTestUserServiceTests
     public async Task CreateIndividualTestUserAsync_ReturnsUserSuccessfully()
     {
         // Arrange
-        var accessToken = "mockBearerToken123";
-        var expectedMtdId = "XAMTD00000000001";
-        var expectedGatewayId = "gateway123";
-        var expectedPassword = "password";
+        var request = new CreateIndividualTestUserRequest { ServiceNames = { "mtd-income-tax" } };
+        var tokenResponse = new AccessTokenResponse { AccessToken = "mock-token", TokenType = "Bearer" };
+        var expectedResponse = new CreateIndividualTestUserResponse
+        {
+            MtdId = "XAMTD00000000001",
+            GatewayId = "gateway123",
+            Password = "password"
+        };
 
         _mockAuthService.Setup(s => s.GetAccessTokenAsync())
-            .ReturnsAsync(new AccessTokenResponse { AccessToken = accessToken, TokenType = "Bearer", ExpiresIn = 3600 });
+            .ReturnsAsync(tokenResponse);
 
-        _mockHttpMessageHandler.Protected()
-            .Setup<Task<HttpResponseMessage>>(
-                "SendAsync",
-                ItExpr.Is<HttpRequestMessage>(req =>
-                    req.RequestUri!.ToString().EndsWith("/create-test-user/individuals") &&
-                    req.Method == HttpMethod.Post &&
-                    req.Headers.Authorization!.Scheme == "Bearer" &&
-                    req.Headers.Authorization.Parameter == accessToken),
-                ItExpr.IsAny<CancellationToken>()
-            )
-            .ReturnsAsync(CreateTestUserHttpResponse(expectedMtdId, expectedGatewayId, expectedPassword));
-
-        var service = new HmrcTestUserService(_mockHttpClient.Object, _mockAuthService.Object);
-        var request = new CreateIndividualTestUserRequest { ServiceNames = { "mtd-income-tax" } };
+        _mockHmrcClient.Setup(c => c.PostAsync<CreateIndividualTestUserRequest, CreateIndividualTestUserResponse>(
+                It.IsAny<string>(),
+                request,
+                tokenResponse.AccessToken,
+                tokenResponse.TokenType))
+            .ReturnsAsync(expectedResponse);
 
         // Act
-        var result = await service.CreateIndividualTestUserAsync(request);
+        var result = await _sut.CreateIndividualTestUserAsync(request);
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal(expectedMtdId, result.MtdId);
-        Assert.Equal(expectedGatewayId, result.GatewayId);
-        Assert.Equal(expectedPassword, result.Password);
+        Assert.Equal(expectedResponse.MtdId, result.MtdId);
+        Assert.Equal(expectedResponse.GatewayId, result.GatewayId);
+        Assert.Equal(expectedResponse.Password, result.Password);
 
         _mockAuthService.Verify(s => s.GetAccessTokenAsync(), Times.Once());
-        _mockHttpMessageHandler.Protected().Verify(
-            "SendAsync",
+        _mockHmrcClient.Verify(c => c.PostAsync<CreateIndividualTestUserRequest, CreateIndividualTestUserResponse>(
+            "/create-test-user/individuals",
+            request,
+            tokenResponse.AccessToken,
+            tokenResponse.TokenType),
             Times.Once(),
-            ItExpr.IsAny<HttpRequestMessage>(),
-            ItExpr.IsAny<CancellationToken>()
-        );
+            "The PostAsync method was not called with the expected parameters.");
     }
 
     [Theory]
-    [InlineData(HttpStatusCode.BadRequest)]
-    [InlineData(HttpStatusCode.Unauthorized)]
-    [InlineData(HttpStatusCode.InternalServerError)]
-    public async Task CreateIndividualTestUserAsync_ThrowsHttpRequestException_OnUnsuccessfulStatusCode(HttpStatusCode statusCode)
+    [InlineData("Simulated bad request")]
+    [InlineData("Simulated server error")]
+    public async Task CreateIndividualTestUserAsync_PropagatesException_WhenClientThrows(string exceptionMessage)
     {
         // Arrange
-        var accessToken = "mockBearerToken";
-        _mockAuthService.Setup(s => s.GetAccessTokenAsync())
-            .ReturnsAsync(new AccessTokenResponse { AccessToken = accessToken, TokenType = "Bearer", ExpiresIn = 3600 });
-
-        _mockHttpMessageHandler.Protected()
-            .Setup<Task<HttpResponseMessage>>(
-                "SendAsync",
-                ItExpr.IsAny<HttpRequestMessage>(),
-                ItExpr.IsAny<CancellationToken>()
-            )
-            .ReturnsAsync(new HttpResponseMessage(statusCode));
-
-        var service = new HmrcTestUserService(_mockHttpClient.Object, _mockAuthService.Object);
         var request = new CreateIndividualTestUserRequest();
+        var tokenResponse = new AccessTokenResponse { AccessToken = "mock-token", TokenType = "Bearer" };
+        _mockAuthService.Setup(s => s.GetAccessTokenAsync())
+            .ReturnsAsync(tokenResponse);
+
+        _mockHmrcClient.Setup(c => c.PostAsync<CreateIndividualTestUserRequest, CreateIndividualTestUserResponse>(
+                It.IsAny<string>(), It.IsAny<CreateIndividualTestUserRequest>(), It.IsAny<string>(), It.IsAny<string>()))
+            .ThrowsAsync(new HttpRequestException(exceptionMessage));
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(() => service.CreateIndividualTestUserAsync(request));
-        Assert.Contains(((int)statusCode).ToString(), ex.Message);
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(() => _sut.CreateIndividualTestUserAsync(request));
+        Assert.Equal(exceptionMessage, ex.Message);
     }
 
     [Fact]
-    public async Task CreateIndividualTestUserAsync_ThrowsHttpRequestException_WhenResponseIsEmpty()
+    public async Task CreateIndividualTestUserAsync_ThrowsInvalidOperationException_WhenResponseIsMissingMtdId()
     {
         // Arrange
-        var accessToken = "mockBearerToken";
-        _mockAuthService.Setup(s => s.GetAccessTokenAsync())
-            .ReturnsAsync(new AccessTokenResponse { AccessToken = accessToken, TokenType = "Bearer", ExpiresIn = 3600 });
-
-        _mockHttpMessageHandler.Protected()
-            .Setup<Task<HttpResponseMessage>>(
-                "SendAsync",
-                ItExpr.IsAny<HttpRequestMessage>(),
-                ItExpr.IsAny<CancellationToken>()
-            )
-            .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StringContent("{}", Encoding.UTF8, "application/json") // Empty JSON
-            });
-
-        var service = new HmrcTestUserService(_mockHttpClient.Object, _mockAuthService.Object);
         var request = new CreateIndividualTestUserRequest();
+        var tokenResponse = new AccessTokenResponse { AccessToken = "mock-token", TokenType = "Bearer" };
+        var invalidResponse = new CreateIndividualTestUserResponse { MtdId = null }; // MtdId is missing
+
+        _mockAuthService.Setup(s => s.GetAccessTokenAsync())
+            .ReturnsAsync(tokenResponse);
+
+        _mockHmrcClient.Setup(c => c.PostAsync<CreateIndividualTestUserRequest, CreateIndividualTestUserResponse>(
+                It.IsAny<string>(), It.IsAny<CreateIndividualTestUserRequest>(), It.IsAny<string>(), It.IsAny<string>()))
+            .ReturnsAsync(invalidResponse);
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(() => service.CreateIndividualTestUserAsync(request));
-        // Updated assertion to match the new exception message
-        Assert.Contains("Failed to deserialize individual test user response or essential data (e.g., MtdId) is missing.", ex.Message);
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => _sut.CreateIndividualTestUserAsync(request));
+        Assert.Equal("Received a valid response from HMRC, but it was missing essential data (e.g., MtdId).", ex.Message);
+    }
+
+    [Fact]
+    public async Task CreateIndividualTestUserAsync_ThrowsInvalidOperationException_WhenResponseIsNull()
+    {
+        // Arrange
+        var request = new CreateIndividualTestUserRequest();
+        var tokenResponse = new AccessTokenResponse { AccessToken = "mock-token", TokenType = "Bearer" };
+
+        _mockAuthService.Setup(s => s.GetAccessTokenAsync())
+            .ReturnsAsync(tokenResponse);
+
+        _mockHmrcClient.Setup(c => c.PostAsync<CreateIndividualTestUserRequest, CreateIndividualTestUserResponse>(
+                It.IsAny<string>(), It.IsAny<CreateIndividualTestUserRequest>(), It.IsAny<string>(), It.IsAny<string>()))
+            .ReturnsAsync((CreateIndividualTestUserResponse)null!);
+
+        // Act & Assert
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => _sut.CreateIndividualTestUserAsync(request));
+        Assert.Equal("Received a valid response from HMRC, but it was missing essential data (e.g., MtdId).", ex.Message);
     }
 
     #endregion

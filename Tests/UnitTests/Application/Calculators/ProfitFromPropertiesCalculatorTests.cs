@@ -1,9 +1,11 @@
-using Shared.Models.Incomes; // For IncomeSourcesDetails, UkPropertyBusinessIncome
+// For IncomeSourcesDetails, UkPropertyBusinessIncome
 using Application.Calculators; // To reference the concrete calculator
-using Application.Interfaces;
-using Application.Interfaces.Calculators;
-using Shared.Models.PropertyBusiness; // To reference the calculator interface
-using Xunit; // For [Fact] and Assert
+using Core.Interfaces.Calculators;
+using Core.Models.Incomes;
+using Core.Models.PropertyBusiness;
+// To reference the calculator interface
+
+// For [Fact] and Assert
 
 namespace UnitTests.Application.Calculators;
 

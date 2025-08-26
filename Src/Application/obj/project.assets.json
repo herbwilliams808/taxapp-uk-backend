@@ -974,30 +974,17 @@
           "lib/netcoreapp2.1/_._": {}
         }
       },
-      "Application.Interfaces/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "dependencies": {
-          "Shared": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Application.Interfaces.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Application.Interfaces.dll": {}
-        }
-      },
-      "Shared/1.0.0": {
+      "Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "Swashbuckle.AspNetCore.Annotations": "8.1.1"
         },
         "compile": {
-          "bin/placeholder/Shared.dll": {}
+          "bin/placeholder/Core.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Shared.dll": {}
+          "bin/placeholder/Core.dll": {}
         }
       }
     }
@@ -2550,26 +2537,20 @@
         "version.txt"
       ]
     },
-    "Application.Interfaces/1.0.0": {
+    "Core/1.0.0": {
       "type": "project",
-      "path": "../Application.Interfaces/Application.Interfaces.csproj",
-      "msbuildProject": "../Application.Interfaces/Application.Interfaces.csproj"
-    },
-    "Shared/1.0.0": {
-      "type": "project",
-      "path": "../Shared/Shared.csproj",
-      "msbuildProject": "../Shared/Shared.csproj"
+      "path": "../Core/Core.csproj",
+      "msbuildProject": "../Core/Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "Application.Interfaces >= 1.0.0",
       "Azure.Identity >= 1.13.2",
       "Azure.Storage.Blobs >= 12.24.0",
+      "Core >= 1.0.0",
       "Microsoft.Extensions.Hosting >= 8.0.0",
       "Microsoft.Extensions.Options >= 9.0.4",
-      "Newtonsoft.Json >= 13.0.3",
-      "Shared >= 1.0.0"
+      "Newtonsoft.Json >= 13.0.3"
     ]
   },
   "packageFolders": {
@@ -2597,11 +2578,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Src/Application.Interfaces/Application.Interfaces.csproj": {
-              "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Src/Application.Interfaces/Application.Interfaces.csproj"
-            },
-            "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Src/Shared/Shared.csproj": {
-              "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Src/Shared/Shared.csproj"
+            "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Src/Core/Core.csproj": {
+              "projectPath": "/Users/herbwilliams/RiderProjects/TaxAppUK/taxapp-uk-backend/Src/Core/Core.csproj"
             }
           }
         }

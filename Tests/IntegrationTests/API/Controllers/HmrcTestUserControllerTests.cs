@@ -1,16 +1,14 @@
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using API;
-using Application.Interfaces.Services.HmrcIntegration.TestUser;
-using Moq;
-using Xunit;
-using Xunit.Abstractions;
+using Core.Interfaces.HmrcIntegration.TestUser;
+using Core.Models.HmrcIntegration.TestUser;
 using Microsoft.Extensions.DependencyInjection;
-using Shared.Models.HmrcIntegration.TestUser; // Required for WithWebHostBuilder and ConfigureServices
+using Moq;
+using Xunit.Abstractions;
+
+// Required for WithWebHostBuilder and ConfigureServices
 
 namespace IntegrationTests.API.Controllers;
 

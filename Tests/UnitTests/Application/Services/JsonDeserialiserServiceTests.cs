@@ -1,7 +1,10 @@
 using System.Text.Json;
-using Application.Services.HmrcIntegration.Auth;
+using Application.Services;
+using Core.Services;
 using Microsoft.Extensions.Logging;
 using Moq;
+
+namespace UnitTests.Application.Services;
 
 public class JsonDeserialiserServiceTests
 {

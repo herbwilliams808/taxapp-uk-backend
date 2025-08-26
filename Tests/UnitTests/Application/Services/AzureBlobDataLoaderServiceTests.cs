@@ -1,12 +1,13 @@
-using Moq;
-using Microsoft.Extensions.Options;
-using Shared.Models.Settings;
-using Application.Services.HmrcIntegration.Auth;
-using Azure.Storage.Blobs;
 using System.Text;
+using Application.Services;
 using Azure;
-using Xunit.Abstractions;
+using Azure.Storage.Blobs;
+using Core.Models.Settings;
+using Infrastructure.Services;
+using Microsoft.Extensions.Options;
+using Moq;
 using UnitTests.TestHelpers;
+using Xunit.Abstractions;
 
 namespace UnitTests.Application.Services
 {

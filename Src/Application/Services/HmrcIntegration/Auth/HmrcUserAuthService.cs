@@ -2,10 +2,10 @@ using System.Collections.Concurrent;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Web;
-using Application.Interfaces.Services.HmrcIntegration.Auth;
-using Application.Interfaces.Services.HmrcIntegration.TestUser;
+using Core.Interfaces.HmrcIntegration.Auth;
+using Core.Models.HmrcIntegration.Auth;
 using Microsoft.Extensions.Configuration;
-using Shared.Models.HmrcIntegration.Auth;
+
 // For HttpUtility.ParseQueryString and HtmlEncode
 
 // For ConcurrentDictionary for in-memory token storage
