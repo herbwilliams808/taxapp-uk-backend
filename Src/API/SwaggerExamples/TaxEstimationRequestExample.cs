@@ -6,6 +6,7 @@ using Core.Models.IndividualsEmploymentIncomes.Employments;
 using Core.Models.IndividualsEmploymentIncomes.NonPayeEmploymentIncome;
 using Core.Models.IndividualsReliefs;
 using Core.Models.IndividualsReliefs.Pensions;
+using Core.Models.IndividualsReliefs.CharitableGivings;
 using Core.Models.PropertyBusiness;
 using Swashbuckle.AspNetCore.Filters;
 // Namespace for TaxEstimationRequest
@@ -65,6 +66,10 @@ namespace API.SwaggerExamples
                     PensionReliefs = new PensionReliefs
                     {
                         RegularPensionContributions = 3000
+                    },
+                    GiftAidPayments = new GiftAidPayments
+                    {
+                        CurrentYear = 500
                     }
                 },
                 // Other optional fields from TaxEstimationRequest can be set to null or default if not part of the example

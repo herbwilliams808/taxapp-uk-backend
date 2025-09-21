@@ -68,7 +68,7 @@ public class TaxEstimationService(
             regularPensionContributions,
             giftAidPayments);
 
-        var taxOwed = taxOwedCalculator.Calculate(totalIncome, basicRateLimit);
+        var taxOwed = taxOwedCalculator.Calculate(totalIncome, basicRateLimit, taxYearEnding, region);
 
         // CHANGED: Access parameter directly
         logger.LogInformation("Tax calculated for year ending {TaxYearEnding}, region {Region}: {TaxOwed}",

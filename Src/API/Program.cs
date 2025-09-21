@@ -128,6 +128,29 @@ public partial class Program
         builder.Services.AddScoped<TaxEstimationService>();
 
 
+        // Add CORS configuration
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowFrontend", policy =>
+            {
+                policy
+                    .WithOrigins(
+                        "http://localhost:8081",  // Expo web development server
+                        "https://localhost:8081", // HTTPS variant
+                        "exp://",                 // Expo Go app
+                        "http://localhost:19000", // Alternative Expo port
+                        "http://localhost:19001", // Alternative Expo port
+                        "http://localhost:19002", // Alternative Expo port
+                        "https://localhost:19000",
+                        "https://localhost:19001", 
+                        "https://localhost:19002"
+                    )
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .SetIsOriginAllowedToAllowWildcardSubdomains(); // Allow Expo Go dynamic origins
+            });
+        });
+
         builder.Services.AddControllers()
             .AddJsonOptions(options =>
             {
@@ -185,6 +208,9 @@ public partial class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
+        // Use CORS
+        app.UseCors("AllowFrontend");
 
         app.MapControllers();
 
